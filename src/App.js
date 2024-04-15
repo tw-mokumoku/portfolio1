@@ -5,12 +5,16 @@ import { Home } from './Page/home';
 /* react */
 import React from 'react';
 import { Routes, Route } from "react-router-dom";
+import { DashBoard } from './Page/dashboard';
+import { DiscordAuth } from './Page/discordoauth';
 
 function App() {
     return (
         <div className="App" data-bs-theme={getPrefersColorScheme()}>
             <Routes>
                 <Route exact path="/" element={<Home />} />
+                <Route exact path="/dashboard" element={<DashBoard />} />
+                <Route exact path="/discordauth" element={<DiscordAuth />} />
             </Routes>
         </div>
     );

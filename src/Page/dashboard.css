@@ -1,0 +1,49 @@
+.simple-bt {
+    all: unset;
+    width: 100%;
+    padding: 8px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+.simple-bt:hover {
+    background: hsl(0, 0%, 100%, 0.05);
+}
+
+.simple-bt p {
+    all: unset;
+    margin-left: 8px;
+}
+
+.simple-bt svg {
+    fill: lightblue;
+    width: 27px;
+    height: 27px;
+}
+
+.sp-container{
+    position: relative;
+    height: 160px;
+    overflow: hidden;
+    display: flex;
+    box-sizing: border-box;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    background: hsl(0, 0%, 0%, 0.2);
+}
+.sp-background {
+    position: absolute;
+    filter: blur(10px);
+    transform: scale(2.5);
+    opacity: 0.3;
+    z-index: 1;
+}
+.sp-icon{
+    border: 2px solid lightblue;
+}

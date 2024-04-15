@@ -8,9 +8,14 @@ import { faker } from '@faker-js/faker';
 import Container from 'react-bootstrap/Container';
 import { GuildCard } from '../Component/parts/conversion';
 import { timeDiff } from '../Function/DateCalc';
+import { isLocal } from '../Function/LocalRemoteSwitcher';
+import { useEffect } from 'react';
 
 
 export function Home(props) {
+    useEffect(() => {
+        isLocal();
+    }, []);
     return (
         <Container>
             <HeaderUnion />
@@ -19,10 +24,10 @@ export function Home(props) {
             <GuildCardContainer>
                 {[...Array(100)].map((v, index) => v =
                     <GuildCard key={index}
-                        guildIcon={faker.image.avatar()}
+                        guildIcon={faker.image.url()}
                         guildTags={faker.word.words(5).split(' ')}
                         guildName={faker.word.words({ min: 1, max: 2 })}
-                        guildDescription={faker.lorem.sentences({ min: 1, max: 5 })}
+                        guildDescription={faker.lorem.sentences({ min: 1, max: 20 })}
                         guildLastUpdated={`${timeDiff(faker.date.past())}`}
 
                         guildDailyActiveRank={faker.number.int({ max: 10000 })}
