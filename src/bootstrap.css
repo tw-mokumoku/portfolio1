@@ -3434,6 +3434,8 @@ textarea.form-control-lg {
 .dropdown-toggle {
   white-space: nowrap;
 }
+/*
+
 .dropdown-toggle::after {
   display: inline-block;
   margin-left: 0.255em;
@@ -3444,6 +3446,7 @@ textarea.form-control-lg {
   border-bottom: 0;
   border-left: 0.3em solid transparent;
 }
+*/
 .dropdown-toggle:empty::after {
   margin-left: 0;
 }
@@ -4453,8 +4456,12 @@ textarea.form-control-lg {
   background-color: var(--bs-card-bg);
   background-clip: border-box;
   border: var(--bs-card-border-width) solid var(--bs-card-border-color);
-  border-radius: var(--bs-card-border-radius);
+/*
+border-radius: var(--bs-card-border-radius);
+*/
   box-shadow: var(--bs-card-box-shadow);
+  border-radius: 20px;
+  padding-top: 10px;
 }
 .card > hr {
   margin-right: 0;

@@ -5,10 +5,62 @@ import Stack from 'react-bootstrap/Stack';
 import { FaDiscord } from "react-icons/fa";
 import Accordion from 'react-bootstrap/Accordion';
 import Table from 'react-bootstrap/Table';
+import { useOverflowDetector } from 'react-detectable-overflow';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 export function toButton(tag_names) {
     if (!Array.isArray(tag_names)) return tag_names
-    return tag_names.map((tag_name) => <Button className="m-1 py-1 px-2 btn-secondary" key={`tag_${tag_name}`} href={`/tag/${tag_name}`}>{tag_name}</Button>);
+    return tag_names.map((tag_name, index) => <Button className="m-1 py-1 px-2 btn-secondary" key={index} href={`/tag/${tag_name}`}>{tag_name}</Button>);
+}
+
+export function OpenableOverflowContainer(props) {
+    const { ref, overflow } = useOverflowDetector({});
+    const [buttonImg, setButtonImg] = useState(<KeyboardArrowDownIcon />);
+    const [isOpen, setIsOpen] = useState(false);
+    const [buttonClassName, setButtonClassName] = useState();
+    const [overflowHeight, setOverflowHeight] = useState("100px");
+    const [buttonStyle, setButtonStyle] = useState();
+    useEffect(() => {
+        if (isOpen) {
+            setOverflowHeight("auto");
+            setButtonImg(<KeyboardArrowUpIcon />);
+            setButtonStyle({
+                zIndex: "999",
+                marginTop: "10px",
+            });
+            setButtonClassName("p-1 mb-1");
+        } else {
+            setOverflowHeight("100px");
+            setButtonImg(<KeyboardArrowDownIcon />);
+            setButtonStyle({
+                zIndex: "999",
+                marginTop: "-20px",
+            });
+            setButtonClassName("p-3 mb-3");
+        }
+    }, [isOpen]);
+    return (
+        <>
+            <div ref={ref} className="overflow-hidden" style={{ height: overflowHeight }}>
+                {props.children}
+            </div>
+            <div className="w-100">
+                <div className="d-flex justify-content-center">
+                    {
+                        overflow || isOpen ?
+                            <Button onClick={() => setIsOpen(!isOpen)} className={buttonClassName} style={buttonStyle}>
+                                {buttonImg}
+                            </Button>
+                            :
+                            <></>
+                    }
+                </div>
+            </div>
+        </>
+    );
 }
 
 export function GuildCard(props) {
@@ -17,8 +69,8 @@ export function GuildCard(props) {
             <Card className="m-2">
                 <Card.Header>
                     <Stack direction="horizontal">
-                        <div style={{ height: "60px" }} className="me-4">
-                            <img src={props.guildIcon} alt="" className="w-100 h-100"></img>
+                        <div style={{ height: "60px", width: "60px" }} className="me-4">
+                            <img src={props.guildIcon} alt="" className="w-100 h-100" style={{ borderRadius: "10px", border: "2px solid lightblue" }}></img>
                         </div>
                         <Card.Title>{props.guildName}</Card.Title>
                     </Stack>
@@ -27,9 +79,11 @@ export function GuildCard(props) {
                     <div className="mb-3">
                         {toButton(props.guildTags)}
                     </div>
-                    <Card.Text>{props.guildDescription}</Card.Text>
+                    <OpenableOverflowContainer>
+                        {props.guildDescription}
+                    </OpenableOverflowContainer>
                     <Accordion>
-                        <Accordion.Item eventKey="0">
+                        <Accordion.Item eventKey="1">
                             <Accordion.Header>サーバー情報</Accordion.Header>
                             <Accordion.Body>
                                 <Table striped>
@@ -45,29 +99,31 @@ export function GuildCard(props) {
                                             <td>{props.guildLastUpdated}</td>
                                         </tr>
                                     </tbody>
-                                    <br></br>
+                                </Table>
+                                <br></br>
+                                <Table striped>
                                     <thead>
                                         <tr>
                                             <th>アクティブ率</th>
                                             <th>順位</th>
-                                            <th>時間</th>
+                                            <th>時間(h)</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>日間</td>
-                                            <td>{props.guildDailyActiveRank} 位</td>
-                                            <td>{props.guildDailyActiveRatio} 時間</td>
+                                            <td>{shortNumber(props.guildDailyActiveRank)}</td>
+                                            <td>{shortNumber(props.guildDailyActiveRatio)}</td>
                                         </tr>
                                         <tr>
                                             <td>月間</td>
-                                            <td>{props.guildMonthlyActiveRank} 位</td>
-                                            <td>{props.guildMonthlyActiveRatio} 時間</td>
+                                            <td>{shortNumber(props.guildMonthlyActiveRank)}</td>
+                                            <td>{shortNumber(props.guildMonthlyActiveRatio)}</td>
                                         </tr>
                                         <tr>
                                             <td>年間</td>
-                                            <td>{props.guildYearlyActiveRank} 位</td>
-                                            <td>{props.guildYearlyActiveRatio} 時間</td>
+                                            <td>{shortNumber(props.guildYearlyActiveRank)}</td>
+                                            <td>{shortNumber(props.guildYearlyActiveRatio)}</td>
                                         </tr>
                                     </tbody>
                                 </Table>
@@ -88,4 +144,11 @@ export function GuildCard(props) {
             </Card>
         </Col>
     );
+}
+
+function shortNumber(number) {
+    const num = number.toString();
+    if (number >= 1000000) return `${num.slice(0,-6)}.${num.slice(-6, -5)}m`;
+    if (number >= 1000) return `${num.slice(0, -3)}.${num.slice(-3, -2)}k`;
+    return number.toString();
 }

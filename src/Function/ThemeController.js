@@ -12,7 +12,7 @@ export function switchPrefersColorScheme() {
 }
 
 export function getPrefersColorScheme() {
-    if (hasCookie("prefers_color_scheme")) return getCookie(prefersColorSchemeKey);
+    if (hasCookie(prefersColorSchemeKey)) return getCookie(prefersColorSchemeKey);
     return getGooglePrefersColorScheme();
 }
 
