@@ -9,6 +9,7 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import { getDiscordOAuthURL } from '../../Function/LocalRemoteSwitcher';
 import { CurrentDiscordUserIcon } from '../../Function/APIController';
 import { hasDiscordAccessTokenCookie } from '../../Function/OAuthController';
+import { hasCurrentDiscordUserDataLocalStorage } from '../../Function/LocalStorageController';
 
 export function HeaderUnion() {
     return (

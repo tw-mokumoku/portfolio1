@@ -11,13 +11,14 @@ function setLocalStorageJSON(key, value) {
     setLocalStorage(key, JSON.stringify(value));
 }
 export function setCurrentDiscordUserDataLocalStorage() {
-    getCurrentDiscordUser()
+    return getCurrentDiscordUser()
         .then((response) => {
             setLocalStorageJSON(currentDiscodUserData, response.data);
         });
+
 }
 export function setCurrentDiscordUserGuildsLocalStorage() {
-    getCurrentUserGuilds()
+    return getCurrentUserGuilds()
         .then((response) => {
             setLocalStorageJSON(currentDiscordUserGuilds, response.data);
         });
