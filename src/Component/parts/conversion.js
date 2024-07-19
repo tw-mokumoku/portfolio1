@@ -13,7 +13,7 @@ import { useEffect } from 'react';
 
 export function toButton(tag_names) {
     if (!Array.isArray(tag_names)) return tag_names
-    return tag_names.map((tag_name, index) => <Button className="m-1 py-1 px-2 btn-secondary" key={index} href={`/tag/${tag_name}`}>{tag_name}</Button>);
+    return tag_names.map((tag_name, index) => <Button className="m-1 my-2 py-1 px-2 btn-secondary" key={index} href={`/tag/${tag_name}`}>{tag_name}</Button>);
 }
 
 export function OpenableOverflowContainer(props) {
@@ -66,7 +66,7 @@ export function OpenableOverflowContainer(props) {
 export function GuildCard(props) {
     return (
         <Col>
-            <Card className="m-2">
+            <Card className="m-3">
                 <Card.Header>
                     <Stack direction="horizontal">
                         <div style={{ height: "60px", width: "60px" }} className="me-4">

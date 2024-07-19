@@ -3,7 +3,7 @@ import { HeaderUnion } from '../Component/union/headerUnion';
 import { BigTitle } from '../Component/parts/bigSection';
 import { GuildCardContainer, TagListSection } from '../Component/union/SectionUnion';
 /* faker-js */
-import { faker } from '@faker-js/faker';
+import { fakerJA as faker } from '@faker-js/faker';
 /* react-bootstrap */
 import Container from 'react-bootstrap/Container';
 import { GuildCard } from '../Component/parts/conversion';

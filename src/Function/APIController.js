@@ -5,8 +5,8 @@ import { getCurrentDiscordUserDataLocalStorage } from './LocalStorageController'
 import { Avatar } from '@mui/material';
 
 
-const BaseURL = "https://discord.com/api";
-const ImageBaseURL = "https://cdn.discordapp.com/";
+const DiscordBaseURL = "https://discord.com/api";
+const DiscordImageBaseURL = "https://cdn.discordapp.com/";
 
 
 
@@ -17,7 +17,7 @@ export async function postDiscordAuthentication(token) {
         'https://discordapp.com/api/oauth2/token',
         {
             'client_id': '1226955908991418510',
-            'client_secret': 'bQcoKEgbxrGFv9pTq3BWqd6C0ir0MJwu',
+            'client_secret': 'cNpdt3Qz4AhZEZpjd-5CcSvsIZM8oylZ',
             'grant_type': 'authorization_code',
             'code': token,
             'redirect_uri': getDiscordOAuthPageURL()
@@ -40,19 +40,19 @@ async function getDiscordAPI(API_ENDPOINT) {
 
 /*****************  data  ********************/
 export async function getDiscordUser(user_id) {
-    return getDiscordAPI((BaseURL + `/users/${user_id}`));
+    return getDiscordAPI((DiscordBaseURL + `/users/${user_id}`));
 }
 export async function getCurrentDiscordUser() {
     return getDiscordUser('@me');
 }
 export async function getCurrentUserGuilds() {
-    return getDiscordAPI((BaseURL + `/users/@me/guilds`));
+    return getDiscordAPI((DiscordBaseURL + `/users/@me/guilds`));
 }
 
 /*****************  img  ********************/
 export function getCurrentDiscordUserIconURL() {
     const userdata = getCurrentDiscordUserDataLocalStorage();
-    return `${ImageBaseURL}avatars/${userdata.id}/${userdata.avatar}.png`;
+    return `${DiscordImageBaseURL}avatars/${userdata.id}/${userdata.avatar}.png`;
 }
 export function CurrentDiscordUserIcon(props) {
     const userdata = getCurrentDiscordUserDataLocalStorage();
@@ -62,7 +62,7 @@ export function CurrentDiscordUserIcon(props) {
         <Avatar>{userdata.username.slice(0, 2)}</Avatar>;
 }
 export function getDiscordGuildIcon(guild_id, guild_icon) {
-    return `${ImageBaseURL}icons/${guild_id}/${guild_icon}.png`;
+    return `${DiscordImageBaseURL}icons/${guild_id}/${guild_icon}.png`;
 }
 
 
@@ -73,5 +73,6 @@ export function getCurrentDiscordUserName() {
 }
 export function getCurrentDiscordUserGlobalName() {
     const userdata = getCurrentDiscordUserDataLocalStorage();
+
     return userdata.global_name ? userdata.global_name : userdata.username;
 }
