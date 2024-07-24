@@ -6,13 +6,13 @@ const discordRefreshToken = "discord_refresh_token";
 
 /*****************  set  ********************/
 export function setDiscordOAuthTokenCookie(token) {
-    setCookie(discordOAuthToken, token, 1800, "/");
+    setCookie(discordOAuthToken, token, 2419200, "/");
 }
 export function setDiscordAccessTokenCookie(token) {
-    setCookie(discordAccessToken, token, 1800, "/");
+    setCookie(discordAccessToken, token, 2419200, "/");
 }
 export function setDiscordRefreshTokenCookie(token) {
-    setCookie(discordRefreshToken, token, 1800, "/");
+    setCookie(discordRefreshToken, token, 2419200, "/");
 }
 
 /*****************  get  ********************/

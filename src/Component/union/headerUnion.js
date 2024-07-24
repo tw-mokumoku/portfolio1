@@ -32,6 +32,7 @@ export function HeaderUnion() {
                 </Nav>
                 <Nav>
                     <Row>
+                    {/*
                     <Col xs="auto" className="d-flex">
                         <Button className="p-3" onClick={() => {
                             switchPrefersColorScheme();
@@ -40,6 +41,7 @@ export function HeaderUnion() {
                             <LightModeIcon height="40" width="40"/>
                         </Button>
                     </Col>
+                    */}
                     <Col xs="auto">
                             {
                                 hasDiscordAccessTokenCookie() ?

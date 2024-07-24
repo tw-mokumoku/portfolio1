@@ -1,11 +1,23 @@
 import { Avatar } from '@mui/material';
 import Col from 'react-bootstrap/Col';
-import { getDiscordGuildIcon } from '../../Function/APIController';
+import { getDiscordGuildIcon, getServer } from '../../Function/APIController';
 import { faker } from '@faker-js/faker';
 import { ServerPanelButtons } from './Button';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { getCurrentDislistUserOwningServersLocalStorage } from '../../Function/LocalStorageController';
 
 export function ServerPanel(props) {
-    console.log(props.id);
+    const [isServerAdded, setIsServerAdded] = useState(false);
+    useEffect(() => {
+        const currentDislistUserOwningServers = getCurrentDislistUserOwningServersLocalStorage();
+        if (currentDislistUserOwningServers.length === 0) return;
+        console.log("gcduosls", currentDislistUserOwningServers);
+        for (let i = 0; i < currentDislistUserOwningServers.length; i++) {
+            if (currentDislistUserOwningServers[i]['id'] === props.id) setIsServerAdded(true);
+        }
+    }, []);
+
     return (
         <Col>
             <div className="sp-container mb-3">
@@ -14,7 +26,7 @@ export function ServerPanel(props) {
             </div>
             <div className="mb-5">
                 <p className="fs-6 fw-bold mb-4 ms-1">{props.name}</p>
-                <ServerPanelButtons addedServer={faker.datatype.boolean()} />
+                <ServerPanelButtons addedServer={isServerAdded} server_id={props.id} />
             </div>
         </Col>
     );

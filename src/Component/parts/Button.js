@@ -1,4 +1,5 @@
 import Button from 'react-bootstrap/Button';
+import { getDiscordBotOAuthURL } from '../../Function/LocalRemoteSwitcher';
 
 export function ServerPanelButtons(props) {
     return (
@@ -7,14 +8,32 @@ export function ServerPanelButtons(props) {
                 props.addedServer ?
                     <div className="d-flex">
                         <div className="pe-2 w-50">
-                            <Button className="py-2 w-100" style={{ borderRadius: "10px" }}>View</Button>
+                            <Button
+                                className="py-2 w-100"
+                                style={{ borderRadius: "10px" }}
+                                href={`/server/${props.server_id}`}
+                            >
+                                表示
+                            </Button>
                         </div>
                         <div className="ps-2 w-50">
-                            <Button className="py-2 w-100" style={{ borderRadius: "10px" }}>Edit</Button>
+                            <Button
+                                className="py-2 w-100"
+                                style={{ borderRadius: "10px" }}
+                                href={`/server/${props.server_id}/edit`}
+                            >
+                                編集
+                            </Button>
                         </div>
                     </div >
                     :
-                    <Button className="py-2 w-100" style={{ borderRadius: "10px" }}>Add to Discord list</Button>
+                    <Button
+                        className="py-2 w-100"
+                        style={{ borderRadius: "10px" }}
+                        href={getDiscordBotOAuthURL(props.server_id)}
+                    >
+                        ディスコードに追加
+                    </Button>
 
             }
         </>

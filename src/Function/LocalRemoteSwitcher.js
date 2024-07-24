@@ -31,3 +31,9 @@ export function getDiscordOAuthPageURL() {
 export function getDiscordOAuthTokenViaSearch() {
     return getSearchParam("code");
 }
+export function getDiscordBotOAuthURL(guild_id) {
+    return isLocal() ?
+        "https://discord.com/oauth2/authorize?scope=bot+applications.commands&guild_id=" + guild_id + "&permissions=8&disable_guild_select=true&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fdashboard&client_id=1226955908991418510"
+        :
+        "https://discord.com/oauth2/authorize?scope=bot+applications.commands&guild_id=" + guild_id + "&permissions=8&disable_guild_select=true&redirect_uri=https%3A%2F%2Fdiscordlist.kolysis.com%2Fdashboard&client_id=1226955908991418510";
+}
