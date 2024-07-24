@@ -11,7 +11,7 @@ import { CurrentDiscordUserIcon, getCurrentDiscordUserGlobalName } from '../../F
 import InfoTwoToneIcon from '@mui/icons-material/InfoTwoTone';
 import SettingsTwoToneIcon from '@mui/icons-material/SettingsTwoTone';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { disconnectViaDiscordAccount } from '../../Function/LoginController';
+import { disconnectViaDiscord, disconnectVisDislist } from '../../Function/LoginController';
 import { useNavigate } from "react-router-dom";
 
 export function TagListSection() {
@@ -65,23 +65,26 @@ export function DashboardUserPanel() {
                         className="mb-3 fs-5"
                         style={{ marginLeft: "10px" }}
                     >
-                        General
+                        全般
                     </h5>
                     <SimpleButton
                         icon={<InfoTwoToneIcon />}
-                        title="Overview"
+                        title="ダッシュボード"
+                        onClick={() => {
+                            navigate('/dashboard')
+                        }}
                     />
                     <SimpleButton
                         icon={<SettingsTwoToneIcon style={{ fill: "#cecece" }} />}
-                        title="Settings"
+                        title="設定"
                     />
                     <SimpleButton
                         icon={<LogoutIcon style={{ fill: "#ff6666" }} />}
-                        title="Logout"
+                        title="ログアウト"
                         onClick={() => {
-                            disconnectViaDiscordAccount();
+                            disconnectViaDiscord();
+                            disconnectVisDislist();
                             navigate('/');
-
                         }}
                     />
                 </Stack>

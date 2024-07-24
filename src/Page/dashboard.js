@@ -1,6 +1,6 @@
 /* react-bootstrap */
-import Container from 'react-bootstrap/Container';
 import { HeaderUnion } from '../Component/union/headerUnion';
+import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './dashboard.css';
@@ -9,12 +9,8 @@ import { Navigate } from "react-router-dom";
 import { ServerPanel } from '../Component/parts/Panel';
 import { hasDiscordOAuthTokenCookie } from '../Function/OAuthController';
 import { DashboardUserPanel } from '../Component/union/SectionUnion';
-
-
 export function DashBoard() {
-    if (!hasDiscordOAuthTokenCookie()) {
-        return <Navigate to="/" />
-    }
+    if (!hasDiscordOAuthTokenCookie()) return <Navigate to="/" />
     return (
         <Container>
             <HeaderUnion />

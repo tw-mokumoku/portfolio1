@@ -8,7 +8,7 @@ const prefersColorSchemeKey = "prefers_color_scheme";
  * @param {boolean} theme
  */
 export function switchPrefersColorScheme() {
-    setCookie(prefersColorSchemeKey, getOpposite(getPrefersColorScheme()), 180, "/");
+    setCookie(prefersColorSchemeKey, getOpposite(getPrefersColorScheme()), 2419200, "/");
 }
 
 export function getPrefersColorScheme() {

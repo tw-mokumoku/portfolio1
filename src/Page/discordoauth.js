@@ -1,7 +1,7 @@
 import { getDiscordOAuthTokenViaSearch } from "../Function/LocalRemoteSwitcher";
 import { setDiscordAccessTokenCookie, setDiscordOAuthTokenCookie, setDiscordRefreshTokenCookie } from "../Function/OAuthController";
 import { postDiscordAuthentication } from "../Function/APIController";
-import { setCurrentDiscordUserDataLocalStorage, setCurrentDiscordUserGuildsLocalStorage } from "../Function/LocalStorageController";
+import { setCurrentDiscordUserDataLocalStorage, setCurrentDiscordUserGuildsLocalStorage, setCurrentDislistUserOwningServers } from "../Function/LocalStorageController";
 import { useNavigate } from "react-router-dom";
 export function DiscordAuth() {
     const navigate = useNavigate();
@@ -16,7 +16,12 @@ export function DiscordAuth() {
                 .then(() => {
                     setCurrentDiscordUserGuildsLocalStorage()
                         .then(() => {
-                            navigate("/dashboard");
+                            setCurrentDislistUserOwningServers()
+                                .then(() => {
+                                    navigate("/dashboard");
+                                }).catch((response) => {
+                                    console.log("error", response);
+                                })
                         });
                 });
         })

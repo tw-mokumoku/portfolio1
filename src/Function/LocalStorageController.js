@@ -1,6 +1,7 @@
-import { getCurrentDiscordUser, getCurrentUserGuilds } from "./APIController";
+import { getCurrentDiscordUser, getCurrentUserGuilds, getServer } from "./APIController";
 const currentDiscodUserData = "current_discord_user_data";
 const currentDiscordUserGuilds = "current_discord_user_guilds";
+const currentDislistUserOwningServers = "current_dislist_user_owning_servers";
 
 
 /*****************  set  ********************/
@@ -22,6 +23,21 @@ export function setCurrentDiscordUserGuildsLocalStorage() {
         .then((response) => {
             setLocalStorageJSON(currentDiscordUserGuilds, response.data);
         });
+}
+export function setCurrentDislistUserOwningServers() {
+    var currentDislistUserOwningServersList = [];
+    var promises = [];
+    getCurrentDiscordUserOwnerGuildsLocalStorage().map((value, key) => {
+        promises.push(
+            getServer(value['id']).then((response) => {
+                if (response.data == null) return;
+                currentDislistUserOwningServersList.push(response.data)
+            })
+        )
+    })
+    return Promise.all(promises).then(() => {
+        setLocalStorageJSON(currentDislistUserOwningServers, currentDislistUserOwningServersList);
+    });
 }
 
 /*****************  get  ********************/
@@ -45,6 +61,10 @@ export function getCurrentDiscordUserOwnerGuildsLocalStorage() {
     }
     return ownerGuilds;
 }
+export function getCurrentDislistUserOwningServersLocalStorage() {
+    return getLocalStorageJSON(currentDislistUserOwningServers);
+}
+
 /*****************  remove  ********************/
 function removeLocalStorage(key) {
     localStorage.removeItem(key);
@@ -54,6 +74,9 @@ export function removeCurrentDiscordUserDataLocalStorage() {
 }
 export function removeCurrentDiscordUserGuildsLocalStorage() {
     return removeLocalStorage(currentDiscordUserGuilds);
+}
+export function removeCurrentDislistUserOwningServersLocalStorage() {
+    return removeLocalStorage(currentDislistUserOwningServers);
 }
 
 /*****************  has  ********************/
@@ -65,4 +88,7 @@ export function hasCurrentDiscordUserDataLocalStorage() {
 }
 export function hasCurrentDiscordUserGuildsLocalStorage() {
     return hasLocalStorage(currentDiscordUserGuilds);
+}
+export function hasCurrentDislistUserOwningServers() {
+    return hasLocalStorage(currentDislistUserOwningServers);
 }

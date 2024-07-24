@@ -7,6 +7,8 @@ import React from 'react';
 import { Routes, Route } from "react-router-dom";
 import { DashBoard } from './Page/dashboard';
 import { DiscordAuth } from './Page/discordoauth';
+import { ServerEdit } from './Page/serveredit';
+import { ServerView } from './Page/serverview';
 
 function App() {
     return (
@@ -15,6 +17,8 @@ function App() {
                 <Route exact path="/" element={<Home />} />
                 <Route exact path="/dashboard" element={<DashBoard />} />
                 <Route exact path="/discordauth" element={<DiscordAuth />} />
+                <Route exact path="/server/:id/edit" element={<ServerEdit />} />
+                <Route exact path="/server/:id" element={<ServerView />} />
             </Routes>
         </div>
     );
