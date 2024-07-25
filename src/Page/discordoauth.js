@@ -3,8 +3,12 @@ import { setDiscordAccessTokenCookie, setDiscordOAuthTokenCookie, setDiscordRefr
 import { postDiscordAuthentication } from "../Function/APIController";
 import { setCurrentDiscordUserDataLocalStorage, setCurrentDiscordUserGuildsLocalStorage, setCurrentDislistUserOwningServers } from "../Function/LocalStorageController";
 import { useNavigate } from "react-router-dom";
+import { OverlayLoading } from "react-loading-randomizable";
+import { useState } from "react";
+
 export function DiscordAuth() {
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
 
     const token = getDiscordOAuthTokenViaSearch();
     setDiscordOAuthTokenCookie(token);
@@ -18,6 +22,7 @@ export function DiscordAuth() {
                         .then(() => {
                             setCurrentDislistUserOwningServers()
                                 .then(() => {
+                                    setLoading(false);
                                     navigate("/dashboard");
                                 }).catch((response) => {
                                     console.log("error", response);
@@ -29,4 +34,9 @@ export function DiscordAuth() {
             console.log("Err_postDiscordAuthentication: ", response);
             navigate("/");
         });
+    return (
+        <>
+            <OverlayLoading active={loading} />
+        </>
+    );
 }

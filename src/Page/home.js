@@ -22,7 +22,7 @@ export function Home(props) {
             <BigTitle />
             <TagListSection />
             <GuildCardContainer>
-                {[...Array(100)].map((v, index) => v =
+                {[...Array(10)].map((v, index) => v =
                     <GuildCard key={index}
                         guildIcon={faker.image.url()}
                         guildTags={faker.word.words(5).split(' ')}
