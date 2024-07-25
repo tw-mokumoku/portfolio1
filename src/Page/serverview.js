@@ -14,36 +14,11 @@ import { useEffect, useRef, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 
 export function ServerView() {
-    return (
-        <Container>
-            <HeaderUnion />
-            <Row className="mt-5">
-                <Card className="mb-4">
-                    <Card.Header>
-                        <ViewServerHeader />
-                    </Card.Header>
-                    <Card.Body>
-                        
-                    </Card.Body>
-                </Card>
-            </Row>
-        </Container>
-    );
-}
-
-function ViesServerBody() {
-    return (
-        <div>
-
-        </div>
-    );
-}
-
-function ViewServerHeader() {
     const params = useParams();
     const [serverIcon, setServerIcon] = useState(<></>);
     const [currentServerName, setCurrentServerName] = useState();
     const [serverID, setServerID] = useState("");
+    const [currentServerDescription, setCurrentServerDescription] = useState();
 
     useEffect(() => {
         setServerID(params['id']);
@@ -71,20 +46,51 @@ function ViewServerHeader() {
                     );
                 }
                 setCurrentServerName(currentServer['name']);
+                setCurrentServerDescription(currentServer['description'])
         });
     }, [params]);
 
+    return (
+        <Container>
+            <HeaderUnion />
+            <Row className="mt-5">
+                <Card className="mb-4">
+                    <Card.Header>
+                        <ViewServerHeader
+                            serverIcon={serverIcon}
+                            currentServerName={currentServerName}
+                            serverID={serverID}
+                        />
+                    </Card.Header>
+                    <Card.Body>
+                        <ViesServerBody
+                            currentServerDescription={currentServerDescription}
+                        />
+                    </Card.Body>
+                </Card>
+            </Row>
+        </Container>
+    );
+}
 
+function ViesServerBody(props) {
+    return (
+        <div>
+            <p>{props.currentServerDescription}</p>
+        </div>
+    );
+}
+
+function ViewServerHeader(props) {
     return (
         <div className="d-flex flex-row mb-1">
             <div className="me-4">
-                {serverIcon}
+                {props.serverIcon}
             </div>
             <div>
-                <p className="fs-3 mb-0">{currentServerName}</p>
-                <p className="fs-6">@{serverID}</p>
-                <Button className="py-2 px-3">サーバーに参加
-                </Button>
+                <p className="fs-3 mb-0">{props.currentServerName}</p>
+                <p className="fs-6">@{props.serverID}</p>
+                <Button className="py-2 px-3">サーバーに参加</Button>
             </div>
         </div>
     );
