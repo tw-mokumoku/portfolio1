@@ -33,7 +33,8 @@ export function setCurrentDislistUserOwningServers() {
                 if (response.data == null) return;
                 currentDislistUserOwningServersList.push(response.data)
             })
-        )
+        );
+        return null;
     })
     return Promise.all(promises).then(() => {
         setLocalStorageJSON(currentDislistUserOwningServers, currentDislistUserOwningServersList);

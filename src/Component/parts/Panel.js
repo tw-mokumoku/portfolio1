@@ -12,7 +12,6 @@ export function ServerPanel(props) {
     useEffect(() => {
         const currentDislistUserOwningServers = getCurrentDislistUserOwningServersLocalStorage();
         if (currentDislistUserOwningServers.length === 0) return;
-        console.log("gcduosls", currentDislistUserOwningServers);
         for (let i = 0; i < currentDislistUserOwningServers.length; i++) {
             if (currentDislistUserOwningServers[i]['id'] === props.id) setIsServerAdded(true);
         }

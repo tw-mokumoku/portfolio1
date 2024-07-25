@@ -2,11 +2,11 @@ import { removeCurrentDiscordUserDataLocalStorage, removeCurrentDiscordUserGuild
 import { deleteDiscordAccessTokenCookie, deleteDiscordOAuthTokenCookie, deleteDiscordRefreshTokenCookie } from "./OAuthController";
 
 export function disconnectViaDiscord() {
-    removeCurrentDiscordUserDataLocalStorage();
-    removeCurrentDiscordUserGuildsLocalStorage();
     deleteDiscordAccessTokenCookie();
     deleteDiscordRefreshTokenCookie();
     deleteDiscordOAuthTokenCookie();
+    removeCurrentDiscordUserDataLocalStorage();
+    removeCurrentDiscordUserGuildsLocalStorage();
 }
 export function disconnectVisDislist() {
     removeCurrentDislistUserOwningServersLocalStorage();

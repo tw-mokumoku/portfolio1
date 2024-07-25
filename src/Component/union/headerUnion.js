@@ -43,13 +43,13 @@ export function HeaderUnion() {
                     </Col>
                     */}
                     <Col xs="auto">
-                            {
-                                hasDiscordAccessTokenCookie() ?
-                                    <Button className="p-2" href="/dashboard">
-                                            <CurrentDiscordUserIcon alt="" style={{ borderRadius: "30px", border: "2px solid lightblue", width: 40, height: 40 }} />
-                                    </Button>
-                                    :
-                                    <Button href={getDiscordOAuthURL()}>ログイン</Button>
+                        {
+                            hasDiscordAccessTokenCookie() ?
+                                <Button className="p-2" href="/dashboard">
+                                        <CurrentDiscordUserIcon alt="" style={{ borderRadius: "30px", border: "2px solid lightblue", width: 40, height: 40 }} />
+                                </Button>
+                                :
+                                <Button href={getDiscordOAuthURL()}>ログイン</Button>
                         }
                     </Col>
                     </Row>

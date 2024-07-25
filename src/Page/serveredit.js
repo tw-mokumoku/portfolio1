@@ -22,6 +22,7 @@ export function ServerEdit(props) {
     const [selectedRegion, setSelectedRegion] = useState("JP");
     const [initialSelectedTags, setInitialSelectedTags] = useState([]);
     const [initialRegion, setInitialRegion] = useState("");
+    const [isAPIProcessing, setIsAPIProcessing] = useState(false);
     const params = useParams();
 
     const onAdd = useCallback((newTag) => {
@@ -63,6 +64,11 @@ export function ServerEdit(props) {
             );
             return;
         }
+        if (isAPIProcessing) {
+            toast.error("処理を実行中です。少々お待ちください。");
+            return;
+        }
+        setIsAPIProcessing(true);
         const ist = initialSelectedTags.map(({ value, label }) => label);
         const st = selectedTags.map(({ value, label }) => label);
         const filteredIst = ist.filter((value) => !st.includes(value));
@@ -100,8 +106,10 @@ export function ServerEdit(props) {
                         }
                     }
                     Promise.all(createTagPairPromise).then(() => {
+                        setInitialSelectedTags(selectedTags);
+                        setInitialRegion(selectedRegion);
+                        setIsAPIProcessing(false);
                         resolve();
-                        console.log("おわり");
                     });
                 });
             });
@@ -114,8 +122,6 @@ export function ServerEdit(props) {
                 error: '情報の保存に失敗しました',
             }
         );
-
-
     };
     useEffect(() => {
         getServerTags(params['id'])
@@ -129,7 +135,7 @@ export function ServerEdit(props) {
 
         getServer(params['id'])
             .then((response) => {
-                setDescriptionText(response.data['description']);
+                setDescriptionText(response.data['description'] ? response.data['description'] : "");
                 if (response.data['country_id']) {
                     setSelectedRegion(response.data['country_id']);
                     setInitialRegion(response.data['country_id']);
