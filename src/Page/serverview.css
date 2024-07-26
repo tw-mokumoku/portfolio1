@@ -1,0 +1,7 @@
+.views-server-body-chart-container {
+    display: flex;
+}
+.views-server-body-chart-container-child{
+    width: 100%;
+    height: 30vh;
+}
