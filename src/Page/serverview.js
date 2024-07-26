@@ -1,5 +1,5 @@
 /* react-bootstrap */
-import './dashboard.css';
+import './serverview.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -9,9 +9,12 @@ import { Navigate, useParams } from "react-router-dom";
 import { HeaderUnion } from '../Component/union/headerUnion';
 import { DashboardUserPanel } from '../Component/union/SectionUnion';
 import { hasDiscordOAuthTokenCookie } from '../Function/OAuthController';
-import { getDiscordGuildPreview, getDiscordGuildIcon, getServer } from '../Function/APIController';
+import { getDiscordGuildPreview, getDiscordGuildIcon, getServer, getServerVCLogs } from '../Function/APIController';
 import { useEffect, useRef, useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import Chart from "react-apexcharts";
+import { faker } from '@faker-js/faker';
+
 
 export function ServerView() {
     const params = useParams();
@@ -19,6 +22,7 @@ export function ServerView() {
     const [currentServerName, setCurrentServerName] = useState();
     const [serverID, setServerID] = useState("");
     const [currentServerDescription, setCurrentServerDescription] = useState();
+    const [currentServerVCLogs, setCurrentServerVCLogs] = useState();
 
     useEffect(() => {
         setServerID(params['id']);
@@ -45,8 +49,16 @@ export function ServerView() {
                         />
                     );
                 }
+                // Set Current Server Name
                 setCurrentServerName(currentServer['name']);
+                // Set Current Server Description
                 setCurrentServerDescription(currentServer['description'])
+                // Get Server VC Logs via API
+                /* APIリソース節約の為、一旦コメントアウト
+                getServerVCLogs(currentServer['id']).then((response) => {
+                    setCurrentServerVCLogs(response.data);
+                });
+                */
         });
     }, [params]);
 
@@ -65,6 +77,7 @@ export function ServerView() {
                     <Card.Body>
                         <ViesServerBody
                             currentServerDescription={currentServerDescription}
+                            currentServerVCLogs={currentServerVCLogs}
                         />
                     </Card.Body>
                 </Card>
@@ -74,9 +87,95 @@ export function ServerView() {
 }
 
 function ViesServerBody(props) {
+    const options = {
+        dataLabels: {
+            enabled: false
+        },
+        grid: {
+            show: false
+        },
+        fill: {
+            opacity: 0.1,
+            type: 'gradient',
+            gradient: {
+                shade: 'dark',
+                shadeIntensity: 1,
+                opacityFrom: 0.3,
+                opacityTo: 0
+            }
+        },
+        noData: {
+            text: "直近24時間のデータが存在しません",
+            style: {
+                fontSize: '10px'
+            }
+        },
+        stroke: {
+            curve: 'smooth'
+        },
+        tooltip: {
+            enabled: true,
+            followCursor: true,
+            fillSeriesColor: true,
+            theme: 'dark'
+        },
+        xaxis: {
+            labels: {
+                style: {
+                    colors: '#454e56',
+                    fontSize: '14px'
+                }
+            },
+            axisBorder: {
+                show: false
+            },
+            axisTicks: {
+                show: false
+            }
+        },
+        yaxis: {
+            show: false,
+            labels: {
+                style: {
+                    colors: '#454e56',
+                    fontSize: '14px'
+                }
+            },
+            tickAmount: 20
+        },
+        chart: {
+            toolbar: {
+                show: false
+            }
+        }
+    };
+    const series = [
+        {
+            name: '接続数',
+            data: [...Array(24)].map(() => faker.number.int(20))
+        }
+    ];
+
+    useEffect(() => {
+        if (!props.currentServerVCLogs) return;
+        //途中
+        props.currentServerVCLogs.map(({ server_id, member_id, start_epoch, interval_sec }) => ({ start_epoch, interval_sec }));
+    }, [props.currentServerVCLogs]);
+
     return (
         <div>
             <p>{props.currentServerDescription}</p>
+            <div className="views-server-body-chart-container">
+                <div className="views-server-body-chart-container-child">
+                    <Chart
+                        type="area"
+                        series={series}
+                        width="100%"
+                        height="100%"
+                        options={options}
+                    />
+                </div>
+            </div>
         </div>
     );
 }
