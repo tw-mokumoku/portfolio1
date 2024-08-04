@@ -9,6 +9,7 @@ import { DashBoard } from './Page/dashboard';
 import { DiscordAuth } from './Page/discordoauth';
 import { ServerEdit } from './Page/serveredit';
 import { ServerView } from './Page/serverview';
+import { TagView } from './Page/tagview';
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                 <Route exact path="/discordauth" element={<DiscordAuth />} />
                 <Route exact path="/server/:id/edit" element={<ServerEdit />} />
                 <Route exact path="/server/:id" element={<ServerView />} />
+                <Route exact path="/tag/:name" element={<TagView />} />
             </Routes>
         </div>
     );

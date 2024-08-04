@@ -18,17 +18,9 @@ export function HeaderUnion() {
                 Discord List
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-            <Navbar.Collapse id="responsive-navbar-nav">
-                <Nav variant="underline" className="me-auto">
-                    <Nav.Link href="/search">検索</Nav.Link>
-                    <Nav.Link href="/server">サーバー</Nav.Link>
-                    <Nav.Link href="/ranking">レビュー</Nav.Link>
-                    <NavDropdown title="更新順">
-                        <NavDropdown.Item href="/">更新順</NavDropdown.Item>
-                        <NavDropdown.Item href="/">日間アクティブ率</NavDropdown.Item>
-                        <NavDropdown.Item href="/">月間アクティブ率</NavDropdown.Item>
-                        <NavDropdown.Item href="/">年間アクティブ率</NavDropdown.Item>
-                    </NavDropdown>
+            <Navbar.Collapse id="responsive-navbar-nav" className="align-items-end">
+                <Nav variant="underline" className="me-auto" style={{ marginBottom: "2px" }} >
+                    <Nav.Link href="/search">詳細検索</Nav.Link>
                 </Nav>
                 <Nav>
                     <Row>

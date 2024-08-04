@@ -1,19 +1,17 @@
-/* union */
-import { HeaderUnion } from '../Component/union/headerUnion';
-import { BigTitle } from '../Component/parts/bigSection';
-import { GuildCardContainer, TagListSection } from '../Component/union/SectionUnion';
-/* react-bootstrap */
 import Container from 'react-bootstrap/Container';
-import { GuildCard } from '../Component/parts/conversion';
-import { isLocal } from '../Function/LocalRemoteSwitcher';
+import { HeaderUnion } from '../Component/union/headerUnion';
+import Row from 'react-bootstrap/Row';
+import { GuildCardContainer } from '../Component/union/SectionUnion';
 import { useEffect, useState } from 'react';
-import { getDiscordGuildIcon, getServerRankingCountryUpdatedLog } from '../Function/APIController';
-import { timeDiff } from '../Function/DateCalc';
-
-export function Home(props) {
-    const [guildCards, setGuildCards] = useState([<></>]);
+import { getDiscordGuildIcon, getTagRankingCurrentServers } from '../Function/APIController';
+import { useParams } from "react-router-dom";
+import { GuildCard } from '../Component/parts/conversion';
+import { SearchBar } from '../Component/parts/searchBar';
+export function TagView() {
+    const params = useParams();
+    const [guildCards, setGuildCards] = useState([<></>])
     useEffect(() => {
-        getServerRankingCountryUpdatedLog('JP')
+        getTagRankingCurrentServers(params['name'])
             .then((response) => {
                 setGuildCards(
                     response.data.map((value, index) => {
@@ -24,23 +22,24 @@ export function Home(props) {
                             guildName={value['name']}
                             guildInviteURL={value['invite_url']}
                             guildDescription={value['description']}
-                            dataString={"更新：" + timeDiff(new Date(value['updated_epoch'] * 1000))}
+                            dataString={"現在の接続人数：" + value['user_num']}
                         />
                     })
                 )
-            });
-    }, []);
+            })
+    }, [])
+
     return (
         <Container>
             <HeaderUnion />
-            <BigTitle />
-            <TagListSection />
+            <div className="mt-3 mb-5">
+                <SearchBar />
+            </div>
+            <div className="mt-5">
             <GuildCardContainer>
                 {guildCards}
             </GuildCardContainer>
+            </div>
         </Container>
     );
 }
-
-// meta 情報 section
-// サーバーパネルズ section

@@ -7,7 +7,6 @@ import { Avatar } from '@mui/material';
 
 const DiscordBaseURL = "https://discord.com/api";
 const DiscordImageBaseURL = "https://cdn.discordapp.com/";
-
 const DislitBaseURL = "https://nfvdoa532a.execute-api.ap-northeast-1.amazonaws.com/InitialStage";
 
 
@@ -26,6 +25,9 @@ export async function getCountryTags(country_id) {
 }
 export async function getCountryRankingCurrent(country_id) {
     return await axios.get(`${DislitBaseURL}/country/${country_id}/ranking/current`);
+}
+export async function getCountryRankingTag(country_id) {
+    return await axios.get(`${DislitBaseURL}/country/${country_id}/ranking/tag`);
 }
 
 
@@ -52,8 +54,8 @@ export async function createMember(member_id) {
 export async function getServer(server_id) {
     return await axios.get(`${DislitBaseURL}/server/${server_id}`);
 }
-export async function getServerVCLogs(server_id) {
-    return await axios.get(`${DislitBaseURL}/server/${server_id}/vc_log`);
+export async function getServerVCLogs(server_id, start_epoch, end_epoch) {
+    return await axios.get(`${DislitBaseURL}/server/${server_id}/vc_log?start_epoch=${start_epoch}&end_epoch=${end_epoch}`);
 }
 export async function getServerUpdatedLog(server_id) {
     return await axios.get(`${DislitBaseURL}/server/${server_id}/updated_log`);
@@ -66,6 +68,9 @@ export async function getServerMembers(server_id) {
 }
 export async function getServerCurrentActiveUsers(server_id) {
     return await axios.get(`${DislitBaseURL}/server/${server_id}/current_active_users`);
+}
+export async function getServerRankingCountryUpdatedLog(country_id) {
+    return await axios.get(`${DislitBaseURL}/server/ranking/${country_id}/updated_log`);
 }
 
 ////  POST
@@ -86,14 +91,23 @@ export async function updateServer({ id, name = null, country_id = null, invite_
     if (invite_url) data['invite_url'] = invite_url;
     if (description) data['description'] = description;
 
-    return await axios.patch(`${DislitBaseURL}/server/${id}`, data);
+    return await axios.patch(
+        `${DislitBaseURL}/server/${id}`,
+        data,
+        {
+            headers: {
+                'Authorization': `Bearer ${getDiscordAccessTokenCookie()}`
+            }
+        }
+    );
 }
 export async function updateServerUpdatedLog(server_id, updated_epoch) {
     return await axios.patch(
         `${DislitBaseURL}/server/${server_id}/updated_log`,
         {
             updated_epoch: `${updated_epoch}`
-        });
+        }
+    );
 }
 export async function updateServerCurrentActiveUsers(server_id, user_num) {
     return await axios.patch(
@@ -124,7 +138,9 @@ export async function getTagRankingCurrent(tag_name) { //îzóÒéwíËâ¬î\
 export async function getTagSuggests(country_id, value) {
     return await axios.get(`${DislitBaseURL}/tag/suggests?country_id=${country_id}&value=${value}`);
 }
-
+export async function getTagRankingCurrentServers(tag_name) {
+    return await axios.get(`${DislitBaseURL}/tag/${tag_name}/ranking/current`);
+}
 
 ////  POST
 export async function createTag(name, country_id) { // îÒêÑèß
@@ -145,7 +161,13 @@ export async function createTagPair(server_id, tag_name) {
         {
             server_id: `${server_id}`,
             tag_name: `${tag_name}`
-        });
+        },
+        {
+            headers: {
+                'Authorization': `Bearer ${getDiscordAccessTokenCookie()}`
+            }
+        }
+    );
 }
 
 ////  DELETE
@@ -156,6 +178,9 @@ export async function deleteTagPair(server_id, tag_name) {
             data: {
                 server_id: `${server_id}`,
                 tag_name: `${tag_name}`
+            },
+            headers: {
+                'Authorization': `Bearer ${getDiscordAccessTokenCookie()}`
             }
         }
     );
@@ -247,6 +272,9 @@ export async function getCurrentDiscordUser() {
 }
 export async function getCurrentUserGuilds() {
     return getDiscordAPI((DiscordBaseURL + `/users/@me/guilds`));
+}
+export async function getGuild(guild_id) {
+    return getDiscordAPI((DiscordBaseURL + `/guilds/${guild_id}`));
 }
 
 
