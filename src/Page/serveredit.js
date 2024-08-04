@@ -1,5 +1,5 @@
 import { hasDiscordOAuthTokenCookie } from "../Function/OAuthController";
-import { Navigate, useParams } from "react-router-dom";
+import { useNavigate, Navigate, useParams } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -8,15 +8,16 @@ import { HeaderUnion } from "../Component/union/headerUnion";
 import { DashboardUserPanel } from "../Component/union/SectionUnion";
 import { ReactTags } from 'react-tag-autocomplete'
 import { useCallback, useState } from "react";
-import './serveredit.css';
-import { createTagPair, deleteTagPair, getServer, getServerTags, getTagSuggests, updateServer } from "../Function/APIController";
+import { createTagPair, deleteTagPair, getCurrentUserGuilds, getGuild, getServer, getServerTags, getTagSuggests, updateServer } from "../Function/APIController";
 import Button from 'react-bootstrap/Button';
 import { useEffect } from "react";
-import { getCurrentDislistUserOwningServersLocalStorage } from "../Function/LocalStorageController";
+import './serveredit.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { OverlayLoading } from "react-loading-randomizable";
 
 export function ServerEdit(props) {
+    const navigate = useNavigate();
     const [selectedTags, setSelectedTags] = useState([]);
     const [descriptionText, setDescriptionText] = useState("");
     const [selectedRegion, setSelectedRegion] = useState("JP");
@@ -24,6 +25,8 @@ export function ServerEdit(props) {
     const [initialRegion, setInitialRegion] = useState("");
     const [isAPIProcessing, setIsAPIProcessing] = useState(false);
     const params = useParams();
+    const [serverName, setServerName] = useState("");
+    const [loading, setLoading] = useState(true);
 
     const onAdd = useCallback((newTag) => {
         setSelectedTags([...selectedTags, newTag])
@@ -74,7 +77,7 @@ export function ServerEdit(props) {
         const filteredIst = ist.filter((value) => !st.includes(value));
         const filteredSt = st.filter((value) => !ist.includes(value));
 
-        const allPromises = new Promise(resolve => {
+        const allPromises = new Promise((resolve, reject) => {
 
             var deleteTagPairPromise = [];
             //delete tag_pair
@@ -110,8 +113,26 @@ export function ServerEdit(props) {
                         setInitialRegion(selectedRegion);
                         setIsAPIProcessing(false);
                         resolve();
-                    });
+                    }).catch(() => {
+                        toast.error(
+                            "タグの追加に失敗しました。"
+                        );
+                        setIsAPIProcessing(false);
+                        reject();
+                    })
+                }).catch(() => {
+                    toast.error(
+                        "サーバーの更新に失敗しました。"
+                    );
+                    setIsAPIProcessing(false);
+                    reject();
                 });
+            }).catch(() => {
+                toast.error(
+                    "タグの除去に失敗しました。"
+                );
+                setIsAPIProcessing(false);
+                reject()
             });
         });
         toast.promise(
@@ -124,6 +145,11 @@ export function ServerEdit(props) {
         );
     };
     useEffect(() => {
+        getCurrentUserGuilds().then((response) => {
+            const userOwnerGuilds = response.data.filter(value => value.id == params['id'] && value.owner);
+            if (userOwnerGuilds.length == 0) navigate(`/server/${params['id']}`);
+            setLoading(false);
+        })
         getServerTags(params['id'])
             .then((response) => {
                 const serverTags = response.data.map(({ name }) => ({ value: name, label: name }));
@@ -135,6 +161,7 @@ export function ServerEdit(props) {
 
         getServer(params['id'])
             .then((response) => {
+                setServerName(response.data.name);
                 setDescriptionText(response.data['description'] ? response.data['description'] : "");
                 if (response.data['country_id']) {
                     setSelectedRegion(response.data['country_id']);
@@ -146,6 +173,7 @@ export function ServerEdit(props) {
     if (!hasDiscordOAuthTokenCookie()) return <Navigate to="/" />;
     return (
         <>
+            <OverlayLoading active={loading} />
             <ToastContainer />
             <Container>
                 <HeaderUnion />
@@ -155,10 +183,7 @@ export function ServerEdit(props) {
                     </Col>
                     <Col xl={9}>
                         <p className="fs-2">
-                            「{
-                                getCurrentDislistUserOwningServersLocalStorage()
-                                    .filter(value => value.id === params.id)[0].name
-                            }」 編集
+                            「{serverName}」 編集
                         </p>
                         <Card className="mb-4">
                             <Card.Body>

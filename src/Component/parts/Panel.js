@@ -1,20 +1,16 @@
 import { Avatar } from '@mui/material';
 import Col from 'react-bootstrap/Col';
 import { getDiscordGuildIcon, getServer } from '../../Function/APIController';
-import { faker } from '@faker-js/faker';
 import { ServerPanelButtons } from './Button';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { getCurrentDislistUserOwningServersLocalStorage } from '../../Function/LocalStorageController';
 
 export function ServerPanel(props) {
     const [isServerAdded, setIsServerAdded] = useState(false);
     useEffect(() => {
-        const currentDislistUserOwningServers = getCurrentDislistUserOwningServersLocalStorage();
-        if (currentDislistUserOwningServers.length === 0) return;
-        for (let i = 0; i < currentDislistUserOwningServers.length; i++) {
-            if (currentDislistUserOwningServers[i]['id'] === props.id) setIsServerAdded(true);
-        }
+        getServer(props.id).then((response) => {
+            setIsServerAdded(response.data)
+        })
     }, []);
 
     return (

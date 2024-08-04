@@ -1,13 +1,13 @@
 /* faker-js */
 import { fakerJA as faker } from '@faker-js/faker';
 /* react-bootstrap */
-import { OpenableOverflowContainer, toButton } from '../parts/conversion';
+import { OpenableOverflowContainer, TagButton, toButton, toTagButton } from '../parts/conversion';
 import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
 import { SimpleButton } from '../parts/Button';
 import { useEffect, useState } from 'react';
-import { CurrentDiscordUserIcon, getCurrentDiscordUserGlobalName } from '../../Function/APIController';
+import { CurrentDiscordUserIcon, getCountryRankingTag, getCurrentDiscordUserGlobalName } from '../../Function/APIController';
 import InfoTwoToneIcon from '@mui/icons-material/InfoTwoTone';
 import SettingsTwoToneIcon from '@mui/icons-material/SettingsTwoTone';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -15,8 +15,18 @@ import { disconnectViaDiscord, disconnectVisDislist } from '../../Function/Login
 import { useNavigate } from "react-router-dom";
 
 export function TagListSection() {
-    const tagButtons = toButton(faker.word.words(100).split(' ').map((v) => `${v} (${faker.number.int(100000)})`));
-
+    const [tagButtons, setTagButtons] = useState(<></>);
+    useEffect(() => {
+        getCountryRankingTag('JP')
+            .then((response) => {
+                if (response.data == null || response.data.length == 0) return;
+                setTagButtons(
+                    response.data.map((value, key) => {
+                        return <TagButton key={key} tagName={value['name']} />
+                    })
+                );
+            });
+    }, []);
     return (
         <>
             <div className="d-flex justify-content-center">
@@ -33,7 +43,7 @@ export function TagListSection() {
 
 export function GuildCardContainer(props) {
     return (
-        <Row xs={1} md={2} xl={3} className="mt-5 gx-0">
+        <Row xs={1} md={2} xl={3} className="mt-2 gx-0">
             {props.children}
         </Row>
     );
@@ -83,7 +93,6 @@ export function DashboardUserPanel() {
                         title="ログアウト"
                         onClick={() => {
                             disconnectViaDiscord();
-                            disconnectVisDislist();
                             navigate('/');
                         }}
                     />

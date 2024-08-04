@@ -1,4 +1,4 @@
-import { removeCurrentDiscordUserDataLocalStorage, removeCurrentDiscordUserGuildsLocalStorage, removeCurrentDislistUserOwningServersLocalStorage } from "./LocalStorageController";
+import { removeCurrentDiscordUserDataLocalStorage } from "./LocalStorageController";
 import { deleteDiscordAccessTokenCookie, deleteDiscordOAuthTokenCookie, deleteDiscordRefreshTokenCookie } from "./OAuthController";
 
 export function disconnectViaDiscord() {
@@ -6,8 +6,4 @@ export function disconnectViaDiscord() {
     deleteDiscordRefreshTokenCookie();
     deleteDiscordOAuthTokenCookie();
     removeCurrentDiscordUserDataLocalStorage();
-    removeCurrentDiscordUserGuildsLocalStorage();
-}
-export function disconnectVisDislist() {
-    removeCurrentDislistUserOwningServersLocalStorage();
 }
