@@ -98,14 +98,64 @@ function ViewServerHeader(props) {
 function ViesServerBody(props) {
     const params = useParams();
     const [periodText, setPeriodText] = useState("");
-    const periodTextChanger = (newPeriodText) => { setPeriodText(newPeriodText) }
     const [guildTags, setGuildTags] = useState();
+    const [dailySeriesData, setDailySeriesData] = useState();
+    const [weeklySeriesData, setWeeklySeriesData] = useState();
+    const [monthlySeriesData, setMonthlySeriesData] = useState();
+
     useEffect(() => {
         getServerTags(params['id']).then((response) => {
             setGuildTags(response.data.map(value => value['name']));
         });
     }, []);
 
+    const serverVCLogsAPIRequestLimiter = (start_epoch, end_epoch, xAxisUnit) => {
+        if (xAxisUnit == "day" && dailySeriesData != null) return;
+        if (xAxisUnit == "week" && weeklySeriesData != null) return;
+        if (xAxisUnit == "month" && monthlySeriesData != null) return;
+        getServerVCLogs(params['id'], start_epoch, end_epoch)
+            .then((response) => {
+                const to2digit = (value) => ('00' + value).slice(-2);
+                var createPeriodLambda = (startDate, endDate) => {
+                    return `${startDate.getFullYear()}/${to2digit(startDate.getMonth())}/${to2digit(startDate.getDate())} ${to2digit(startDate.getHours())}:${to2digit(startDate.getMinutes())}` +
+                        " - " +
+                        `${endDate.getFullYear()}/${to2digit(endDate.getMonth())}/${to2digit(endDate.getDate())} ${to2digit(endDate.getHours())}:${to2digit(endDate.getMinutes())}`;
+                }
+                // logが存在しない場合は戻る。
+                if (!response.data || response.data.length == 0) return;
+                var logs = [];
+                logs.push({ epoch: Number(start_epoch), fluctuation: 0 });
+                logs.push({ epoch: Number(end_epoch), fluctuation: 0 });
+                // logsをフォーマット
+                response.data.forEach(({ server_id, member_id, start_epoch, interval_sec }) => {
+                    if (interval_sec < 600) return;
+                    logs.push({ epoch: Number(start_epoch), fluctuation: 1 });
+                    logs.push({ epoch: (Number(start_epoch) + Number(interval_sec)), fluctuation: -1 });
+                });
+
+                // logsの順番を並び替え
+                logs.sort((a, b) => a.epoch > b.epoch ? 1 : -1);
+                const startDate = new Date(logs[0]['epoch'] * 1000);
+                const endDate = new Date(logs.slice(-1)[0]['epoch'] * 1000);
+
+                setPeriodText(createPeriodLambda(startDate, endDate));
+
+                // logsの接続数を算出しフォーマット
+                var logs_formatted = [];
+                var i = 0;
+                logs.forEach(({ epoch, fluctuation }) => {
+                    i += fluctuation;
+                    logs_formatted.push({ epoch: epoch, userNum: i });
+                });
+
+                // logsをchart用データにフォーマット
+                const log_datas = logs_formatted.map(({ epoch, userNum }) => ([epoch, userNum]));
+                if (xAxisUnit == "day") setDailySeriesData(log_datas);
+                if (xAxisUnit == "week") setWeeklySeriesData(log_datas);
+                if (xAxisUnit == "month") setMonthlySeriesData(log_datas);
+
+            });
+    }
     return (
         <div>
             <div className="mb-3" style={{ height: '40px' }}>
@@ -139,13 +189,13 @@ function ViesServerBody(props) {
                         </div>
                     </TabList>
                     <TabPanel value={0}>
-                        <VCLogChart xAxisUnit="day" periodTextChanger={periodTextChanger} {...props} />
+                        <VCLogChart xAxisUnit="day" seriesData={dailySeriesData} serverVCLogsAPIRequestLimiter={serverVCLogsAPIRequestLimiter} {...props} />
                     </TabPanel>
                     <TabPanel value={1}>
-                        <VCLogChart xAxisUnit="week" periodTextChanger={periodTextChanger} {...props} />
+                        <VCLogChart xAxisUnit="week" seriesData={weeklySeriesData} serverVCLogsAPIRequestLimiter={serverVCLogsAPIRequestLimiter} {...props} />
                     </TabPanel>
                     <TabPanel value={2}>
-                        <VCLogChart xAxisUnit="month" periodTextChanger={periodTextChanger} {...props} />
+                        <VCLogChart xAxisUnit="month" seriesData={monthlySeriesData} serverVCLogsAPIRequestLimiter={serverVCLogsAPIRequestLimiter} {...props} />
                     </TabPanel>
                 </Tabs>
             </CssVarsProvider>
@@ -155,20 +205,12 @@ function ViesServerBody(props) {
 
 
 function VCLogChart(props) {
-    const [seriesData, setSeriesData] = useState([]);
     const [notExistText, setNotExistText] = useState("");
-    const params = useParams();
 
     useEffect(() => {
         const todayEpoch = (Date.now() / 1000);
         const end_epoch = todayEpoch.toFixed();
         var start_epoch;
-        var createPeriodLambda = (startDate, endDate) => {
-            return `${startDate.getFullYear()}/${to2digit(startDate.getMonth())}/${to2digit(startDate.getDate())} ${to2digit(startDate.getHours())}:${to2digit(startDate.getMinutes())}` +
-                " - " +
-                `${endDate.getFullYear()}/${to2digit(endDate.getMonth())}/${to2digit(endDate.getDate())} ${to2digit(endDate.getHours())}:${to2digit(endDate.getMinutes())}`;
-        }
-        const to2digit = (value) => ('00' + value).slice(-2);
 
         if (props.xAxisUnit === "day") {
             setNotExistText("直近24時間のデータが存在しません");
@@ -183,39 +225,7 @@ function VCLogChart(props) {
             start_epoch = (todayEpoch - 2592000).toFixed();
         }
         // Get Daily Server VC Logs
-        getServerVCLogs(params['id'], start_epoch, end_epoch)
-            .then((response) => {
-                // logが存在しない場合は戻る。
-                if (!response.data || response.data.length == 0) return;
-                var logs = [];
-                logs.push({ epoch: Number(start_epoch), fluctuation: 0 });
-                logs.push({ epoch: Number(end_epoch), fluctuation: 0 });
-                // logsをフォーマット
-                response.data.forEach(({ server_id, member_id, start_epoch, interval_sec }) => {
-                    if (interval_sec < 600) return;
-                    logs.push({ epoch: Number(start_epoch), fluctuation: 1 });
-                    logs.push({ epoch: (Number(start_epoch) + Number(interval_sec)), fluctuation: -1 });
-                });
-
-                // logsの順番を並び替え
-                logs.sort((a, b) => a.epoch > b.epoch ? 1 : -1);
-                const startDate = new Date(logs[0]['epoch'] * 1000);
-                const endDate = new Date(logs.slice(-1)[0]['epoch'] * 1000);
-
-                props.periodTextChanger(createPeriodLambda(startDate, endDate));
-
-                // logsの接続数を算出しフォーマット
-                var logs_formatted = [];
-                var i = 0;
-                logs.forEach(({ epoch, fluctuation }) => {
-                    i += fluctuation;
-                    logs_formatted.push({ epoch: epoch, userNum: i });
-                });
-
-                // logsをchart用データにフォーマット
-                const daily_log_datas = logs_formatted.map(({ epoch, userNum }) => ([epoch, userNum]));
-                setSeriesData(daily_log_datas);
-            });
+        props.serverVCLogsAPIRequestLimiter(start_epoch, end_epoch, props.xAxisUnit);
     }, []);
 
 
@@ -227,7 +237,7 @@ function VCLogChart(props) {
                     series={[
                         {
                             name: '接続数',
-                            data: seriesData
+                            data: props.seriesData
                         }
                     ]}
                     width="100%"
