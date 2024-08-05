@@ -13,7 +13,7 @@ import { TagView } from './Page/tagview';
 
 function App() {
     return (
-        <div className="App" data-bs-theme={getPrefersColorScheme()}>
+        <div className="App" data-bs-theme={"dark"}>
             <Routes>
                 <Route exact path="/" element={<Home />} />
                 <Route exact path="/dashboard" element={<DashBoard />} />
