@@ -83,19 +83,25 @@ export function ServerEdit(props) {
 
         const allPromises = new Promise((resolve, reject) => {
 
-            var deleteTagPairPromise = [];
-            //delete tag_pair
-            if (selectedRegion !== initialRegion) {
-                for (let i = 0; i < ist.length; i++) {
-                    deleteTagPairPromise.push(deleteTagPair(params['id'], ist[i]));
+            const deleteTagPairPromise = new Promise((resolve) => {
+                const deleteTagPairs = async () => {
+                    //delete tag_pair
+                    if (selectedRegion !== initialRegion) {
+                        for (let i = 0; i < ist.length; i++) {
+                            await deleteTagPair(params['id'], ist[i]);
+                        }
+                    } else {
+                        for (let i = 0; i < filteredIst.length; i++) {
+                            await deleteTagPair(params['id'], filteredIst[i]);
+                        }
+                    }
                 }
-            } else {
-                for (let i = 0; i < filteredIst.length; i++) {
-                    deleteTagPairPromise.push(deleteTagPair(params['id'], filteredIst[i]));
-                }
-            }
+                deleteTagPairs().then(() => {
+                    resolve();
+                })
+            })
 
-            Promise.all(deleteTagPairPromise).then(() => {
+            deleteTagPairPromise.then(() => {
                 var updateServerData = {
                     id: params['id'],
                     country_id: selectedRegion,
@@ -105,18 +111,24 @@ export function ServerEdit(props) {
                     updateServerData['is_public'] = isServerPublic;
                 }
                 updateServer(updateServerData).then(() => {
-                    var createTagPairPromise = [];
+                    const createTagPairPromise = new Promise((resolve) => {
+                        const createTagPairs = async () => {
+                            if (selectedRegion !== initialRegion) {
+                                for (let i = 0; i < st.length; i++) {
+                                    await createTagPair(params['id'], st[i]);
+                                }
+                            } else {
+                                for (let i = 0; i < filteredSt.length; i++) {
+                                    await createTagPair(params['id'], filteredSt[i]);
+                                }
+                            }
+                        }
+                        createTagPairs().then(() => {
+                            resolve();
+                        })
+                    });
                     //create tag_pair
-                    if (selectedRegion !== initialRegion) {
-                        for (let i = 0; i < st.length; i++) {
-                            createTagPairPromise.push(createTagPair(params['id'], st[i]));
-                        }
-                    } else {
-                        for (let i = 0; i < filteredSt.length; i++) {
-                            createTagPairPromise.push(createTagPair(params['id'], filteredSt[i]));
-                        }
-                    }
-                    Promise.all(createTagPairPromise).then(() => {
+                    createTagPairPromise.then(() => {
                         setInitialSelectedTags(selectedTags);
                         setInitialRegion(selectedRegion);
                         setIsAPIProcessing(false);
