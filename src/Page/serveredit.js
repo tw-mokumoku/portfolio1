@@ -8,13 +8,15 @@ import { HeaderUnion } from "../Component/union/headerUnion";
 import { DashboardUserPanel } from "../Component/union/SectionUnion";
 import { ReactTags } from 'react-tag-autocomplete'
 import { useCallback, useState } from "react";
-import { createTagPair, deleteTagPair, getCurrentUserGuilds, getGuild, getServer, getServerTags, getTagSuggests, updateServer } from "../Function/APIController";
+import { createTagPair, deleteTagPair, getCurrentUserGuilds, getServer, getServerTags, getTagSuggests, updateServer } from "../Function/APIController";
 import Button from 'react-bootstrap/Button';
 import { useEffect } from "react";
 import './serveredit.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { OverlayLoading } from "react-loading-randomizable";
+import "react-toggle/style.css"
+import Toggle from 'react-toggle'
 
 export function ServerEdit(props) {
     const navigate = useNavigate();
@@ -27,6 +29,8 @@ export function ServerEdit(props) {
     const params = useParams();
     const [serverName, setServerName] = useState("");
     const [loading, setLoading] = useState(true);
+    const [isServerPublic, setIsServerPublic] = useState(false);
+    const [initialIsServerPublic, setInitialIsServerPublic] = useState(false);
 
     const onAdd = useCallback((newTag) => {
         setSelectedTags([...selectedTags, newTag])
@@ -92,11 +96,15 @@ export function ServerEdit(props) {
             }
 
             Promise.all(deleteTagPairPromise).then(() => {
-                updateServer({
+                var updateServerData = {
                     id: params['id'],
                     country_id: selectedRegion,
-                    description: descriptionText
-                }).then(() => {
+                    description: descriptionText,
+                };
+                if (initialIsServerPublic != isServerPublic) {
+                    updateServerData['is_public'] = isServerPublic;
+                }
+                updateServer(updateServerData).then(() => {
                     var createTagPairPromise = [];
                     //create tag_pair
                     if (selectedRegion !== initialRegion) {
@@ -162,6 +170,8 @@ export function ServerEdit(props) {
         getServer(params['id'])
             .then((response) => {
                 setServerName(response.data.name);
+                setIsServerPublic(response.data.is_public)
+                setInitialIsServerPublic(response.data.is_public)
                 setDescriptionText(response.data['description'] ? response.data['description'] : "");
                 if (response.data['country_id']) {
                     setSelectedRegion(response.data['country_id']);
@@ -221,6 +231,15 @@ export function ServerEdit(props) {
                                         onChange={(event) => setDescriptionText(event.target.value)}
                                         className="w-100 server-edit-description-textarea"
                                     />
+                                </EditCategory>
+                                <EditCategory
+                                    title="サーバーを公開する"
+                                >
+                                    <Toggle
+                                        id='cheese-status'
+                                        checked={isServerPublic}
+                                        defaultChecked={isServerPublic}
+                                        onChange={() => setIsServerPublic(!isServerPublic)} />
                                 </EditCategory>
                             </Card.Body>
                         </Card>
