@@ -9,7 +9,7 @@ export function ServerPanel(props) {
     const [isServerAdded, setIsServerAdded] = useState(false);
     useEffect(() => {
         getServer(props.id).then((response) => {
-            setIsServerAdded(response.data)
+            setIsServerAdded(response.data['is_bot_available'])
         })
     }, []);
 
