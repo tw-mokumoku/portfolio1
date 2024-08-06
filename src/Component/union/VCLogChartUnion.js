@@ -7,58 +7,9 @@ import Tabs from '@mui/joy/Tabs';
 import TabList from '@mui/joy/TabList';
 import Chart from "react-apexcharts";
 
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 export function VCLogChartTabs(props) {
-    const [periodText, setPeriodText] = useState("");
-    const [dailySeriesData, setDailySeriesData] = useState();
-    const [weeklySeriesData, setWeeklySeriesData] = useState();
-    const [monthlySeriesData, setMonthlySeriesData] = useState();
-    const serverVCLogsAPIRequestLimiter = (start_epoch, end_epoch, xAxisUnit) => {
-        if (xAxisUnit == "day" && dailySeriesData != null) return;
-        if (xAxisUnit == "week" && weeklySeriesData != null) return;
-        if (xAxisUnit == "month" && monthlySeriesData != null) return;
-        getServerVCLogs(props.serverID, start_epoch, end_epoch)
-            .then((response) => {
-                const to2digit = (value) => ('00' + value).slice(-2);
-                var createPeriodLambda = (startDate, endDate) => {
-                    return `${startDate.getFullYear()}/${to2digit(startDate.getMonth())}/${to2digit(startDate.getDate())} ${to2digit(startDate.getHours())}:${to2digit(startDate.getMinutes())}` +
-                        " - " +
-                        `${endDate.getFullYear()}/${to2digit(endDate.getMonth())}/${to2digit(endDate.getDate())} ${to2digit(endDate.getHours())}:${to2digit(endDate.getMinutes())}`;
-                }
-                // logが存在しない場合は戻る。
-                if (!response.data || response.data.length == 0) return;
-                var logs = [];
-                logs.push({ epoch: Number(start_epoch), fluctuation: 0 });
-                logs.push({ epoch: Number(end_epoch), fluctuation: 0 });
-                // logsをフォーマット
-                response.data.forEach(({ server_id, member_id, start_epoch, interval_sec }) => {
-                    if (interval_sec < 600) return;
-                    logs.push({ epoch: Number(start_epoch), fluctuation: 1 });
-                    logs.push({ epoch: (Number(start_epoch) + Number(interval_sec)), fluctuation: -1 });
-                });
-
-                // logsの順番を並び替え
-                logs.sort((a, b) => a.epoch > b.epoch ? 1 : -1);
-                const startDate = new Date(logs[0]['epoch'] * 1000);
-                const endDate = new Date(logs.slice(-1)[0]['epoch'] * 1000);
-
-                setPeriodText(createPeriodLambda(startDate, endDate));
-
-                // logsの接続数を算出しフォーマット
-                var logs_formatted = [];
-                var i = 0;
-                logs.forEach(({ epoch, fluctuation }) => {
-                    i += fluctuation;
-                    logs_formatted.push({ epoch: epoch, userNum: i });
-                });
-
-                // logsをchart用データにフォーマット
-                const log_datas = logs_formatted.map(({ epoch, userNum }) => ([epoch, userNum]));
-                if (xAxisUnit == "day") setDailySeriesData(log_datas);
-                if (xAxisUnit == "week") setWeeklySeriesData(log_datas);
-                if (xAxisUnit == "month") setMonthlySeriesData(log_datas);
-
-            });
-    }
     return (
         <CssVarsProvider
             defaultMode="dark"
@@ -82,21 +33,76 @@ export function VCLogChartTabs(props) {
                     <Tab disableIndicator color='#ffffff'>月間</Tab>
                     <div className="ms-auto d-flex align-items-center">
                         <div style={{ marginRight: '10px', color: '#e3e5e8' }}>
-                            {periodText}
+                            {props.periodText}
                         </div>
                     </div>
                 </TabList>
                 <TabPanel value={0}>
-                    <VCLogChart xAxisUnit="day" seriesData={dailySeriesData} serverVCLogsAPIRequestLimiter={serverVCLogsAPIRequestLimiter} {...props} />
+                    <VCLogInfo
+                        activeUserCount={props.dailyVCLogInfoData['activeUserCount']}
+                        vcConnectCount={props.dailyVCLogInfoData['vcConnectCount']}
+                        vcAverageTime={props.dailyVCLogInfoData['vcAverageTime']}
+                        vcMaxConnectTime={props.dailyVCLogInfoData['vcMaxConnectTime']}
+                    />
+                    <VCLogChart xAxisUnit="day" seriesData={props.dailySeriesData} serverVCLogsAPIRequestLimiter={props.serverVCLogsAPIRequestLimiter} {...props} />
                 </TabPanel>
                 <TabPanel value={1}>
-                    <VCLogChart xAxisUnit="week" seriesData={weeklySeriesData} serverVCLogsAPIRequestLimiter={serverVCLogsAPIRequestLimiter} {...props} />
+                    <VCLogInfo
+                        activeUserCount={props.monthlyVCLogInfoData['activeUserCount']}
+                        vcConnectCount={props.monthlyVCLogInfoData['vcConnectCount']}
+                        vcAverageTime={props.monthlyVCLogInfoData['vcAverageTime']}
+                        vcMaxConnectTime={props.monthlyVCLogInfoData['vcMaxConnectTime']}
+                    />
+                    <VCLogChart xAxisUnit="week" seriesData={props.weeklySeriesData} serverVCLogsAPIRequestLimiter={props.serverVCLogsAPIRequestLimiter} {...props} />
                 </TabPanel>
                 <TabPanel value={2}>
-                    <VCLogChart xAxisUnit="month" seriesData={monthlySeriesData} serverVCLogsAPIRequestLimiter={serverVCLogsAPIRequestLimiter} {...props} />
+                    <VCLogInfo
+                        activeUserCount={props.yearlyVCLogInfoData['activeUserCount']}
+                        vcConnectCount={props.yearlyVCLogInfoData['vcConnectCount']}
+                        vcAverageTime={props.yearlyVCLogInfoData['vcAverageTime']}
+                        vcMaxConnectTime={props.yearlyVCLogInfoData['vcMaxConnectTime']}
+                    />
+                    <VCLogChart xAxisUnit="month" seriesData={props.monthlySeriesData} serverVCLogsAPIRequestLimiter={props.serverVCLogsAPIRequestLimiter} {...props} />
                 </TabPanel>
             </Tabs>
         </CssVarsProvider>
+    );
+}
+
+function VCLogInfo(props) {
+    return (
+        <Row xs={2} md={4} xl={4}>
+            <BasicInfoPanel
+                title="アクティブユーザー"
+                data={props.activeUserCount}
+            />
+            <BasicInfoPanel
+                title="VC接続回数"
+                data={props.vcConnectCount}
+            />
+            <BasicInfoPanel
+                title="平均VC接続時間"
+                data={props.vcAverageTime}
+            />
+            <BasicInfoPanel
+                title="最高VC接続時間"
+                data={props.vcMaxConnectTime}
+            />
+        </Row>
+    );
+}
+function BasicInfoPanel(props) {
+    return (
+        <Col>
+            <div className="basic-info-panel py-2" style={{ color: 'white' }}>
+                <div className="basic-info-panel-title">
+                    {props.title}
+                </div>
+                <div className="fs-5">
+                    {props.data}
+                </div>
+            </div>
+        </Col>
     );
 }
 
@@ -133,7 +139,7 @@ function VCLogChart(props) {
                     series={[
                         {
                             name: '接続数',
-                            data: props.seriesData
+                            data: props.seriesData ? props.seriesData : []
                         }
                     ]}
                     width="100%"

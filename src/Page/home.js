@@ -9,9 +9,11 @@ import { isLocal } from '../Function/LocalRemoteSwitcher';
 import { useEffect, useState } from 'react';
 import { getDiscordGuildIcon, getServerRankingCountryUpdatedLog } from '../Function/APIController';
 import { timeDiff } from '../Function/DateCalc';
+import { OverlayLoading } from "react-loading-randomizable";
 
 export function Home(props) {
     const [guildCards, setGuildCards] = useState([<></>]);
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         getServerRankingCountryUpdatedLog('JP')
             .then((response) => {
@@ -28,17 +30,21 @@ export function Home(props) {
                         />
                     })
                 )
+                setLoading(false);
             });
     }, []);
     return (
-        <Container>
-            <HeaderUnion />
-            <BigTitle />
-            <TagListSection />
-            <GuildCardContainer>
-                {guildCards}
-            </GuildCardContainer>
-        </Container>
+        <>
+            <OverlayLoading active={loading} />
+            <Container>
+                <HeaderUnion />
+                <BigTitle />
+                <TagListSection />
+                <GuildCardContainer>
+                    {guildCards}
+                </GuildCardContainer>
+            </Container>
+        </>
     );
 }
 
