@@ -7,6 +7,7 @@ import { ReactTags } from 'react-tag-autocomplete'
 import { useCallback, useState } from 'react';
 import { getTagSuggests } from '../../Function/APIController';
 import './searchBar.css';
+import { useDebounce } from 'react-use';
 export function SearchBar() {
     const [selectedTags, setSelectedTags] = useState([]);
 
@@ -19,16 +20,23 @@ export function SearchBar() {
     }, [selectedTags]);
 
     const [suggestions, setSuggestions] = useState([]);
+    const [inputValues, setInputValues] = useState('');
 
-    const onInput = (value) => {
-        if (value == null || value === "") {
-            setSuggestions([]);
-            return;
-        }
-        getTagSuggests("JP", value).then((response) => {
-            setSuggestions(response.data.map(({ id, name, country_id }) => ({ value: name, label: name })));
-        });
-    };
+
+    const [, cancel] = useDebounce(
+        () => {
+            if (inputValues == null || inputValues === "") {
+                setSuggestions([]);
+                return;
+            }
+            getTagSuggests("JP", inputValues).then((response) => {
+                setSuggestions(response.data.map(({ id, name, country_id }) => ({ value: name, label: name })));
+            });            
+        },
+        1000,
+        [inputValues],
+    );
+
     return (
         <Stack className="justify-content-center align-items-center">
             <InputGroup className="my-3" style={{ width: "70%" }}>
@@ -41,7 +49,7 @@ export function SearchBar() {
                     onDelete={onDelete}
                     allowNew={true}
                     noOptionsText="No matching countries"
-                    onInput={onInput}
+                    onInput={(value)=>setInputValues(value)}
                     allowResize={true}
                 />
                 </div>
