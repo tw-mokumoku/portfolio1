@@ -46,7 +46,7 @@ export function DashBoard() {
                     </Col>
                     <Col xl={9}>
                         <p className="fs-2">ディスコード サーバー</p>
-                        <Row xs={1} md={3} xl={3}>
+                        <Row xs={1} md={2} xl={3}>
                             {serverPanels}
                         </Row>
                     </Col>

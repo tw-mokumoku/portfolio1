@@ -2,6 +2,7 @@
 import './serverview.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import { Avatar } from '@mui/material';
 import { useParams } from "react-router-dom";
@@ -11,6 +12,7 @@ import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { ToButton } from '../Component/parts/conversion';
 import { VCLogChartTabs } from '../Component/union/VCLogChartUnion';
+import Stack from 'react-bootstrap/Stack';
 
 
 export function ServerView() {
@@ -102,12 +104,99 @@ function ViesServerBody(props) {
 
     return (
         <div>
+            <FirstEditCategory title="タグ">
             <div className="mb-3" style={{ height: '40px' }}>
                 {ToButton(guildTags)}
             </div>
-            <p>{props.currentServerDescription}</p>
-            <VCLogChartTabs serverID={params['id']} />
+            </FirstEditCategory>
+            <BodySeparater />
+            <EditCategory title="概要">
+                <p>{props.currentServerDescription}</p>
+            </EditCategory>
+            <BodySeparater />
+            <EditCategory title="基本情報">
+                <BasicInfo />
+            </EditCategory>
+            <BodySeparater />
+            <EditCategory title="VC 接続グラフ">
+                <VCLogChartTabs serverID={params['id']} />
+            </EditCategory>
         </div>
     );
 }
+function BasicInfo(props) {
+    return (
+        <Row xs={2} md={3} xl={6}>
+            <BasicInfoPanel
+                title="ユーザー"
+                data={"998"}
+            />
+            <BasicInfoPanel
+                title="月間新規ユーザー"
+                data={"54.08%"}
+            />
+            <BasicInfoPanel
+                title="非アクティブユーザー"
+                data={"76.34%"}
+            />
+            <BasicInfoPanel
+                title="VC接続回数"
+                data={"1,241"}
+            />
+            <BasicInfoPanel
+                title="平均VC接続時間"
+                data={"00:14:31"}
+            />
+            <BasicInfoPanel
+                title="最終更新"
+                data={"21時間前"}
+            />
+        </Row>
+    );
+}
 
+function BasicInfoPanel(props) {
+    return (
+        <Col>
+            <div className="basic-info-panel py-2">
+                <div className="basic-info-panel-title">
+                    {props.title}
+                </div>
+                <div className="fs-5">
+                    {props.data}
+                </div>
+            </div>
+        </Col>
+    );
+}
+
+function BodySeparater(props) {
+    return (
+        <div className="server-view-body-separater"></div>
+    );
+}
+
+function FirstEditCategory(props) {
+    return (
+        <div className="edit-category pb-2">
+            <div
+                className="mb-2 fs-6"
+            >
+                {props.title}
+            </div>
+            {props.children}
+        </div>
+    );
+}
+function EditCategory(props) {
+    return (
+        <div className="edit-category pb-2">
+            <div
+                className="mb-2 fs-6 pt-4"
+            >
+                {props.title}
+            </div>
+            {props.children}
+        </div>
+    );
+}

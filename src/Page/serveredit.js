@@ -82,23 +82,38 @@ export function ServerEdit(props) {
         const filteredSt = st.filter((value) => !ist.includes(value));
 
         const allPromises = new Promise((resolve, reject) => {
-
-            const deleteTagPairPromise = new Promise((resolve) => {
+            var failedDeleteTags = [];
+            const deleteTagPairPromise = new Promise((resolve, reject) => {
                 const deleteTagPairs = async () => {
+                    var deleteTagsFailed = false;
                     //delete tag_pair
                     if (selectedRegion !== initialRegion) {
                         for (let i = 0; i < ist.length; i++) {
-                            await deleteTagPair(params['id'], ist[i]);
+                            try {
+                                await deleteTagPair(params['id'], ist[i]);
+                            } catch (err) {
+                                failedDeleteTags.push(ist[i]);
+                                deleteTagsFailed = true;
+                            }
                         }
                     } else {
                         for (let i = 0; i < filteredIst.length; i++) {
-                            await deleteTagPair(params['id'], filteredIst[i]);
+                            try {
+                                await deleteTagPair(params['id'], filteredIst[i]);
+                            } catch (err) {
+                                failedDeleteTags.push(filteredIst[i]);
+                                deleteTagsFailed = true;
+                            }
                         }
                     }
+                    if (deleteTagsFailed) reject();
                 }
-                deleteTagPairs().then(() => {
-                    resolve();
-                })
+                deleteTagPairs()
+                    .then(() => {
+                        resolve();
+                    }).catch(() => {
+                        reject();
+                    })
             })
 
             deleteTagPairPromise.then(() => {
@@ -111,21 +126,37 @@ export function ServerEdit(props) {
                     updateServerData['is_public'] = isServerPublic;
                 }
                 updateServer(updateServerData).then(() => {
-                    const createTagPairPromise = new Promise((resolve) => {
+                    var failedCreateTags = [];
+                    const createTagPairPromise = new Promise((resolve, reject) => {
                         const createTagPairs = async () => {
+                            var createTagsFailed = false;
                             if (selectedRegion !== initialRegion) {
                                 for (let i = 0; i < st.length; i++) {
-                                    await createTagPair(params['id'], st[i]);
+                                    try {
+                                        await createTagPair(params['id'], st[i]);
+                                    } catch (err) {
+                                        failedCreateTags.push(st[i]);
+                                        createTagsFailed = true
+                                    }
                                 }
                             } else {
                                 for (let i = 0; i < filteredSt.length; i++) {
-                                    await createTagPair(params['id'], filteredSt[i]);
+                                    try {
+                                        await createTagPair(params['id'], filteredSt[i]);
+                                    } catch (err) {
+                                        failedCreateTags.push(filteredSt[i]);
+                                        createTagsFailed = true
+                                    }
                                 }
                             }
+                            if (createTagsFailed) reject();
                         }
-                        createTagPairs().then(() => {
-                            resolve();
-                        })
+                        createTagPairs()
+                            .then(() => {
+                                resolve();
+                            }).catch(() => {
+                                reject();
+                            })
                     });
                     //create tag_pair
                     createTagPairPromise.then(() => {
@@ -135,7 +166,8 @@ export function ServerEdit(props) {
                         resolve();
                     }).catch(() => {
                         toast.error(
-                            "タグの追加に失敗しました。"
+                            `タグ ${failedCreateTags.join(', ')} の追加に失敗しました\n少し時間を置いて再度お試しください`
+                            //"タグの追加に失敗しました。"
                         );
                         setIsAPIProcessing(false);
                         reject();
@@ -149,7 +181,7 @@ export function ServerEdit(props) {
                 });
             }).catch(() => {
                 toast.error(
-                    "タグの除去に失敗しました。"
+                    `タグ 「${failedDeleteTags.join(', ')}」 の除去に失敗しました\n少し時間を置いて再度お試しください`
                 );
                 setIsAPIProcessing(false);
                 reject()
