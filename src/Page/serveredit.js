@@ -15,8 +15,9 @@ import './serveredit.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { OverlayLoading } from "react-loading-randomizable";
-import "react-toggle/style.css"
-import Toggle from 'react-toggle'
+import "react-toggle/style.css";
+import Toggle from 'react-toggle';
+import { useDebounce } from 'react-use';
 
 export function ServerEdit(props) {
     const navigate = useNavigate();
@@ -41,16 +42,21 @@ export function ServerEdit(props) {
     }, [selectedTags]);
 
     const [suggestions, setSuggestions] = useState([]);
+    const [inputValues, setInputValues] = useState('');
 
-    const onInput = (value) => {
-        if (value == null || value === "") {
-            setSuggestions([]);
-            return;
-        }
-        getTagSuggests("JP", value).then((response) => {
-            setSuggestions(response.data.map(({ id, name, country_id }) => ({ value: name, label: name })));
-        });
-    };
+    const [, cancel] = useDebounce(
+        () => {
+            if (inputValues == null || inputValues === "") {
+                setSuggestions([]);
+                return;
+            }
+            getTagSuggests("JP", inputValues).then((response) => {
+                setSuggestions(response.data.map(({ id, name, country_id }) => ({ value: name, label: name })));
+            });
+        },
+        1000,
+        [inputValues],
+    );
 
     const onRegionChange = (event) => {
         if (event.target.value === initialRegion) setSelectedTags(initialSelectedTags);
@@ -264,7 +270,7 @@ export function ServerEdit(props) {
                                         onDelete={onDelete}
                                         allowNew={true}
                                         noOptionsText="No matching countries"
-                                        onInput={onInput}
+                                        onInput={(value) => setInputValues(value)}
                                     />
                                 </EditCategory>
                                 <EditCategory

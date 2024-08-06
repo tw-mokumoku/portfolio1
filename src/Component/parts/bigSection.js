@@ -12,9 +12,6 @@ export function BigTitle() {
             <Stack className="justify-content-center align-items-center my-5">
                 <h1 className="p-2">DiscordListへようこそ</h1>
                 <p className="p-2 fs-6">サーバーを検索して友達を見つけましょう！</p>
-                <SearchBar />
-            </Stack>
-            {/*
                 <InputGroup className="mb-3" style={{ width: "70%" }}>
                     <InputGroup.Text>
                         <SearchIcon />
@@ -26,7 +23,7 @@ export function BigTitle() {
                     />
                     <Button>検索</Button>
                 </InputGroup>
-            */}
+            </Stack>
         </Container>
     );
 }
