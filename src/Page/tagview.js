@@ -7,9 +7,13 @@ import { getDiscordGuildIcon, getTagRankingCurrentServers } from '../Function/AP
 import { useParams } from "react-router-dom";
 import { GuildCard } from '../Component/parts/conversion';
 import { SearchBar } from '../Component/parts/searchBar';
+import { OverlayLoading } from "react-loading-randomizable";
+
 export function TagView() {
     const params = useParams();
-    const [guildCards, setGuildCards] = useState([<></>])
+    const [guildCards, setGuildCards] = useState([<></>]);
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         getTagRankingCurrentServers(params['name'])
             .then((response) => {
@@ -25,21 +29,25 @@ export function TagView() {
                             dataString={"現在の接続人数：" + value['user_num']}
                         />
                     })
-                )
+                );
+                setLoading(false);
             })
     }, [])
 
     return (
-        <Container>
-            <HeaderUnion />
-            <div className="mt-3 mb-5">
-                <SearchBar />
-            </div>
-            <div className="mt-5">
-            <GuildCardContainer>
-                {guildCards}
-            </GuildCardContainer>
-            </div>
-        </Container>
+        <>
+            <OverlayLoading active={loading} />
+            <Container>
+                <HeaderUnion />
+                <div className="mt-3 mb-5">
+                    <SearchBar />
+                </div>
+                <div className="mt-5">
+                <GuildCardContainer>
+                    {guildCards}
+                </GuildCardContainer>
+                </div>
+            </Container>
+        </>
     );
 }
