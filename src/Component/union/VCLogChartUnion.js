@@ -70,23 +70,29 @@ export function VCLogChartTabs(props) {
 }
 
 function VCLogInfo(props) {
+    const numDataString = (data) => {
+        return data ? data : "0";
+    };
+    const timeDataString = (data) => {
+        return data ? data : "00:00:00";
+    };
     return (
         <Row xs={2} md={4} xl={4}>
             <BasicInfoPanel
                 title="アクティブユーザー"
-                data={props.activeUserCount}
+                data={numDataString(props.activeUserCount)}
             />
             <BasicInfoPanel
                 title="VC接続回数"
-                data={props.vcConnectCount}
+                data={numDataString(props.vcConnectCount)}
             />
             <BasicInfoPanel
                 title="平均VC接続時間"
-                data={props.vcAverageTime}
+                data={timeDataString(props.vcAverageTime)}
             />
             <BasicInfoPanel
                 title="最高VC接続時間"
-                data={props.vcMaxConnectTime}
+                data={timeDataString(props.vcMaxConnectTime)}
             />
         </Row>
     );
