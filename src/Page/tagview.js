@@ -39,7 +39,7 @@ export function TagView() {
             <OverlayLoading active={loading} />
             <Container>
                 <HeaderUnion />
-                <div className="mt-3 mb-5">
+                <div className="mt-3 mb-5 d-flex justify-content-center align-items-center">
                     <SearchBar />
                 </div>
                 <div className="mt-5">

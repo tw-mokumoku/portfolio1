@@ -37,11 +37,42 @@ export function SearchBar() {
         [inputValues],
     );
 
+    const tmp = () => {
+        return (
+            <InputGroup className="mb-3" style={{ width: "70%" }}>
+                <InputGroup.Text>
+                    <SearchIcon />
+                </InputGroup.Text>
+                <Button>検索</Button>
+            </InputGroup>
+        );
+    }
+
+
     return (
-        <Stack className="justify-content-center align-items-center">
-            <InputGroup className="my-3" style={{ width: "70%" }}>
-                <div className="w-100">
+        <div className="my-3 search-bar-input-group" style={{ width: "70%" }}>
+            <div className="search-bar-search-icon">
+                <SearchIcon />
+            </div>
+            <div className="search-bar-reacttags-container">
                 <ReactTags
+                    classNames={{
+                        root: 'search-bar-react-tags',
+                        rootIsActive: 'is-active',
+                        rootIsDisabled: 'is-disabled',
+                        rootIsInvalid: 'is-invalid',
+                        label: 'search-bar-react-tags__label',
+                        tagList: 'search-bar-react-tags__list',
+                        tagListItem: 'search-bar-react-tags__list-item',
+                        tag: 'search-bar-react-tags__tag',
+                        tagName: 'search-bar-react-tags__tag-name',
+                        comboBox: 'search-bar-react-tags__combobox',
+                        input: 'search-bar-react-tags__combobox-input',
+                        listBox: 'search-bar-react-tags__listbox',
+                        option: 'search-bar-react-tags__listbox-option',
+                        optionIsActive: 'is-active',
+                        highlight: 'search-bar-react-tags__listbox-option-highlight',
+                    }}
                     placeholderText="タグを入力してください"
                     selected={selectedTags}
                     suggestions={suggestions}
@@ -52,17 +83,8 @@ export function SearchBar() {
                     onInput={(value)=>setInputValues(value)}
                     allowResize={true}
                 />
-                </div>
-            </InputGroup>
-            {/*
-                <Form.Control
-                    placeholder={"タグを入力"}
-                    aria-label=""
-                    aria-describedby=""
-                />
-            <div className="my-7" style={{ width: "70%" }}>
             </div>
-            */}
-        </Stack>
+            <Button className="search-bar-button">検索</Button>
+        </div>
     );
 }
