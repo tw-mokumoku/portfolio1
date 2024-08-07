@@ -8,7 +8,7 @@ import { HeaderUnion } from "../Component/union/headerUnion";
 import { DashboardUserPanel } from "../Component/union/SectionUnion";
 import { ReactTags } from 'react-tag-autocomplete'
 import { useCallback, useState } from "react";
-import { createTagPair, deleteTagPair, getCurrentUserGuilds, getServer, getServerTags, getTagSuggests, updateServer } from "../Function/APIController";
+import { createTagPair, deleteTagPair, getCurrentUserGuilds, getServer, getServerTags, getTagSuggests, updateServer, updateServerUpdatedLog } from "../Function/APIController";
 import Button from 'react-bootstrap/Button';
 import { useEffect } from "react";
 import './serveredit.css';
@@ -193,6 +193,9 @@ export function ServerEdit(props) {
                 reject()
             });
         });
+        allPromises.then(() => {
+            updateServerUpdatedLog(params['id'], Math.floor(Date.now() / 1000));
+        })
         toast.promise(
             allPromises,
             {
