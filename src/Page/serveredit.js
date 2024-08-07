@@ -263,6 +263,23 @@ export function ServerEdit(props) {
                                     title="タグ"
                                 >
                                     <ReactTags
+                                        classNames={{
+                                            root: 'server-edit-react-tags',
+                                            rootIsActive: 'is-active',
+                                            rootIsDisabled: 'is-disabled',
+                                            rootIsInvalid: 'is-invalid',
+                                            label: 'server-edit-react-tags__label',
+                                            tagList: 'server-edit-react-tags__list',
+                                            tagListItem: 'server-edit-react-tags__list-item',
+                                            tag: 'server-edit-react-tags__tag',
+                                            tagName: 'server-edit-react-tags__tag-name',
+                                            comboBox: 'server-edit-react-tags__combobox',
+                                            input: 'server-edit-react-tags__combobox-input',
+                                            listBox: 'server-edit-react-tags__listbox',
+                                            option: 'server-edit-react-tags__listbox-option',
+                                            optionIsActive: 'is-active',
+                                            highlight: 'server-edit-react-tags__listbox-option-highlight',
+                                        }}
                                         placeholderText="タグを入力してください"
                                         selected={selectedTags}
                                         suggestions={suggestions}
