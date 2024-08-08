@@ -303,7 +303,7 @@ function BasicInfo(props) {
                     }
             />
             <BasicInfoPanel
-                title="現在のアクティブ数"
+                title="VC人数"
                 data={props.serverCurrentUpdatedLog ? props.serverCurrentUpdatedLog['user_num'] : "データ取得失敗"}
             />
         </Row>

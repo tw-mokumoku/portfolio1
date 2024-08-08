@@ -26,7 +26,7 @@ export function TagView() {
                             guildName={value['name']}
                             guildInviteURL={value['invite_url']}
                             guildDescription={value['description']}
-                            dataString={"現在の接続人数：" + value['user_num']}
+                            dataString={"現在のVCの接続人数：" + value['user_num']}
                         />
                     })
                 );
