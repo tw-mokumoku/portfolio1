@@ -91,13 +91,17 @@ export async function createServer(id, name) {
 }
 
 ////  PATCH
-export async function updateServer({ id, name = null, country_id = null, invite_url = null, description = null, is_public = null}) {
+export async function updateServer({ id, name = null, invite_url = null, description = null, country_id = null, icon = null, is_public = null, added_tag_pairs = null, removed_tag_pairs = null}) {
     var data = {};
     if (name != null) data['name'] = name;
-    if (country_id != null) data['country_id'] = country_id;
     if (invite_url != null) data['invite_url'] = invite_url;
     if (description != null) data['description'] = description;
+    if (country_id != null) data['country_id'] = country_id;
+    if (icon != null) data['icon'] = icon;
     if (is_public != null) data['is_public'] = is_public;
+    data['updated_log'] = Math.floor(Date.now() / 1000);
+    if (added_tag_pairs != null) data['added_tag_pairs'] = added_tag_pairs;
+    if (removed_tag_pairs != null) data['removed_tag_pairs'] = removed_tag_pairs;
 
     return await axios.patch(
         `${DislitBaseURL}/server/${id}`,
