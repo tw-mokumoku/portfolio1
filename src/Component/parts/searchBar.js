@@ -37,18 +37,6 @@ export function SearchBar() {
         [inputValues],
     );
 
-    const tmp = () => {
-        return (
-            <InputGroup className="mb-3" style={{ width: "70%" }}>
-                <InputGroup.Text>
-                    <SearchIcon />
-                </InputGroup.Text>
-                <Button>検索</Button>
-            </InputGroup>
-        );
-    }
-
-
     return (
         <div className="my-3 search-bar-input-group" style={{ width: "70%" }}>
             <div className="search-bar-search-icon">
@@ -84,7 +72,9 @@ export function SearchBar() {
                     allowResize={true}
                 />
             </div>
-            <Button className="search-bar-button">検索</Button>
+            <Button className="search-bar-button">
+                    検索
+            </Button>
         </div>
     );
 }
