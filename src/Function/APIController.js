@@ -79,7 +79,15 @@ export async function createServer(id, name) {
         name: `${name}`
     }
 
-    return await axios.post(`${DislitBaseURL}/server`, data);
+    return await axios.post(
+        `${DislitBaseURL}/server`,
+        data,
+        {
+            headers: {
+                'Authorization': `Bearer ${getDiscordAccessTokenCookie()}`
+            }
+        }
+    );
 }
 
 ////  PATCH
@@ -106,6 +114,11 @@ export async function updateServerUpdatedLog(server_id, updated_epoch) {
         `${DislitBaseURL}/server/${server_id}/updated_log`,
         {
             updated_epoch: `${updated_epoch}`
+        },
+        {
+            headers: {
+                'Authorization': `Bearer ${getDiscordAccessTokenCookie()}`
+            }
         }
     );
 }
@@ -114,13 +127,33 @@ export async function updateServerCurrentActiveUsers(server_id, user_num) {
         `${DislitBaseURL}/server/${server_id}/current_active_users`,
         {
             user_num: `${user_num}`
-        });
+        },
+        {
+            headers: {
+                'Authorization': `Bearer ${getDiscordAccessTokenCookie()}`
+            }
+        }
+    );
 }
 export async function incrementServerCurrentActiveUsers(server_id) {
-    return await axios.patch(`${DislitBaseURL}/server/${server_id}/current_active_users/increment`);
+    return await axios.patch(
+        `${DislitBaseURL}/server/${server_id}/current_active_users/increment`,
+        {
+            headers: {
+                'Authorization': `Bearer ${getDiscordAccessTokenCookie()}`
+            }
+        }
+    );
 }
 export async function decrementServerCurrentActiveUsers(server_id) {
-    return await axios.patch(`${DislitBaseURL}/server/${server_id}/current_active_users/increment`);
+    return await axios.patch(
+        `${DislitBaseURL}/server/${server_id}/current_active_users/increment`,
+        {
+            headers: {
+                'Authorization': `Bearer ${getDiscordAccessTokenCookie()}`
+            }
+        }
+    );
 }
 
 /*****************  dislist tag  ********************/
@@ -149,7 +182,13 @@ export async function createTag(name, country_id) { // îÒêÑèß
         {
             name: `${name}`,
             country_id: `${country_id}`
-        });
+        },
+        {
+            headers: {
+                'Authorization': `Bearer ${getDiscordAccessTokenCookie()}`
+            }
+        }
+    );
 }
 
 
@@ -195,7 +234,13 @@ export async function createUpdatedLog(server_id, updated_epoch) {
         {
             server_id: `${server_id}`,
             updated_epoch: `${updated_epoch}`
-        });
+        },
+        {
+            headers: {
+                'Authorization': `Bearer ${getDiscordAccessTokenCookie()}`
+            }
+        }
+    );
 }
 
 
@@ -209,7 +254,13 @@ export async function createVCLog(server_id, member_id, start_epoch, interval_se
             member_id: `${member_id}`,
             start_epoch: `${start_epoch}`,
             interval_sec: `${interval_sec}`,
-        });
+        },
+        {
+            headers: {
+                'Authorization': `Bearer ${getDiscordAccessTokenCookie()}`
+            }
+        }
+    );
 }
 
 
@@ -221,6 +272,11 @@ export async function deleteMemberPair(server_id, member_id) {
         {
             server_id: `${server_id}`,
             member_id: `${member_id}`
+        },
+        {
+            headers: {
+                'Authorization': `Bearer ${getDiscordAccessTokenCookie()}`
+            }
         });
 }
 

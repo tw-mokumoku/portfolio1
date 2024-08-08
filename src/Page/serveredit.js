@@ -251,7 +251,7 @@ export function ServerEdit(props) {
                         <Card className="mb-4">
                             <Card.Body>
                                 <EditCategory
-                                    title="リージョン"
+                                    title="国"
                                 >
                                     <select
                                         className="server-edit-region-select"
