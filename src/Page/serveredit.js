@@ -116,6 +116,8 @@ export function ServerEdit(props) {
         const filteredSt = st.filter((value) => !ist.includes(value));
         console.log("initialIsServerPublic", initialIsServerPublic);
         console.log("isServerPublic", isServerPublic);
+        const added_tag_pairs = selectedRegion !== initialRegion ? st : filteredSt;
+        const removed_tag_pairs = selectedRegion !== initialRegion ? ist : filteredIst;
         return updateServer({
             id: params['id'],
             name: null,
@@ -123,9 +125,9 @@ export function ServerEdit(props) {
             description: descriptionText,
             country_id: selectedRegion,
             icon: null,
-            is_public: initialIsServerPublic !== isServerPublic ? isServerPublic : null,
-            added_tag_pairs: selectedRegion !== initialRegion ? st : filteredSt,
-            removed_tag_pairs: selectedRegion !== initialRegion ? ist : filteredIst
+            is_public: initialIsServerPublic != isServerPublic ? isServerPublic : null,
+            added_tag_pairs: added_tag_pairs.length != 0 ? added_tag_pairs : null,
+            removed_tag_pairs: removed_tag_pairs != 0 ? removed_tag_pairs : null
         });
     }
 
