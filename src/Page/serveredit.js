@@ -8,7 +8,7 @@ import { HeaderUnion } from "../Component/union/headerUnion";
 import { DashboardUserPanel } from "../Component/union/SectionUnion";
 import { ReactTags } from 'react-tag-autocomplete'
 import { useCallback, useState } from "react";
-import { createTagPair, deleteTagPair, getCurrentUserGuilds, getServer, getServerTags, getTagSuggests, updateServer, updateServerUpdatedLog } from "../Function/APIController";
+import { getCurrentUserGuilds, getServer, getServerTags, getTagSuggests, updateServer } from "../Function/APIController";
 import Button from 'react-bootstrap/Button';
 import { useEffect } from "react";
 import './serveredit.css';
@@ -65,139 +65,41 @@ export function ServerEdit(props) {
     }
 
     const onSaveModification = () => {
+        // サーバー説明未入力時
         if (descriptionText === "") {
             toast.error(
                 "サーバー説明が未入力です"
             );
             return;
         }
+        // サーバータグ選択時
         if (selectedTags.length === 0) {
             toast.error(
                 "タグを最低１つ選択してください"
             );
             return;
         }
+        // 前回のサーバー更新処理未終了時
         if (isAPIProcessing) {
             toast.error("処理を実行中です。少々お待ちください。");
             return;
         }
+        // toastの有効化
         setIsAPIProcessing(true);
-        const ist = initialSelectedTags.map(({ value, label }) => label);
-        const st = selectedTags.map(({ value, label }) => label);
-        const filteredIst = ist.filter((value) => !st.includes(value));
-        const filteredSt = st.filter((value) => !ist.includes(value));
 
-        const allPromises = new Promise((resolve, reject) => {
-            var failedDeleteTags = [];
-            const deleteTagPairPromise = new Promise((resolve, reject) => {
-                const deleteTagPairs = async () => {
-                    var deleteTagsFailed = false;
-                    //delete tag_pair
-                    if (selectedRegion !== initialRegion) {
-                        for (let i = 0; i < ist.length; i++) {
-                            try {
-                                await deleteTagPair(params['id'], ist[i]);
-                            } catch (err) {
-                                failedDeleteTags.push(ist[i]);
-                                deleteTagsFailed = true;
-                            }
-                        }
-                    } else {
-                        for (let i = 0; i < filteredIst.length; i++) {
-                            try {
-                                await deleteTagPair(params['id'], filteredIst[i]);
-                            } catch (err) {
-                                failedDeleteTags.push(filteredIst[i]);
-                                deleteTagsFailed = true;
-                            }
-                        }
-                    }
-                    if (deleteTagsFailed) reject();
-                }
-                deleteTagPairs()
-                    .then(() => {
-                        resolve();
-                    }).catch(() => {
-                        reject();
-                    })
-            })
 
-            deleteTagPairPromise.then(() => {
-                var updateServerData = {
-                    id: params['id'],
-                    country_id: selectedRegion,
-                    description: descriptionText,
-                };
-                if (initialIsServerPublic != isServerPublic) {
-                    updateServerData['is_public'] = isServerPublic;
-                }
-                updateServer(updateServerData).then(() => {
-                    var failedCreateTags = [];
-                    const createTagPairPromise = new Promise((resolve, reject) => {
-                        const createTagPairs = async () => {
-                            var createTagsFailed = false;
-                            if (selectedRegion !== initialRegion) {
-                                for (let i = 0; i < st.length; i++) {
-                                    try {
-                                        await createTagPair(params['id'], st[i]);
-                                    } catch (err) {
-                                        failedCreateTags.push(st[i]);
-                                        createTagsFailed = true
-                                    }
-                                }
-                            } else {
-                                for (let i = 0; i < filteredSt.length; i++) {
-                                    try {
-                                        await createTagPair(params['id'], filteredSt[i]);
-                                    } catch (err) {
-                                        failedCreateTags.push(filteredSt[i]);
-                                        createTagsFailed = true
-                                    }
-                                }
-                            }
-                            if (createTagsFailed) reject();
-                        }
-                        createTagPairs()
-                            .then(() => {
-                                resolve();
-                            }).catch(() => {
-                                reject();
-                            })
-                    });
-                    //create tag_pair
-                    createTagPairPromise.then(() => {
-                        setInitialSelectedTags(selectedTags);
-                        setInitialRegion(selectedRegion);
-                        setIsAPIProcessing(false);
-                        resolve();
-                    }).catch(() => {
-                        toast.error(
-                            `タグ ${failedCreateTags.join(', ')} の追加に失敗しました\n少し時間を置いて再度お試しください`
-                            //"タグの追加に失敗しました。"
-                        );
-                        setIsAPIProcessing(false);
-                        reject();
-                    })
-                }).catch(() => {
-                    toast.error(
-                        "サーバーの更新に失敗しました。"
-                    );
-                    setIsAPIProcessing(false);
-                    reject();
-                });
-            }).catch(() => {
-                toast.error(
-                    `タグ 「${failedDeleteTags.join(', ')}」 の除去に失敗しました\n少し時間を置いて再度お試しください`
-                );
+        const updateServerPromise = new Promise((resolve, reject) => {
+            updateServerProcess().then(() => {
                 setIsAPIProcessing(false);
-                reject()
-            });
-        });
-        allPromises.then(() => {
-            updateServerUpdatedLog(params['id'], Math.floor(Date.now() / 1000));
+                resolve();
+            }).catch(() => {
+                setIsAPIProcessing(false);
+                reject();
+            })
         })
+
         toast.promise(
-            allPromises,
+            updateServerPromise,
             {
                 pending: 'データを保存しています...',
                 success: '保存が完了しました',
@@ -205,6 +107,28 @@ export function ServerEdit(props) {
             }
         );
     };
+
+    const updateServerProcess = () => {
+        // 各種変数
+        const ist = initialSelectedTags.map(({ value, label }) => label);
+        const st = selectedTags.map(({ value, label }) => label);
+        const filteredIst = ist.filter((value) => !st.includes(value));
+        const filteredSt = st.filter((value) => !ist.includes(value));
+        console.log("initialIsServerPublic", initialIsServerPublic);
+        console.log("isServerPublic", isServerPublic);
+        return updateServer({
+            id: params['id'],
+            name: null,
+            invite_url: null,
+            description: descriptionText,
+            country_id: selectedRegion,
+            icon: null,
+            is_public: initialIsServerPublic !== isServerPublic ? isServerPublic : null,
+            added_tag_pairs: selectedRegion !== initialRegion ? st : filteredSt,
+            removed_tag_pairs: selectedRegion !== initialRegion ? ist : filteredIst
+        });
+    }
+
     useEffect(() => {
         getCurrentUserGuilds().then((response) => {
             const userOwnerGuilds = response.data.filter(value => value.id == params['id'] && value.owner);
