@@ -137,13 +137,12 @@ function ViesServerBody(props) {
             .then((response) => {
                 const to2digit = (value) => ('00' + value).slice(-2);
                 var createPeriodLambda = (startDate, endDate) => {
-                    return `${startDate.getFullYear()}/${to2digit(startDate.getMonth())}/${to2digit(startDate.getDate())} ${to2digit(startDate.getHours())}:${to2digit(startDate.getMinutes())}` +
+                    return `${startDate.getFullYear()}/${to2digit(startDate.getMonth() + 1)}/${to2digit(startDate.getDate())} ${to2digit(startDate.getHours())}:${to2digit(startDate.getMinutes())}` +
                         " - " +
-                        `${endDate.getFullYear()}/${to2digit(endDate.getMonth())}/${to2digit(endDate.getDate())} ${to2digit(endDate.getHours())}:${to2digit(endDate.getMinutes())}`;
+                        `${endDate.getFullYear()}/${to2digit(endDate.getMonth() + 1)}/${to2digit(endDate.getDate())} ${to2digit(endDate.getHours())}:${to2digit(endDate.getMinutes())}`;
                 }
                 // logが存在しない場合は戻る。
                 if (!response.data || response.data.length == 0) return;
-                console.log(response.data);
                 var logs = [];
                 // logsをフォーマット
                 response.data.forEach(({ server_id, member_id, start_epoch, interval_sec }) => {
@@ -158,6 +157,7 @@ function ViesServerBody(props) {
                 const startDate = new Date(logs[0]['epoch'] * 1000);
                 const endDate = new Date(logs.slice(-1)[0]['epoch'] * 1000);
 
+                console.log(createPeriodLambda(startDate, endDate));
                 setPeriodText(createPeriodLambda(startDate, endDate));
 
                 // logsの接続数を算出しフォーマット
