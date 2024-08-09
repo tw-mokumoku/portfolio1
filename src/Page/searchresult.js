@@ -52,25 +52,31 @@ export function SearchResult(props) {
                     <SearchBar />
                 </div>
                 <div className="mt-5">
-                    {hasResult ?
-                        <GuildCardContainer>
-                            {guildCards}
-                        </GuildCardContainer>
-                        :
+                    {!loading ?
                         <>
-                            <div className="d-flex justify-content-center align-items-center mb-5">
-                                <p className="mb-5">{searchParams.get("q")}に一致する情報は見つかりませんでした。</p>
-                            </div>
-                            <Stack className="d-flex justify-content-center align-items-center">
-                                <div className="w-75">
-                                    <p style={{ fontSize: '1rem' }}>検索のヒント:</p>
-                                    <p style={{ fontSize: '0.9rem' }}>・ キーワードに誤字・脱字がないか確認します。</p>
-                                    <p style={{ fontSize: '0.9rem' }}>・ 別のキーワードを試してみます。</p>
-                                    <p style={{ fontSize: '0.9rem' }}>・ もっと一般的なキーワードに変えてみます。</p>
-                                    <p style={{ fontSize: '0.9rem' }}>・ キーワードの数を減らしてみます。</p>
-                                </div>
-                            </Stack>
-                            </>
+                            {hasResult ?
+                                <GuildCardContainer>
+                                    {guildCards}
+                                </GuildCardContainer>
+                                :
+                                <>
+                                    <div className="d-flex justify-content-center align-items-center mb-5">
+                                        <p className="mb-5">{searchParams.get("q")}に一致する情報は見つかりませんでした。</p>
+                                    </div>
+                                    <Stack className="d-flex justify-content-center align-items-center">
+                                        <div className="w-75">
+                                            <p style={{ fontSize: '1rem' }}>検索のヒント:</p>
+                                            <p style={{ fontSize: '0.9rem' }}>・ キーワードに誤字・脱字がないか確認します。</p>
+                                            <p style={{ fontSize: '0.9rem' }}>・ 別のキーワードを試してみます。</p>
+                                            <p style={{ fontSize: '0.9rem' }}>・ もっと一般的なキーワードに変えてみます。</p>
+                                            <p style={{ fontSize: '0.9rem' }}>・ キーワードの数を減らしてみます。</p>
+                                        </div>
+                                    </Stack>
+                                </>
+                            }
+                        </>
+                        :
+                        <></>
                     }
                 </div>
             </Container>
