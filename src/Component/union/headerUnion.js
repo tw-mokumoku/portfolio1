@@ -20,7 +20,9 @@ export function HeaderUnion() {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav" className="align-items-end">
                 <Nav variant="underline" className="me-auto" style={{ marginBottom: "2px" }} >
+                    {/*
                     <Nav.Link href="/search">詳細検索</Nav.Link>
+                    */}
                 </Nav>
                 <Nav>
                     <Row>

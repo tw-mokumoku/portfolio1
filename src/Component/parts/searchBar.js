@@ -8,7 +8,51 @@ import { useCallback, useState } from 'react';
 import { getTagSuggests } from '../../Function/APIController';
 import './searchBar.css';
 import { useDebounce } from 'react-use';
+import { useNavigate } from "react-router-dom";
+
 export function SearchBar() {
+    const navigate = useNavigate();
+    const [formValue, setFormValue] = useState('');
+
+
+    const onEnter = (event) => {
+        if (event.key !== "Enter") return;
+        if (formValue === "") return;
+        navigate(`/search?q=${formValue}&country=${"JP"}`);
+    }
+
+    return (
+        <div className="w-75">
+            <InputGroup className="mt-3">
+                <InputGroup.Text id="basic-addon1">
+                    <SearchIcon />
+                </InputGroup.Text>
+                <Form.Control
+                    value={formValue}
+                    onChange={e => setFormValue(e.target.value)}
+                    placeholder=""
+                    aria-label="Username"
+                    aria-describedby="basic-addon1"
+                    onKeyDown={onEnter}
+                />
+            </InputGroup>
+        </div>
+    );
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+function SearchBarPrev() {
     const [selectedTags, setSelectedTags] = useState([]);
 
     const onAdd = useCallback((newTag) => {
@@ -78,3 +122,5 @@ export function SearchBar() {
         </div>
     );
 }
+*/
+
