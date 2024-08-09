@@ -49,6 +49,14 @@ export async function createMember(member_id) {
 
 
 /*****************  dislist server  ********************/
+export async function getSearch(query, country_id = "JP") {
+    return await axios.get(
+        `${DislitBaseURL}/search?${query.map((value) => `query=${value}`).join('&') }&country_id=${country_id}`
+    );
+}
+
+
+/*****************  dislist server  ********************/
 ////  GET
 export async function getServer(server_id) {
     return await axios.get(`${DislitBaseURL}/server/${server_id}`);
