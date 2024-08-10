@@ -28,7 +28,7 @@ export function TagListSection() {
             });
     }, []);
     return (
-        <>
+        <div className="popular-tour">
             <div className="d-flex justify-content-center">
                 <h5>
                     人気タグ一覧
@@ -37,7 +37,7 @@ export function TagListSection() {
             <OpenableOverflowContainer>
                 {tagButtons}
             </OpenableOverflowContainer>
-        </>
+        </div>
     );
 }
 

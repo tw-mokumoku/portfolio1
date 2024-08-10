@@ -21,13 +21,13 @@ import { useDebounce } from 'react-use';
 
 export function ServerEdit(props) {
     const navigate = useNavigate();
+    const params = useParams();
     const [selectedTags, setSelectedTags] = useState([]);
     const [descriptionText, setDescriptionText] = useState("");
     const [selectedRegion, setSelectedRegion] = useState("JP");
     const [initialSelectedTags, setInitialSelectedTags] = useState([]);
     const [initialRegion, setInitialRegion] = useState("");
     const [isAPIProcessing, setIsAPIProcessing] = useState(false);
-    const params = useParams();
     const [serverName, setServerName] = useState("");
     const [loading, setLoading] = useState(true);
     const [isServerPublic, setIsServerPublic] = useState(false);

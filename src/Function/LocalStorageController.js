@@ -1,7 +1,6 @@
 import { getCurrentDiscordUser, getCurrentUserGuilds, getServer } from "./APIController";
 const currentDiscodUserData = "current_discord_user_data";
-const currentDiscordUserGuilds = "current_discord_user_guilds";
-const currentDislistUserOwningServers = "current_dislist_user_owning_servers";
+const didHomeTourFlag = "did_home_tour_flag"
 
 
 /*****************  set  ********************/
@@ -16,7 +15,9 @@ export function setCurrentDiscordUserDataLocalStorage() {
         .then((response) => {
             setLocalStorageJSON(currentDiscodUserData, response.data);
         });
-
+}
+export function setHomeTourFlagLocalStorage() {
+    setLocalStorageJSON(didHomeTourFlag, true);
 }
 
 /*****************  get  ********************/
@@ -43,4 +44,7 @@ function hasLocalStorage(key) {
 }
 export function hasCurrentDiscordUserDataLocalStorage() {
     return hasLocalStorage(currentDiscodUserData);
+}
+export function hasHomeTourFlagLocalStorage() {
+    return hasLocalStorage(didHomeTourFlag);
 }

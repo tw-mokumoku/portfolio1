@@ -4,7 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
 import { ReactTags } from 'react-tag-autocomplete'
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getTagSuggests } from '../../Function/APIController';
 import './searchBar.css';
 import { useDebounce } from 'react-use';
@@ -14,7 +14,6 @@ export function SearchBar() {
     const navigate = useNavigate();
     const [formValue, setFormValue] = useState('');
 
-
     const onEnter = (event) => {
         if (event.key !== "Enter") return;
         if (formValue === "") return;
@@ -23,7 +22,7 @@ export function SearchBar() {
 
     return (
         <div className="w-75">
-            <InputGroup className="mt-3">
+            <InputGroup className="mt-3 search-bar-tour">
                 <InputGroup.Text id="basic-addon1">
                     <SearchIcon />
                 </InputGroup.Text>

@@ -26,26 +26,18 @@ export function HeaderUnion() {
                 </Nav>
                 <Nav>
                     <Row>
-                    {/*
-                    <Col xs="auto" className="d-flex">
-                        <Button className="p-3" onClick={() => {
-                            switchPrefersColorScheme();
-                                window.location.reload();
-                        }}>
-                            <LightModeIcon height="40" width="40"/>
-                        </Button>
-                    </Col>
-                    */}
-                    <Col xs="auto">
-                        {
-                            hasDiscordAccessTokenCookie() ?
-                                <Button className="p-2" href="/dashboard">
-                                        <CurrentDiscordUserIcon alt="" style={{ borderRadius: "30px", border: "2px solid lightblue", width: 40, height: 40 }} />
-                                </Button>
-                                :
-                                <Button href={getDiscordOAuthURL()}>ログイン</Button>
-                        }
-                    </Col>
+                        <Col xs="auto">
+                            <div className="header-login-tour">
+                            {
+                                hasDiscordAccessTokenCookie() ?
+                                    <Button className="p-2" href="/dashboard">
+                                            <CurrentDiscordUserIcon alt="" style={{ borderRadius: "30px", border: "2px solid lightblue", width: 40, height: 40 }} />
+                                    </Button>
+                                    :
+                                    <Button href={getDiscordOAuthURL()}>ログイン</Button>
+                            }
+                            </div>
+                        </Col>
                     </Row>
                 </Nav>
             </Navbar.Collapse>
