@@ -20,9 +20,9 @@ export function getURL(pathname) {
 
 export function getDiscordOAuthURL() {
     return isLocal() ?
-        "https://discord.com/oauth2/authorize?client_id=1226955908991418510&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fdiscordauth&scope=identify+guilds+email"
+        "https://discord.com/oauth2/authorize?client_id=1226955908991418510&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fdiscordauth&scope=identify+guilds"
         :
-        "https://discord.com/oauth2/authorize?client_id=1226955908991418510&response_type=code&redirect_uri=https%3A%2F%2Fdiscordlist.kolysis.com%2Fdiscordauth&scope=identify+guilds+email";
+        "https://discord.com/oauth2/authorize?client_id=1226955908991418510&response_type=code&redirect_uri=https%3A%2F%2Fdiscordlist.kolysis.com%2Fdiscordauth&scope=identify+guilds";
 }
 export function getDiscordOAuthPageURL() {
     return getURL('/discordauth');

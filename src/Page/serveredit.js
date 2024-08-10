@@ -65,10 +65,24 @@ export function ServerEdit(props) {
     }
 
     const onSaveModification = () => {
+        // サーバー説明多すぎ
+        if (descriptionText.length > 5000) {
+            toast.error(
+                `サーバー説明上限は5000文字です。現在 ${descriptionText.length} 文字`
+            );
+            return;
+        }
         // サーバー説明未入力時
         if (descriptionText === "") {
             toast.error(
                 "サーバー説明が未入力です"
+            );
+            return;
+        }
+        // サーバータグ多すぎ
+        if (selectedTags.length > 7) {
+            toast.error(
+                `タグ数の上限は7個です。現在 ${selectedTags.length} 個`
             );
             return;
         }
