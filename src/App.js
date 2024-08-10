@@ -19,7 +19,7 @@ function App() {
                 <Route exact path="/" element={<Home />} />
                 <Route exact path="/dashboard" element={<DashBoard />} />
                 <Route exact path="/discordauth" element={<DiscordAuth />} />
-                <Route exact path="/server/:id/edit" element={<ServerEdit />} />
+                <Route exact path="/server/edit/:id" element={<ServerEdit />} />
                 <Route exact path="/server/:id" element={<ServerView />} />
                 <Route exact path="/tag/:name" element={<TagView />} />
                 <Route path="/search" element={<SearchResult />} />

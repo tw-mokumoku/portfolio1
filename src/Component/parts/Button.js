@@ -20,7 +20,7 @@ export function ServerPanelButtons(props) {
                             <Button
                                 className="py-2 w-100"
                                 style={{ borderRadius: "10px" }}
-                                href={`/server/${props.server_id}/edit`}
+                                href={`/server/edit/${props.server_id}`}
                             >
                                 編集
                             </Button>
