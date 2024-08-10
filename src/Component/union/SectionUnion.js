@@ -43,7 +43,7 @@ export function TagListSection() {
 
 export function GuildCardContainer(props) {
     return (
-        <Row xs={1} md={2} xl={3} className="mt-2 gx-0">
+        <Row xs={1} md={2} xl={3} className="mt-2 g-3">
             {props.children}
         </Row>
     );

@@ -61,7 +61,7 @@ export function OpenableOverflowContainer(props) {
         }
     }, [isOpen]);
     return (
-        <>
+        <div style={{ minHeight: '160px' }}>
             <div ref={ref} className="overflow-hidden" style={{ height: overflowHeight }}>
                 {props.children}
             </div>
@@ -77,7 +77,7 @@ export function OpenableOverflowContainer(props) {
                     }
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 
