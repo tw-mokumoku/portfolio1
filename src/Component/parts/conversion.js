@@ -92,27 +92,27 @@ export function GuildCard(props) {
     }, [props.guildID]);
     return (
         <Col>
-            <Card className="m-3">
+            <Card cardName="m-3">
                 <Card.Header>
-                    <Stack direction="horizontal">
-                        <button className="to-guild-view-button" onClick={() => navigate(`/server/${props.guildID}`)}>
-                            <Avatar src={props.guildIcon} sx={{ width: 60, height: 60 }} className="sp-icon me-4" alt={props.guildName} variant="rounded">
-                                {props.guildName[0]}
-                            </Avatar>
+                    <div className={props.cardTitleName}>
+                        <button className="to-guild-view-button w-100" onClick={() => navigate(`/server/${props.guildID}`)}>
+                            <Stack direction="horizontal">
+                                <Avatar src={props.guildIcon} sx={{ width: 60, height: 60 }} className="sp-icon me-4" alt={props.guildName} variant="rounded">
+                                    {props.guildName[0]}
+                                </Avatar>
+                                <Card.Title className="fs-5">{props.guildName}</Card.Title>
+                            </Stack>
                         </button>
-                        <button className="to-guild-view-button" onClick={() => navigate(`/server/${props.guildID}`)}>
-                            <Card.Title className="fs-5">{props.guildName}</Card.Title>
-                        </button>
-                    </Stack>
+                    </div>
                 </Card.Header>
                 <Card.Body className="pt-2">
-                    <div className="mb-3" style={{ height: '90px' }}>
+                    <div className={props.cardTagClassName + " mb-3"} style={{ height: '90px' }}>
                         {ToButton(guildtags)}
                     </div>
                     <OpenableOverflowContainer>
                         {props.guildDescription}
                     </OpenableOverflowContainer>
-                    <div className="guild-card-data-container">
+                    <div className={props.cardDataClassName + " guild-card-data-container"}>
                         {props.dataString}
                     </div>
                 </Card.Body>
