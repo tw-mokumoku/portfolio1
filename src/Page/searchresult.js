@@ -20,7 +20,8 @@ export function SearchResult(props) {
     useEffect(() => {
         getSearch(queryParams, countryParams)
             .then((response) => {
-                if (response.data === "") {
+                console.log(typeof response.data, response.data);
+                if (response.data === "" || response.data.length === 0) {
                     setLoading(false);
                     setHasResult(false);
                     return;
