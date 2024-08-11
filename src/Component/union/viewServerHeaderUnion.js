@@ -8,7 +8,7 @@ export function ViewServerHeader(props) {
             <div>
                 <p className="fs-3 mb-0">{props.currentServerName}</p>
                 <p className="fs-6">@{props.serverID}</p>
-                <Button className="py-2 px-3">サーバーに参加</Button>
+                <Button onClick={() => window.open(props.serverInviteURL)} className="py-2 px-3">サーバーに参加</Button>
             </div>
         </div>
     );

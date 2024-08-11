@@ -12,6 +12,8 @@ import { ServerView } from './Page/serverview';
 import { TagView } from './Page/tagview';
 import { SearchResult } from './Page/searchresult';
 
+import './i18n/i18n';
+
 function App() {
     return (
         <div className="App" data-bs-theme={"dark"}>
