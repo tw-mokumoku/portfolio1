@@ -23,6 +23,7 @@ export function ServerView() {
     const [currentServer, setCurrentServer] = useState({});
     const [serverUpdatedLog, setServerUpdatedLog] = useState();
     const [serverCurrentUpdatedLog, setServerCurrentUpdatedLog] = useState();
+    const [serverInviteURL, setServerInviteURL] = useState();
 
     useEffect(() => {
         setServerID(params['id']);
@@ -55,6 +56,7 @@ export function ServerView() {
                 // Set Current Server Description
                 setCurrentServerDescription(currentServer['description']);
                 setLoading(false);
+                setServerInviteURL(currentServer['invite_url']);
             });
         const getServerUpdatedLogPromise = getServerUpdatedLog(params['id'])
             .then((response) => {
@@ -78,6 +80,7 @@ export function ServerView() {
                                 serverIcon={serverIcon}
                                 currentServerName={currentServerName}
                                 serverID={serverID}
+                                serverInviteURL={serverInviteURL}
                             />
                         </Card.Header>
                         <Card.Body>
