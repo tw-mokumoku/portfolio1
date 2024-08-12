@@ -8,6 +8,17 @@ function ENi18n() {
             },
             home: {
                 home: {
+                    skip: "skip",
+                    next: "next",
+                    back: "back",
+                    last: "end",
+                    searchBarTour: "Here you can search for the desired server.",
+                    headerLoginTour: "If you would like to post the server you manage on discord, please log in here.",
+                    popularTour: "Here, the tags used by the server are displayed in order of popularity.",
+                    guildCardTour: "You can also see the tags used by the server here.",
+                    guildCardDataTagTour: "Important server information is displayed here. You can see the 'Last updated date' and 'Current vc connection'.",
+                    guildCardTitleTour1: "Click here to see more detailed information about the server.",
+                    guildCardTitleTour2: "Let's press the highlight now!",
                     updatedDataString: "Last updated date："
                 }
             },
@@ -36,6 +47,7 @@ function ENi18n() {
             },
             serveredit: {
                 serverEdit: {
+                    doNotIncludeSpaces: "Tags containing spaces cannot be selected.",
                     tooManyDescriptionLength1: "Server description limit is 5000 characters.Currently ",
                     tooManyDescriptionLength2: " characters.",
                     emptyDescription: "Server description not entered",

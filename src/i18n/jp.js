@@ -20,6 +20,17 @@ function JPi18n() {
             },
             home: {
                 home: {
+                    skip: "スキップ",
+                    next: "次へ",
+                    back: "戻る",
+                    last: "終了",
+                    searchBarTour: "ここでは目的のサーバーを検索することができます。",
+                    headerLoginTour: "管理しているサーバーをDiscordListに掲示する場合はここでログインしてください。",
+                    popularTour: "ここではサーバーに使われているタグが人気順で表示されています。",
+                    guildCardTour: "ここでもサーバーに使われているタグが見れます。",
+                    guildCardDataTagTour: "ここはサーバーの重要な情報が表示されています。「更新」や「現在」のVCの接続人数が見れます。",
+                    guildCardTitleTour1: "ここクリックするとサーバーのより詳細な情報が表示されます。",
+                    guildCardTitleTour2: "さっそくハイライトを押してみましょう！",
                     updatedDataString: "更新："
                 }
             },
@@ -48,6 +59,7 @@ function JPi18n() {
             },
             serveredit: {
                 serverEdit: {
+                    doNotIncludeSpaces: "スペースを含むタグは選択できません。",
                     tooManyDescriptionLength1: "サーバー説明上限は5000文字です。現在 ",
                     tooManyDescriptionLength2: " 文字",
                     emptyDescription: "サーバー説明が未入力です",

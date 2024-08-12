@@ -36,6 +36,12 @@ export function ServerEdit(props) {
     const [initialIsServerPublic, setInitialIsServerPublic] = useState(false);
 
     const onAdd = useCallback((newTag) => {
+        if (newTag.value.includes(' ') || newTag.value.includes('　')) {
+            toast.error(
+                t('serveredit.serverEdit.doNotIncludeSpaces')
+            );
+            return;
+        }
         setSelectedTags([...selectedTags, newTag])
     }, [selectedTags]);
 
