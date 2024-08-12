@@ -42,6 +42,12 @@ export function ServerEdit(props) {
             );
             return;
         }
+        if (newTag.value.length > 100) {
+            toast.error(
+                t('serveredit.serverEdit.tooManyWordsInTag')
+            );
+            return;
+        }
         setSelectedTags([...selectedTags, newTag])
     }, [selectedTags]);
 

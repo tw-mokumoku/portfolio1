@@ -86,7 +86,8 @@ function JPi18n() {
                     noOptionText: "該当するタグが見つかりませんでした",
                     serverDescription: "サーバー説明",
                     makeServerPublic: "サーバーを公開する",
-                    saveModification: "変更を保存する"
+                    saveModification: "変更を保存する",
+                    tooManyWordsInTag: "タグの文字数が多すぎます。100文字以内に変更して再度お試しください。"
                 }
             },
             viewServerBodyUnion: {
