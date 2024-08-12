@@ -1,6 +1,7 @@
 import { getCurrentDiscordUser, getCurrentUserGuilds, getServer } from "./APIController";
 const currentDiscodUserData = "current_discord_user_data";
-const didHomeTourFlag = "did_home_tour_flag"
+const didHomeTourFlag = "did_home_tour_flag";
+const i18next = "i18next";
 
 
 /*****************  set  ********************/
@@ -30,6 +31,15 @@ function getLocalStorageJSON(key) {
 export function getCurrentDiscordUserDataLocalStorage() {
     return getLocalStorageJSON(currentDiscodUserData);
 }
+function geti18nextLocalStorage() {
+    return getLocalStorage(i18next);
+}
+export function getLanguageLocalStorage() {
+    const i18nextLocalStorarge = geti18nextLocalStorage();
+    if (i18nextLocalStorarge == 'en-US') return 'US';
+    if (i18nextLocalStorarge == 'ja') return 'JP';
+}
+
 /*****************  remove  ********************/
 function removeLocalStorage(key) {
     localStorage.removeItem(key);

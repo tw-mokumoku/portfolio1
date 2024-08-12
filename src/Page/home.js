@@ -5,12 +5,11 @@ import { GuildCardContainer, TagListSection } from '../Component/union/SectionUn
 /* react-bootstrap */
 import Container from 'react-bootstrap/Container';
 import { GuildCard } from '../Component/parts/conversion';
-import { isLocal } from '../Function/LocalRemoteSwitcher';
 import { useEffect, useState } from 'react';
 import { getDiscordGuildIcon, getServerRankingCountryUpdatedLog } from '../Function/APIController';
 import { OverlayLoading } from "react-loading-randomizable";
 import './home.css';
-import { hasHomeTourFlagLocalStorage, setHomeTourFlagLocalStorage } from '../Function/LocalStorageController';
+import { getLanguageLocalStorage, hasHomeTourFlagLocalStorage, setHomeTourFlagLocalStorage } from '../Function/LocalStorageController';
 import Joyride, { ACTIONS, EVENTS, ORIGIN, STATUS, CallBackProps } from 'react-joyride';
 import { useTranslation } from "react-i18next";
 import { timeDiff } from '../Function/DateCalc';
@@ -109,7 +108,7 @@ export function Home(props) {
     }
 
     useEffect(() => {
-        getServerRankingCountryUpdatedLog('JP')
+        getServerRankingCountryUpdatedLog(getLanguageLocalStorage())
             .then((response) => {
                 setGuildCards(
                     response.data.map((value, index) => {
