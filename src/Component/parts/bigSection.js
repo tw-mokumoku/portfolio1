@@ -11,8 +11,8 @@ export function BigTitle() {
     return (
         <Container className="d-flex my-5">
             <Stack className="justify-content-center align-items-center my-5">
-                <h1 className="p-2">{t('home.bigSection.title')}</h1>
-                <p className="p-2 fs-6">{t('home.bigSection.subtitle')}</p>
+                <h1 className="p-2">{t('bigSection.bigTitle.title')}</h1>
+                <p className="p-2 fs-6">{t('bigSection.bigTitle.subtitle')}</p>
                 <SearchBar />
             </Stack>
         </Container>

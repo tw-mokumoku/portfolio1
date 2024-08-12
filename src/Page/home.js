@@ -13,8 +13,10 @@ import { OverlayLoading } from "react-loading-randomizable";
 import './home.css';
 import { hasHomeTourFlagLocalStorage, setHomeTourFlagLocalStorage } from '../Function/LocalStorageController';
 import Joyride, { ACTIONS, EVENTS, ORIGIN, STATUS, CallBackProps } from 'react-joyride';
+import { useTranslation } from "react-i18next";
 
 export function Home(props) {
+    const { t } = useTranslation();
     const [guildCards, setGuildCards] = useState([<></>]);
     const [loading, setLoading] = useState(true);
     const [running, setRunning] = useState(false);
@@ -116,7 +118,7 @@ export function Home(props) {
                             guildName={value['name']}
                             guildInviteURL={value['invite_url']}
                             guildDescription={value['description']}
-                            dataString={"更新：" + timeDiff(new Date(value['updated_epoch'] * 1000))}
+                            dataString={t('home.home.updatedDataString') + timeDiff(new Date(value['updated_epoch'] * 1000))}
                         />
                     })
                 )

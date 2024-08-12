@@ -8,15 +8,22 @@ import { useParams } from "react-router-dom";
 import { GuildCard } from '../Component/parts/conversion';
 import { SearchBar } from '../Component/parts/searchBar';
 import { OverlayLoading } from "react-loading-randomizable";
+import Stack from 'react-bootstrap/Stack';
 
 export function TagView() {
     const params = useParams();
     const [guildCards, setGuildCards] = useState([<></>]);
     const [loading, setLoading] = useState(true);
+    const [hasResult, setHasResult] = useState(false);
 
     useEffect(() => {
         getTagRankingCurrentServers(params['name'])
             .then((response) => {
+                if (response.data === "" || response.data.length === 0) {
+                    setLoading(false);
+                    setHasResult(false);
+                    return;
+                }
                 setGuildCards(
                     response.data.map((value, index) => {
                         return <GuildCard
@@ -39,6 +46,7 @@ export function TagView() {
                         />
                     })
                 );
+                setHasResult(true);
                 setLoading(false);
             })
     }, [params])
@@ -52,9 +60,25 @@ export function TagView() {
                     <SearchBar />
                 </div>
                 <div className="mt-5">
-                <GuildCardContainer>
-                    {guildCards}
-                </GuildCardContainer>
+                    <div className="mt-5">
+                        {!loading ?
+                            <>
+                                {hasResult ?
+                                    <GuildCardContainer>
+                                        {guildCards}
+                                    </GuildCardContainer>
+                                    :
+                                    <>
+                                        <div className="d-flex justify-content-center align-items-center mb-5">
+                                            <p className="mb-5">タグ「{params['name']}」の情報が見つかりませんでした。</p>
+                                        </div>
+                                    </>
+                                }
+                            </>
+                            :
+                            <></>
+                        }
+                    </div>
                 </div>
             </Container>
         </>
