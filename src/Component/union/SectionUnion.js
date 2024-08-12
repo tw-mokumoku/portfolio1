@@ -13,8 +13,10 @@ import SettingsTwoToneIcon from '@mui/icons-material/SettingsTwoTone';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { disconnectViaDiscord, disconnectVisDislist } from '../../Function/LoginController';
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export function TagListSection() {
+    const { t } = useTranslation();
     const [tagButtons, setTagButtons] = useState(<></>);
     useEffect(() => {
         getCountryRankingTag('JP')
@@ -31,7 +33,7 @@ export function TagListSection() {
         <div className="popular-tour">
             <div className="d-flex justify-content-center">
                 <h5>
-                    人気タグ一覧
+                    {t('sectionUnion.tagListSection.title')}
                 </h5>
             </div>
             <OpenableOverflowContainer>

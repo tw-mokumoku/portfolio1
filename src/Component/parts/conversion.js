@@ -14,6 +14,7 @@ import { Avatar } from '@mui/material';
 import { getServerTags } from '../../Function/APIController';
 import { useNavigate } from "react-router-dom";
 import './conversion.css';
+import { useTranslation } from "react-i18next";
 export function ToButton(tag_names) {
     const navigate = useNavigate();
     if (!Array.isArray(tag_names)) return tag_names
@@ -84,6 +85,7 @@ export function OpenableOverflowContainer(props) {
 export function GuildCard(props) {
     const navigate = useNavigate();
     const [guildtags, setGuildTags] = useState();
+    const { t } = useTranslation();
 
     useEffect(() => {
         getServerTags(props.guildID).then((response) => {
@@ -122,7 +124,7 @@ export function GuildCard(props) {
                             <FaDiscord className="h-100 w-100" />
                         </div>
                         <div className="">
-                            サーバーに参加する
+                            {t('conversion.guildCard.joinServer')}
                         </div>
                     </Button>
                 </Card.Footer>
