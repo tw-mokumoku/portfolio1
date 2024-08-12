@@ -188,7 +188,7 @@ export function ServerEdit(props) {
                     </Col>
                     <Col xl={9}>
                         <p className="fs-2">
-                            「{serverName}」 {t('serveredit.serverEdit.edit')}
+                            {t('serveredit.serverEdit.edit1')}{serverName}{t('serveredit.serverEdit.edit2')}
                         </p>
                         <Card className="mb-4">
                             <Card.Body>

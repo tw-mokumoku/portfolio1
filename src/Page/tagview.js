@@ -9,8 +9,10 @@ import { GuildCard } from '../Component/parts/conversion';
 import { SearchBar } from '../Component/parts/searchBar';
 import { OverlayLoading } from "react-loading-randomizable";
 import Stack from 'react-bootstrap/Stack';
+import { useTranslation } from "react-i18next";
 
 export function TagView() {
+    const { t } = useTranslation();
     const params = useParams();
     const [guildCards, setGuildCards] = useState([<></>]);
     const [loading, setLoading] = useState(true);
@@ -35,7 +37,7 @@ export function TagView() {
                             guildDescription={value['description']}
                             dataString={
                                 <>
-                                    現在のVCの接続人数：
+                                    {t('tagView.tagView.currentVCConnectionNumber')}：
                                     {value['user_num'] !== 0 ?
                                         <span className="ms-1" style={{ color: '#12c74b' }}>{value['user_num']}</span>
                                         :
@@ -70,7 +72,7 @@ export function TagView() {
                                     :
                                     <>
                                         <div className="d-flex justify-content-center align-items-center mb-5">
-                                            <p className="mb-5">タグ「{params['name']}」の情報が見つかりませんでした。</p>
+                                            <p className="mb-5">{t('tagView.tagView.tagNotFound1')}{params['name']}{t('tagView.tagView.tagNotFound2')}</p>
                                         </div>
                                     </>
                                 }
