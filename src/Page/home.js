@@ -23,75 +23,80 @@ export function Home(props) {
     const steps = [
         {
             target: '.search-bar-tour',
-            content: 'ここでは目的のサーバーを検索することができます。',
+            content: t('home.home.searchBarTour'),
             locale: {
-                skip: <strong aria-label="skip">スキップ</strong>,
-                next: '次へ',
+                skip: <strong aria-label="skip">{t('home.home.skip')}</strong>,
+                next: t('home.home.next'),
             },
             disableBeacon: true,
             disableOverlayClose: true,
-            placement: 'bottom',
+            placement: 'auto',
             spotlightClicks: true,
         },
         {
             target: '.header-login-tour',
-            content: '管理しているサーバーをDiscordListに掲示する場合はここでログインしてください。',
+            content: t('home.home.headerLoginTour'),
             locale: {
-                skip: <strong aria-label="skip">スキップ</strong>,
-                next: '次へ',
-                back: '戻る',
-                last: '終了',
+                skip: <strong aria-label="skip">{t('home.home.skip')}</strong>,
+                next: t('home.home.next'),
+                back: t('home.home.back'),
+                last: t('home.home.last'),
             },
+            placement: 'auto',
         },
         {
             target: '.popular-tour',
-            content: 'ここではサーバーに使われているタグが人気順で表示されています。',
+            content: t('home.home.popularTour'),
             locale: {
-                skip: <strong aria-label="skip">スキップ</strong>,
-                next: '次へ',
-                back: '戻る',
-                last: '終了',
+                skip: <strong aria-label="skip">{t('home.home.skip')}</strong>,
+                next: t('home.home.next'),
+                back: t('home.home.back'),
+                last: t('home.home.last'),
             },
+            placement: 'auto',
         },
         {
             target: '.guild-card-tag-tour',
-            content: 'ここでもサーバーに使われているタグが見れます。',
+            content: t('home.home.guildCardTour'),
             locale: {
-                skip: <strong aria-label="skip">スキップ</strong>,
-                next: '次へ',
-                back: '戻る',
-                last: '終了',
+                skip: <strong aria-label="skip">{t('home.home.skip')}</strong>,
+                next: t('home.home.next'),
+                back: t('home.home.back'),
+                last: t('home.home.last'),
             },
+            placement: 'auto',
         },
         {
             target: '.guild-card-data-tag-tour',
-            content: 'ここはサーバーの重要な情報が表示されています。「更新」や「現在」のVCの接続人数が見れます。',
+            content: t('home.home.guildCardDataTagTour'),
             locale: {
-                skip: <strong aria-label="skip">スキップ</strong>,
-                next: '次へ',
-                back: '戻る',
-                last: '終了',
+                skip: <strong aria-label="skip">{t('home.home.skip')}</strong>,
+                next: t('home.home.next'),
+                back: t('home.home.back'),
+                last: t('home.home.last'),
             },
+            placement: 'auto',
         },
         {
             target: '.guild-card-title-tour',
             content: (
                 <>
                     <div>
-                        ここクリックするとサーバーのより詳細な情報が表示されます。
+                        {t('home.home.guildCardTitleTour1')}
                     </div>
                     <br />
                     <div>
-                        さっそくハイライトを押してみましょう！
+                        {t('home.home.guildCardTitleTour2')}
                     </div>
                 </>
             ),
             locale: {
-                skip: <strong aria-label="skip">スキップ</strong>,
-                next: '次へ',
-                back: '戻る',
-                last: '終了',
+                skip: <strong aria-label="skip">{t('home.home.skip')}</strong>,
+                next: t('home.home.next'),
+                back: t('home.home.back'),
+                last: t('home.home.last'),
             },
+            placement: 'auto',
         }
     ];
 
@@ -138,6 +143,7 @@ export function Home(props) {
                 showSkipButton
                 steps={steps}
                 spotlightClicks
+                scrollOffset={200}
                 styles={{
                     options: {
                         zIndex: 10000
