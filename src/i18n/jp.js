@@ -34,6 +34,12 @@ function JPi18n() {
                     updatedDataString: "更新："
                 }
             },
+            serverview: {
+                serverView: {
+                    serverDataMissing: "サーバー情報が不足しています。ダッシュボードの編集からサーバー情報を入力してください。",
+                    failedToGetServerData: "サーバー情報の取得に失敗しました。再度お試しください。"
+                }
+            },
             dashboard: {
                 dashboard: {
                     discordServer: "ディスコード サーバー"
