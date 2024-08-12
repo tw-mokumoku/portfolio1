@@ -52,6 +52,7 @@ export function GuildCardContainer(props) {
 }
 
 export function DashboardUserPanel() {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const [globalName, setGlobalName] = useState("");
     const [userIcon, setUserIcon] = useState(<></>);
@@ -77,22 +78,22 @@ export function DashboardUserPanel() {
                         className="mb-3 fs-5"
                         style={{ marginLeft: "10px" }}
                     >
-                        全般
+                        {t('sectionUnion.dashboardUserPanel.general')}
                     </h5>
                     <SimpleButton
                         icon={<InfoTwoToneIcon />}
-                        title="ダッシュボード"
+                        title={t('sectionUnion.dashboardUserPanel.dashboard')}
                         onClick={() => {
                             navigate('/dashboard')
                         }}
                     />
                     <SimpleButton
                         icon={<SettingsTwoToneIcon style={{ fill: "#cecece" }} />}
-                        title="設定"
+                        title={t('sectionUnion.dashboardUserPanel.setting')}
                     />
                     <SimpleButton
                         icon={<LogoutIcon style={{ fill: "#ff6666" }} />}
-                        title="ログアウト"
+                        title={t('sectionUnion.dashboardUserPanel.logout')}
                         onClick={() => {
                             disconnectViaDiscord();
                             navigate('/');

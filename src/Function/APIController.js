@@ -107,7 +107,7 @@ export async function updateServer({ id, name = null, invite_url = null, descrip
     if (country_id != null) data['country_id'] = country_id;
     if (icon != null) data['icon'] = icon;
     if (is_public != null) data['is_public'] = is_public;
-    data['updated_log'] = `${Math.floor(Date.now() / 1000)}`;
+    data['updated_epoch'] = `${Math.floor(Date.now() / 1000)}`;
     if (added_tag_pairs != null) data['added_tag_pairs'] = added_tag_pairs;
     if (removed_tag_pairs != null) data['removed_tag_pairs'] = removed_tag_pairs;
 

@@ -18,8 +18,10 @@ import { OverlayLoading } from "react-loading-randomizable";
 import "react-toggle/style.css";
 import Toggle from 'react-toggle';
 import { useDebounce } from 'react-use';
+import { useTranslation } from "react-i18next";
 
 export function ServerEdit(props) {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const params = useParams();
     const [selectedTags, setSelectedTags] = useState([]);
@@ -68,34 +70,36 @@ export function ServerEdit(props) {
         // サーバー説明多すぎ
         if (descriptionText.length > 5000) {
             toast.error(
-                `サーバー説明上限は5000文字です。現在 ${descriptionText.length} 文字`
+                `${t('serveredit.serverEdit.tooManyDescriptionLength1')}${descriptionText.length}${t('serveredit.serverEdit.tooManyDescriptionLength2')}`
             );
             return;
         }
         // サーバー説明未入力時
         if (descriptionText === "") {
             toast.error(
-                "サーバー説明が未入力です"
+                t('serveredit.serverEdit.emptyDescription')
             );
             return;
         }
         // サーバータグ多すぎ
         if (selectedTags.length > 7) {
             toast.error(
-                `タグ数の上限は7個です。現在 ${selectedTags.length} 個`
+                `${t('serveredit.serverEdit.tooManyTag1')}${selectedTags.length}${t('serveredit.serverEdit.tooManyTag2')}`
             );
             return;
         }
         // サーバータグ選択時
         if (selectedTags.length === 0) {
             toast.error(
-                "タグを最低１つ選択してください"
+                t('serveredit.serverEdit.emptyTag')
             );
             return;
         }
         // 前回のサーバー更新処理未終了時
         if (isAPIProcessing) {
-            toast.error("処理を実行中です。少々お待ちください。");
+            toast.error(
+                t('serveredit.serverEdit.currentlyProcessing')
+            );
             return;
         }
         // toastの有効化
@@ -115,9 +119,9 @@ export function ServerEdit(props) {
         toast.promise(
             updateServerPromise,
             {
-                pending: 'データを保存しています...',
-                success: '保存が完了しました',
-                error: '情報の保存に失敗しました',
+                pending: t('serveredit.serverEdit.pending'),
+                success: t('serveredit.serverEdit.success'),
+                error: t('serveredit.serverEdit.error'),
             }
         );
     };
@@ -128,8 +132,6 @@ export function ServerEdit(props) {
         const st = selectedTags.map(({ value, label }) => label);
         const filteredIst = ist.filter((value) => !st.includes(value));
         const filteredSt = st.filter((value) => !ist.includes(value));
-        console.log("initialIsServerPublic", initialIsServerPublic);
-        console.log("isServerPublic", isServerPublic);
         const added_tag_pairs = selectedRegion !== initialRegion ? st : filteredSt;
         const removed_tag_pairs = selectedRegion !== initialRegion ? ist : filteredIst;
         return updateServer({
@@ -186,24 +188,24 @@ export function ServerEdit(props) {
                     </Col>
                     <Col xl={9}>
                         <p className="fs-2">
-                            「{serverName}」 編集
+                            「{serverName}」 {t('serveredit.serverEdit.edit')}
                         </p>
                         <Card className="mb-4">
                             <Card.Body>
                                 <EditCategory
-                                    title="国"
+                                    title={t('serveredit.serverEdit.language')}
                                 >
                                     <select
                                         className="server-edit-region-select"
                                         value={selectedRegion}
                                         onChange={onRegionChange}
                                     >
-                                        <option value="JP">日本</option>
-                                        <option value="US">アメリカ</option>
+                                        <option value="JP">{t('serveredit.serverEdit.jp')}</option>
+                                        <option value="US">{t('serveredit.serverEdit.us')}</option>
                                     </select>
                                 </EditCategory>
                                 <EditCategory
-                                    title="タグ"
+                                    title={t('serveredit.serverEdit.tag')}
                                 >
                                     <ReactTags
                                         classNames={{
@@ -223,18 +225,18 @@ export function ServerEdit(props) {
                                             optionIsActive: 'is-active',
                                             highlight: 'server-edit-react-tags__listbox-option-highlight',
                                         }}
-                                        placeholderText="タグを入力してください"
+                                        placeholderText={t('serveredit.serverEdit.pleaseEnterTag')}
                                         selected={selectedTags}
                                         suggestions={suggestions}
                                         onAdd={onAdd}
                                         onDelete={onDelete}
                                         allowNew={true}
-                                        noOptionsText="No matching countries"
+                                        noOptionsText={t('serveredit.serverEdit.noOptionText')}
                                         onInput={(value) => setInputValues(value)}
                                     />
                                 </EditCategory>
                                 <EditCategory
-                                    title="サーバー説明"
+                                    title={t('serveredit.serverEdit.serverDescription')}
                                 >
                                     <textarea
                                         value={descriptionText}
@@ -243,7 +245,7 @@ export function ServerEdit(props) {
                                     />
                                 </EditCategory>
                                 <EditCategory
-                                    title="サーバーを公開する"
+                                    title={t('serveredit.serverEdit.makeServerPublic')}
                                 >
                                     <Toggle
                                         id='cheese-status'
@@ -257,7 +259,7 @@ export function ServerEdit(props) {
                             <Button
                                 onClick={onSaveModification}
                             >
-                                変更を保存する
+                                {t('serveredit.serverEdit.saveModification')}
                             </Button>
                         </div>
                     </Col>
