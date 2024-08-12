@@ -14,12 +14,13 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { disconnectViaDiscord, disconnectVisDislist } from '../../Function/LoginController';
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { getLanguageLocalStorage } from '../../Function/LocalStorageController';
 
 export function TagListSection() {
     const { t } = useTranslation();
     const [tagButtons, setTagButtons] = useState(<></>);
     useEffect(() => {
-        getCountryRankingTag('JP')
+        getCountryRankingTag(getLanguageLocalStorage())
             .then((response) => {
                 if (response.data == null || response.data.length == 0) return;
                 setTagButtons(

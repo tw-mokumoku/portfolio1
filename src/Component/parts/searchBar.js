@@ -9,6 +9,7 @@ import { getTagSuggests } from '../../Function/APIController';
 import './searchBar.css';
 import { useDebounce } from 'react-use';
 import { useNavigate } from "react-router-dom";
+import { getLanguageLocalStorage } from '../../Function/LocalStorageController';
 
 export function SearchBar() {
     const navigate = useNavigate();
@@ -17,7 +18,7 @@ export function SearchBar() {
     const onEnter = (event) => {
         if (event.key !== "Enter") return;
         if (formValue === "") return;
-        navigate(`/search?q=${formValue}&country=${"JP"}`);
+        navigate(`/search?q=${formValue}&country=${getLanguageLocalStorage()}`);
     }
 
     return (
