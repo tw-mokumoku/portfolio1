@@ -74,7 +74,8 @@ function ENi18n() {
                     noOptionText: "No matching tags found",
                     serverDescription: "Server description",
                     makeServerPublic: "Publish the server",
-                    saveModification: "Save changes"
+                    saveModification: "Save changes",
+                    tooManyWordsInTag: "Tag has too many characters. Please change it to within 100 characters and try again."
                 }
             },
             viewServerBodyUnion: {
