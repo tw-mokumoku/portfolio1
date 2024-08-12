@@ -6,10 +6,12 @@ import { getServerVCLogs } from '../../Function/APIController';
 import Tabs from '@mui/joy/Tabs';
 import TabList from '@mui/joy/TabList';
 import Chart from "react-apexcharts";
-
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { useTranslation } from "react-i18next";
+
 export function VCLogChartTabs(props) {
+    const { t } = useTranslation();
     return (
         <CssVarsProvider
             defaultMode="dark"
@@ -28,9 +30,9 @@ export function VCLogChartTabs(props) {
                         },
                     }}
                 >
-                    <Tab disableIndicator color='#ffffff'>日間</Tab>
-                    <Tab disableIndicator color='#ffffff'>週間</Tab>
-                    <Tab disableIndicator color='#ffffff'>月間</Tab>
+                    <Tab disableIndicator color='#ffffff'>{t('vcLogChartTabs.vcLogChartTabs.daily')}</Tab>
+                    <Tab disableIndicator color='#ffffff'>{t('vcLogChartTabs.vcLogChartTabs.weekly')}</Tab>
+                    <Tab disableIndicator color='#ffffff'>{t('vcLogChartTabs.vcLogChartTabs.monthly')}</Tab>
                     <div className="ms-auto d-flex align-items-center">
                         <div style={{ marginRight: '10px', color: '#e3e5e8' }}>
                             {props.periodText}
@@ -70,6 +72,7 @@ export function VCLogChartTabs(props) {
 }
 
 function VCLogInfo(props) {
+    const { t } = useTranslation();
     const numDataString = (data) => {
         return data ? data : "0";
     };
@@ -79,19 +82,19 @@ function VCLogInfo(props) {
     return (
         <Row xs={2} md={4} xl={4}>
             <BasicInfoPanel
-                title="アクティブユーザー"
+                title={t('vcLogChartTabs.vCLogInfo.activeUser')}
                 data={numDataString(props.activeUserCount)}
             />
             <BasicInfoPanel
-                title="VC接続回数"
+                title={t('vcLogChartTabs.vCLogInfo.vcConnectionNumber')}
                 data={numDataString(props.vcConnectCount)}
             />
             <BasicInfoPanel
-                title="平均VC接続時間"
+                title={t('vcLogChartTabs.vCLogInfo.avarageConnectionTime')}
                 data={timeDataString(props.vcAverageTime)}
             />
             <BasicInfoPanel
-                title="最高VC接続時間"
+                title={t('vcLogChartTabs.vCLogInfo.maxConnectionTime')}
                 data={timeDataString(props.vcMaxConnectTime)}
             />
         </Row>
@@ -113,6 +116,7 @@ function BasicInfoPanel(props) {
 }
 
 function VCLogChart(props) {
+    const { t } = useTranslation();
     const [notExistText, setNotExistText] = useState("");
 
     useEffect(() => {
@@ -121,15 +125,15 @@ function VCLogChart(props) {
         var start_epoch;
 
         if (props.xAxisUnit === "day") {
-            setNotExistText("直近24時間のデータが存在しません");
+            setNotExistText(t('vcLogChartTabs.vcLogChart.dailyDataNotFound'));
             start_epoch = (todayEpoch - 86400).toFixed();
         }
         if (props.xAxisUnit === "week") {
-            setNotExistText("直近7日間のデータが存在しません");
+            setNotExistText(t('vcLogChartTabs.vcLogChart.weeklyDataNotFound'));
             start_epoch = (todayEpoch - 604800).toFixed();
         }
         if (props.xAxisUnit === "month") {
-            setNotExistText("直近30日間のデータが存在しません");
+            setNotExistText(t('vcLogChartTabs.vcLogChart.monthlyDataNotFound'));
             start_epoch = (todayEpoch - 2592000).toFixed();
         }
         // Get Daily Server VC Logs
@@ -144,7 +148,7 @@ function VCLogChart(props) {
                     type="area"
                     series={[
                         {
-                            name: '接続数',
+                            name: t('vcLogChartTabs.vcLogChart.connectionNumber'),
                             data: props.seriesData ? props.seriesData : []
                         }
                     ]}

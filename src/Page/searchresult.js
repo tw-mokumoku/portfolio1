@@ -8,8 +8,10 @@ import { GuildCardContainer } from '../Component/union/SectionUnion';
 import { OverlayLoading } from "react-loading-randomizable";
 import { GuildCard } from '../Component/parts/conversion';
 import Stack from 'react-bootstrap/Stack';
+import { useTranslation } from "react-i18next";
 
 export function SearchResult(props) {
+    const { t } = useTranslation();
     const [searchParams] = useSearchParams();
     const queryParams = searchParams.get("q").replace(/\s+/g, ' ').split(' ');
     const countryParams = searchParams.get("country");
@@ -36,7 +38,7 @@ export function SearchResult(props) {
                             guildDescription={value['description']}
                             dataString={
                                 <>
-                                    現在のVCの接続人数：
+                                    {t('searchresult.searchResult.currentVCConnectionNumber')}：
                                     {value['user_num'] !== 0 ?
                                         <span className="ms-1" style={{ color: '#12c74b' }}>{value['user_num']}</span>
                                         :
@@ -70,15 +72,15 @@ export function SearchResult(props) {
                                 :
                                 <>
                                     <div className="d-flex justify-content-center align-items-center mb-5">
-                                        <p className="mb-5">{searchParams.get("q")}に一致する情報は見つかりませんでした。</p>
+                                        <p className="mb-5">{searchParams.get("q")}{t('searchresult.searchResult.searchInfoNotFount')}</p>
                                     </div>
                                     <Stack className="d-flex justify-content-center align-items-center">
                                         <div className="w-75">
-                                            <p style={{ fontSize: '1rem' }}>検索のヒント:</p>
-                                            <p style={{ fontSize: '0.9rem' }}>・ キーワードに誤字・脱字がないか確認します。</p>
-                                            <p style={{ fontSize: '0.9rem' }}>・ 別のキーワードを試してみます。</p>
-                                            <p style={{ fontSize: '0.9rem' }}>・ もっと一般的なキーワードに変えてみます。</p>
-                                            <p style={{ fontSize: '0.9rem' }}>・ キーワードの数を減らしてみます。</p>
+                                            <p style={{ fontSize: '1rem' }}>{t('searchresult.searchResult.searchHint')}</p>
+                                            <p style={{ fontSize: '0.9rem' }}>{t('searchresult.searchResult.checkMisspelling')}</p>
+                                            <p style={{ fontSize: '0.9rem' }}>{t('searchresult.searchResult.checkOtherKeywords')}</p>
+                                            <p style={{ fontSize: '0.9rem' }}>{t('searchresult.searchResult.checkMoreCommonKeywords')}</p>
+                                            <p style={{ fontSize: '0.9rem' }}>{t('searchresult.searchResult.reduceKeywordsNumber')}</p>
                                         </div>
                                     </Stack>
                                 </>

@@ -10,8 +10,10 @@ import { ToButton } from '../parts/conversion';
 import { VCLogChartTabs } from './VCLogChartUnion';
 import Row from 'react-bootstrap/Row';
 import { timeDiff } from '../../Function/DateCalc';
+import { useTranslation } from "react-i18next";
 
 export function ViewServerBody(props) {
+    const { t } = useTranslation();
     const params = useParams();
     const [guildTags, setGuildTags] = useState();
     const [showPeriodVCLogInfo, setShowPeriodVCLogInfo] = useState(false);
@@ -123,24 +125,24 @@ export function ViewServerBody(props) {
 
     return (
         <div>
-            <FirstEditCategory title="タグ">
+            <FirstEditCategory title={t('viewServerBodyUnion.viewServerBody.tagTitle')}>
                 <div className="mb-3" style={{ minHeight: '40px' }}>
                     {ToButton(guildTags)}
                 </div>
             </FirstEditCategory>
             <BodySeparater />
-            <EditCategory title="概要">
+            <EditCategory title={t('viewServerBodyUnion.viewServerBody.descriptionTitle')}>
                 <p className="view-server-body-description">
                     {props.currentServerDescription}
                 </p>
             </EditCategory>
             <BodySeparater />
-            <EditCategory title="基本情報">
+            <EditCategory title={t('viewServerBodyUnion.viewServerBody.basicInfoTitle')}>
                 <BasicInfo {...props} />
             </EditCategory>
             <div className="d-display d-md-none" ref={test}>
                 <BodySeparater />
-                <EditCategory title="日間情報">
+                <EditCategory title={t('viewServerBodyUnion.viewServerBody.dailyInfoTitle')}>
                     <VCLogInfo
                         activeUserCount={dailyVCLogInfoData['activeUserCount']}
                         vcConnectCount={dailyVCLogInfoData['vcConnectCount']}
@@ -148,7 +150,7 @@ export function ViewServerBody(props) {
                         vcMaxConnectTime={dailyVCLogInfoData['vcMaxConnectTime']}
                     />
                 </EditCategory>
-                <EditCategory title="週間情報">
+                <EditCategory title={t('viewServerBodyUnion.viewServerBody.weeklyInfoTitle')}>
                     <VCLogInfo
                         activeUserCount={monthlyVCLogInfoData['activeUserCount']}
                         vcConnectCount={monthlyVCLogInfoData['vcConnectCount']}
@@ -156,7 +158,7 @@ export function ViewServerBody(props) {
                         vcMaxConnectTime={monthlyVCLogInfoData['vcMaxConnectTime']}
                     />
                 </EditCategory>
-                <EditCategory title="月間情報">
+                <EditCategory title={t('viewServerBodyUnion.viewServerBody.monthlyInfoTitle')}>
                     <VCLogInfo
                         activeUserCount={yearlyVCLogInfoData['activeUserCount']}
                         vcConnectCount={yearlyVCLogInfoData['vcConnectCount']}
@@ -169,7 +171,7 @@ export function ViewServerBody(props) {
                 <BodySeparater />
             </div>
             <div className="d-none d-md-block">
-                <EditCategory title="VC 接続グラフ">
+                <EditCategory title={t('viewServerBodyUnion.viewServerBody.vcConnectionGraphTitle')}>
                     <VCLogChartTabs
                         serverID={params['id']}
                         periodText={periodText}
@@ -187,25 +189,27 @@ export function ViewServerBody(props) {
     );
 }
 function BasicInfo(props) {
+    const { t } = useTranslation();
     return (
         <Row xs={2} md={4} xl={4}>
             <BasicInfoPanel
-                title="最終更新日"
+                title={t('viewServerBodyUnion.basicInfo.latestUpdatedDate')}
                 data={
                     props.serverUpdatedLog ?
                         timeDiff(new Date(props.serverUpdatedLog['updated_epoch'] * 1000))
                         :
-                        "データ取得失敗"
+                        t('viewServerBodyUnion.basicInfo.failedToGetData')
                 }
             />
             <BasicInfoPanel
-                title="VC人数"
-                data={props.serverCurrentUpdatedLog ? props.serverCurrentUpdatedLog['user_num'] : "データ取得失敗"}
+                title={t('viewServerBodyUnion.basicInfo.vcConnectionNumber')}
+                data={props.serverCurrentUpdatedLog ? props.serverCurrentUpdatedLog['user_num'] : t('viewServerBodyUnion.basicInfo.failedToGetData')}
             />
         </Row>
     );
 }
 function VCLogInfo(props) {
+    const { t } = useTranslation();
     const numDataString = (data) => {
         return data ? data : "0";
     };
@@ -215,19 +219,19 @@ function VCLogInfo(props) {
     return (
         <Row xs={2} md={4} xl={4}>
             <BasicInfoPanel
-                title="アクティブユーザー"
+                title={t('viewServerBodyUnion.vcLogInfo.activeUser')}
                 data={numDataString(props.activeUserCount)}
             />
             <BasicInfoPanel
-                title="VC接続回数"
+                title={t('viewServerBodyUnion.vcLogInfo.vcConnectionNumber')}
                 data={numDataString(props.vcConnectCount)}
             />
             <BasicInfoPanel
-                title="平均VC接続時間"
+                title={t('viewServerBodyUnion.vcLogInfo.avarageConnectionTime')}
                 data={timeDataString(props.vcAverageTime)}
             />
             <BasicInfoPanel
-                title="最高VC接続時間"
+                title={t('viewServerBodyUnion.vcLogInfo.maxConnectionTime')}
                 data={timeDataString(props.vcMaxConnectTime)}
             />
         </Row>

@@ -28,6 +28,24 @@ function JPi18n() {
                     discordServer: "ディスコード サーバー"
                 }
             },
+            tagView: {
+                tagView: {
+                    currentVCConnectionNumber: "現在のVCの接続人数",
+                    tagNotFound1: "タグ「",
+                    tagNotFound2: "」の情報が見つかりませんでした。",
+                }
+            },
+            searchresult: {
+                searchResult: {
+                    currentVCConnectionNumber: "現在のVCの接続人数",
+                    searchInfoNotFount: "に一致する情報は見つかりませんでした。",
+                    searchHint: "検索のヒント:",
+                    checkMisspelling: "・ キーワードに誤字・脱字がないか確認します。",
+                    checkOtherKeywords: "・ 別のキーワードを試してみます。",
+                    checkMoreCommonKeywords: "・ もっと一般的なキーワードに変えてみます。",
+                    reduceKeywordsNumber: "・ キーワードの数を減らしてみます。"
+                }
+            },
             serveredit: {
                 serverEdit: {
                     tooManyDescriptionLength1: "サーバー説明上限は5000文字です。現在 ",
@@ -40,7 +58,8 @@ function JPi18n() {
                     pending: "データを保存しています...",
                     success: "保存が完了しました",
                     error: "情報の保存に失敗しました",
-                    edit: "編集",
+                    edit1: "「",
+                    edit2: "」 編集",
                     language: "言語",
                     jp: "日本語",
                     us: "英語",
@@ -50,6 +69,47 @@ function JPi18n() {
                     serverDescription: "サーバー説明",
                     makeServerPublic: "サーバーを公開する",
                     saveModification: "変更を保存する"
+                }
+            },
+            viewServerBodyUnion: {
+                viewServerBody: {
+                    tagTitle: "タグ",
+                    descriptionTitle: "概要",
+                    basicInfoTitle: "基本情報",
+                    dailyInfoTitle: "日間情報",
+                    weeklyInfoTitle: "週間情報",
+                    monthlyInfoTitle: "月間情報",
+                    vcConnectionGraphTitle: "VC 接続グラフ",
+                },
+                basicInfo: {
+                    latestUpdatedDate: "最終更新日",
+                    failedToGetData: "データ取得失敗",
+                    vcConnectionNumber: "VC人数"
+                },
+                vcLogInfo: {
+                    activeUser: "アクティブユーザー",
+                    vcConnectionNumber: "VC接続回数",
+                    avarageConnectionTime: "平均VC接続時間",
+                    maxConnectionTime: "最高VC接続時間",
+                }
+            },
+            vcLogChartTabs: {
+                vcLogChartTabs: {
+                    daily: "日間",
+                    weekly: "週間",
+                    monthly: "月間",
+                },
+                vCLogInfo: {
+                    activeUser: "アクティブユーザー",
+                    vcConnectionNumber: "VC接続回数",
+                    avarageConnectionTime: "平均VC接続時間",
+                    maxConnectionTime: "最高VC接続時間",
+                },
+                vcLogChart: {
+                    dailyDataNotFound: "直近24時間のデータが存在しません",
+                    weeklyDataNotFound: "直近7日間のデータが存在しません",
+                    monthlyDataNotFound: "直近1カ月間のデータが存在しません",
+                    connectionNumber: "接続数"
                 }
             },
             bigSection: {
@@ -77,6 +137,13 @@ function JPi18n() {
             viewServerHeaderUnion: {
                 viewServerHeader: {
                     joinServer: "サーバーに参加"
+                }
+            },
+            button: {
+                serverPanelButtons: {
+                    view: "表示",
+                    edit: "編集",
+                    addToDiscord: "ディスコードに追加"
                 }
             }
         }
