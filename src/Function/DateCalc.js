@@ -1,17 +1,22 @@
-export function timeDiff(postDay) {
+export function timeDiff(t, postDay) {
     let diff = new Date().getTime() - postDay.getTime();
     let progress = new Date(diff);
     if (progress.getUTCFullYear() - 1970) {
-        return progress.getUTCFullYear() - 1970 + '年前';
+        if (progress.getUTCFullYear() - 1970 == 1) return progress.getUTCFullYear() - 1970 + t('DateCalc.timeDiff.yearAgo');
+        return progress.getUTCFullYear() - 1970 + t('DateCalc.timeDiff.yearsAgo');
     } else if (progress.getUTCMonth()) {
-        return progress.getUTCMonth() + 'ヶ月前';
+        return progress.getUTCMonth() + t('DateCalc.timeDiff.monthAgo');
     } else if (progress.getUTCDate() - 1) {
-        return progress.getUTCDate() - 1 + '日前';
+        if (progress.getUTCDate() - 1 == 1) return progress.getUTCDate() - 1 + t('DateCalc.timeDiff.dayAgo');
+        return progress.getUTCDate() - 1 + t('DateCalc.timeDiff.daysAgo');
     } else if (progress.getUTCHours()) {
-        return progress.getUTCHours() + '時間前';
+        if (progress.getUTCHours() == 1) return progress.getUTCHours() + t('DateCalc.timeDiff.hourAgo');
+        return progress.getUTCHours() + t('DateCalc.timeDiff.hoursAgo');
     } else if (progress.getUTCMinutes()) {
-        return progress.getUTCMinutes() + '分前';
+        if (progress.getUTCMinutes() == 1) return progress.getUTCMinutes() + t('DateCalc.timeDiff.minuteAgo');
+        return progress.getUTCMinutes() + t('DateCalc.timeDiff.minutesAgo');
     } else {
-        return progress.getUTCSeconds() + '秒前';
+        if (progress.getUTCSeconds() == 1) return progress.getUTCSeconds() + t('DateCalc.timeDiff.secondAgo');
+        return progress.getUTCSeconds() + t('DateCalc.timeDiff.secondsAgo');
     }
 }
