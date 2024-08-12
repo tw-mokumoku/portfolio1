@@ -22,6 +22,12 @@ function ENi18n() {
                     updatedDataString: "Last updated date："
                 }
             },
+            serverview: {
+                serverView: {
+                    serverDataMissing: "Server information is missing. Please enter the server information from the dashboard.",
+                    failedToGetServerData: "Failed to obtain server information. Please try again."
+                }
+            },
             dashboard: {
                 dashboard: {
                     discordServer: "Discord Servers"

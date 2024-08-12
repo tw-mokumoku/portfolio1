@@ -15,7 +15,7 @@ import { useTranslation } from "react-i18next";
 export function ViewServerBody(props) {
     const { t } = useTranslation();
     const params = useParams();
-    const [guildTags, setGuildTags] = useState();
+    //const [guildTags, setGuildTags] = useState();
     const [showPeriodVCLogInfo, setShowPeriodVCLogInfo] = useState(false);
 
     // chart用
@@ -108,9 +108,11 @@ export function ViewServerBody(props) {
         checkVCLogInfoElementDisplay();
         window.onresize = () => checkVCLogInfoElementDisplay();
         // chart用
+        /*
         getServerTags(params['id']).then((response) => {
             setGuildTags(response.data.map(value => value['name']));
         });
+        */
     }, []);
 
     useEffect(() => {
@@ -127,7 +129,7 @@ export function ViewServerBody(props) {
         <div>
             <FirstEditCategory title={t('viewServerBodyUnion.viewServerBody.tagTitle')}>
                 <div className="mb-3" style={{ minHeight: '40px' }}>
-                    {ToButton(guildTags)}
+                    {ToButton(props.guildTags)}
                 </div>
             </FirstEditCategory>
             <BodySeparater />
