@@ -163,6 +163,21 @@ function JPi18n() {
                     edit: "編集",
                     addToDiscord: "ディスコードに追加"
                 }
+            },
+            DateCalc: {
+                timeDiff: {
+                    yearAgo: "年前",
+                    yearsAgo: "年前",
+                    monthAgo: "ヶ月前",
+                    dayAgo: "日前",
+                    daysAgo: "日前",
+                    hourAgo: "時間前",
+                    hoursAgo: "時間前",
+                    minuteAgo: "分前",
+                    minutesAgo: "分前",
+                    secondAgo: "秒前",
+                    secondsAgo: "秒前",
+                }
             }
         }
     };

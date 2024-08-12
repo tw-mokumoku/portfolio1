@@ -8,12 +8,12 @@ import { GuildCard } from '../Component/parts/conversion';
 import { isLocal } from '../Function/LocalRemoteSwitcher';
 import { useEffect, useState } from 'react';
 import { getDiscordGuildIcon, getServerRankingCountryUpdatedLog } from '../Function/APIController';
-import { timeDiff } from '../Function/DateCalc';
 import { OverlayLoading } from "react-loading-randomizable";
 import './home.css';
 import { hasHomeTourFlagLocalStorage, setHomeTourFlagLocalStorage } from '../Function/LocalStorageController';
 import Joyride, { ACTIONS, EVENTS, ORIGIN, STATUS, CallBackProps } from 'react-joyride';
 import { useTranslation } from "react-i18next";
+import { timeDiff } from '../Function/DateCalc';
 
 export function Home(props) {
     const { t } = useTranslation();
@@ -106,8 +106,8 @@ export function Home(props) {
         if ([EVENTS.TOUR_END].includes(type)) {
             setHomeTourFlagLocalStorage();
         }
-
     }
+
     useEffect(() => {
         getServerRankingCountryUpdatedLog('JP')
             .then((response) => {
@@ -123,7 +123,7 @@ export function Home(props) {
                             guildName={value['name']}
                             guildInviteURL={value['invite_url']}
                             guildDescription={value['description']}
-                            dataString={t('home.home.updatedDataString') + timeDiff(new Date(value['updated_epoch'] * 1000))}
+                            dataString={t('home.home.updatedDataString') + timeDiff(t, new Date(value['updated_epoch'] * 1000))}
                         />
                     })
                 )

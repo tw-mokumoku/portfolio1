@@ -9,8 +9,8 @@ import { getServerTags, getServerVCLogs } from '../../Function/APIController';
 import { ToButton } from '../parts/conversion';
 import { VCLogChartTabs } from './VCLogChartUnion';
 import Row from 'react-bootstrap/Row';
-import { timeDiff } from '../../Function/DateCalc';
 import { useTranslation } from "react-i18next";
+import { timeDiff } from '../../Function/DateCalc';
 
 export function ViewServerBody(props) {
     const { t } = useTranslation();
@@ -198,7 +198,7 @@ function BasicInfo(props) {
                 title={t('viewServerBodyUnion.basicInfo.latestUpdatedDate')}
                 data={
                     props.serverUpdatedLog ?
-                        timeDiff(new Date(props.serverUpdatedLog['updated_epoch'] * 1000))
+                        timeDiff(t, new Date(props.serverUpdatedLog['updated_epoch'] * 1000))
                         :
                         t('viewServerBodyUnion.basicInfo.failedToGetData')
                 }

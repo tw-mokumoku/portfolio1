@@ -90,11 +90,11 @@ function ENi18n() {
                 basicInfo: {
                     latestUpdatedDate: "Last updated date",
                     failedToGetData: "Failed to get data",
-                    vcConnectionNumber: "VC Connectivity"
+                    vcConnectionNumber: "Current VC Connection"
                 },
                 vcLogInfo: {
                     activeUser: "Active User",
-                    vcConnectionNumber: "Average VC connection time",
+                    vcConnectionNumber: "TotalVC connection count",
                     avarageConnectionTime: "Average VC connection time",
                     maxConnectionTime: "Maximum VC connection time",
                 }
@@ -107,7 +107,7 @@ function ENi18n() {
                 },
                 vCLogInfo: {
                     activeUser: "Active User",
-                    vcConnectionNumber: "Average VC connection time",
+                    vcConnectionNumber: "Total VC connection count",
                     avarageConnectionTime: "Average VC connection time",
                     maxConnectionTime: "Maximum VC connection time",
                 },
@@ -150,6 +150,21 @@ function ENi18n() {
                     view: "view",
                     edit: "edit",
                     addToDiscord: "Add to Discord"
+                }
+            },
+            DateCalc: {
+                timeDiff: {
+                    yearAgo: "year ago",
+                    yearsAgo: "years ago",
+                    monthAgo: "month ago",
+                    dayAgo: "day ago",
+                    daysAgo: "days ago",
+                    hourAgo: "hour ago",
+                    hoursAgo: "hours ago",
+                    minuteAgo: "minute ago",
+                    minutesAgo: "minutes ago",
+                    secondAgo: "second ago",
+                    secondsAgo: "seconds ago",
                 }
             }
         }
