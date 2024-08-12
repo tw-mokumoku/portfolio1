@@ -10,8 +10,10 @@ import { getDiscordOAuthURL } from '../../Function/LocalRemoteSwitcher';
 import { CurrentDiscordUserIcon } from '../../Function/APIController';
 import { hasDiscordAccessTokenCookie } from '../../Function/OAuthController';
 import { hasCurrentDiscordUserDataLocalStorage } from '../../Function/LocalStorageController';
+import { useTranslation } from "react-i18next";
 
 export function HeaderUnion() {
+    const { t } = useTranslation();
     return (
         <Navbar expand="lg" sticky="top">
             <Navbar.Brand href="/">
@@ -34,7 +36,7 @@ export function HeaderUnion() {
                                             <CurrentDiscordUserIcon alt="" style={{ borderRadius: "30px", border: "2px solid lightblue", width: 40, height: 40 }} />
                                     </Button>
                                     :
-                                    <Button href={getDiscordOAuthURL()}>ログイン</Button>
+                                    <Button href={getDiscordOAuthURL()}>{t('headerUnion.headerUnion.login')}</Button>
                             }
                             </div>
                         </Col>

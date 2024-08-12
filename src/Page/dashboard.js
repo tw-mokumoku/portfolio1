@@ -12,8 +12,10 @@ import { useEffect } from 'react';
 import { getCurrentUserGuilds } from '../Function/APIController';
 import { useState } from 'react';
 import { OverlayLoading } from "react-loading-randomizable";
+import { useTranslation } from "react-i18next";
 
 export function DashBoard() {
+    const { t } = useTranslation();
     const [serverPanels, setServerPanels] = useState(<></>)
     const [loading, setLoading] = useState(true);
     useEffect(() => {
@@ -45,7 +47,7 @@ export function DashBoard() {
                         <DashboardUserPanel />
                     </Col>
                     <Col xl={9}>
-                        <p className="fs-2">ディスコード サーバー</p>
+                        <p className="fs-2">{t('dashboard.dashboard.discordServer')}</p>
                         <Row xs={1} md={2} xl={3}>
                             {serverPanels}
                         </Row>
