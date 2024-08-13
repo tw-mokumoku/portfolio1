@@ -31,7 +31,9 @@ function JPi18n() {
                     guildCardDataTagTour: "ここはサーバーの重要な情報が表示されています。「更新」や「現在」のVCの接続人数が見れます。",
                     guildCardTitleTour1: "ここクリックするとサーバーのより詳細な情報が表示されます。",
                     guildCardTitleTour2: "さっそくハイライトを押してみましょう！",
-                    updatedDataString: "更新："
+                    updatedDataString: "更新：",
+                    guildCardDisplayExplaination1: "現在、最近の更新順で表示しています。",
+                    guildCardDisplayExplaination2: "VCの人数順での表示が行う場合は検索又はタグをクリックしてください。"
                 }
             },
             serverview: {
