@@ -99,10 +99,10 @@ export function ViewServerBody(props) {
             });
     }
 
-    const test = useRef(null);
+    const VCLogInfoContainerRef = useRef(null);
     useEffect(() => {
         const checkVCLogInfoElementDisplay = () => {
-            if (window.getComputedStyle(test.current).display == 'block') setShowPeriodVCLogInfo(true);
+            if (window.getComputedStyle(VCLogInfoContainerRef.current).display == 'block') setShowPeriodVCLogInfo(true);
             else setShowPeriodVCLogInfo(false);
         }
         checkVCLogInfoElementDisplay();
@@ -142,7 +142,7 @@ export function ViewServerBody(props) {
             <EditCategory title={t('viewServerBodyUnion.viewServerBody.basicInfoTitle')}>
                 <BasicInfo {...props} />
             </EditCategory>
-            <div className="d-display d-md-none" ref={test}>
+            <div className="vc-log-info-container d-display d-md-none" ref={VCLogInfoContainerRef}>
                 <BodySeparater />
                 <EditCategory title={t('viewServerBodyUnion.viewServerBody.dailyInfoTitle')}>
                     <VCLogInfo

@@ -19,7 +19,9 @@ function ENi18n() {
                     guildCardDataTagTour: "Important server information is displayed here. You can see the 'Last updated date' and 'Current vc connection'.",
                     guildCardTitleTour1: "Click here to see more detailed information about the server.",
                     guildCardTitleTour2: "Let's press the highlight now!",
-                    updatedDataString: "Last updated date："
+                    updatedDataString: "Last updated date：",
+                    guildCardDisplayExplaination1: "Currently, displaying in order of recent updates.",
+                    guildCardDisplayExplaination2: "If you want to display in order of users currently connecting to VC, please search or click on the tag."
                 }
             },
             serverview: {

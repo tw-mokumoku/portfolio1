@@ -33,7 +33,7 @@ export function getDiscordOAuthTokenViaSearch() {
 }
 export function getDiscordBotOAuthURL(guild_id) {
     return isLocal() ?
-        "https://discord.com/oauth2/authorize?client_id=1226955908991418510&guild_id=" + guild_id + "&permissions=8&response_type=code&disable_guild_select=true&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fdashboard&integration_type=0&scope=bot+identify+applications.commands"
+        "https://discord.com/oauth2/authorize?client_id=1226955908991418510&guild_id=" + guild_id + "&permissions=2181565441&response_type=code&disable_guild_select=true&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fdashboard&integration_type=0&scope=bot+identify+applications.commands"
         :
-        "https://discord.com/oauth2/authorize?client_id=1226955908991418510&guild_id=" + guild_id + "&permissions=8&response_type=code&disable_guild_select=true&redirect_uri=https%3A%2F%2Fdiscordlist.kolysis.com%2Fdashboard&integration_type=0&scope=bot+identify+applications.commands"
+        "https://discord.com/oauth2/authorize?client_id=1226955908991418510&guild_id=" + guild_id + "&permissions=2181565441&response_type=code&disable_guild_select=true&redirect_uri=https%3A%2F%2Fdiscordlist.kolysis.com%2Fdashboard&integration_type=0&scope=bot+identify+applications.commands"
 }

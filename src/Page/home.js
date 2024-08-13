@@ -122,7 +122,17 @@ export function Home(props) {
                             guildName={value['name']}
                             guildInviteURL={value['invite_url']}
                             guildDescription={value['description']}
-                            dataString={t('home.home.updatedDataString') + timeDiff(t, new Date(value['updated_epoch'] * 1000))}
+                            dataString={
+                                <>
+                                    {t('tagView.tagView.currentVCConnectionNumber')}：
+                                    {value['user_num'] !== 0 ?
+                                        <span className="ms-1" style={{ color: '#12c74b' }}>{value['user_num']}</span>
+                                        :
+                                        <span className="ms-1">{value['user_num']}</span>
+                                    }
+                                </>
+                            }
+//                            dataString={t('home.home.updatedDataString') + timeDiff(t, new Date(value['updated_epoch'] * 1000))}
                         />
                     })
                 )
@@ -154,6 +164,12 @@ export function Home(props) {
                 <HeaderUnion />
                 <BigTitle />
                 <TagListSection />
+                <p className="fs-6 mb-0">
+                    {t('home.home.guildCardDisplayExplaination1')}
+                </p>
+                <p className="fs-6">
+                    {t('home.home.guildCardDisplayExplaination2')}
+                </p>
                 <GuildCardContainer>
                     {guildCards}
                 </GuildCardContainer>
