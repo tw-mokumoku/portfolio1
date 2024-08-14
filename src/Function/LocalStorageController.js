@@ -36,7 +36,11 @@ function geti18nextLocalStorage() {
 }
 export function getLanguageLocalStorage() {
     const i18nextLocalStorarge = geti18nextLocalStorage();
+    if (i18nextLocalStorarge == 'en') return 'US';
     if (i18nextLocalStorarge == 'en-US') return 'US';
+    if (i18nextLocalStorarge == 'en-GB') return 'US';
+    if (i18nextLocalStorarge == 'en-CA') return 'US';
+    if (i18nextLocalStorarge == 'en-AU') return 'US';
     if (i18nextLocalStorarge == 'ja') return 'JP';
 }
 

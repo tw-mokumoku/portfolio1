@@ -13,6 +13,7 @@ import { TagView } from './Page/tagview';
 import { SearchResult } from './Page/searchresult';
 
 import './i18n/i18n';
+import { Setting } from './Page/setting';
 
 function App() {
     return (
@@ -25,6 +26,7 @@ function App() {
                 <Route exact path="/server/:id" element={<ServerView />} />
                 <Route exact path="/tag/:name" element={<TagView />} />
                 <Route path="/search" element={<SearchResult />} />
+                <Route exact path="/setting" element={<Setting />} />
             </Routes>
         </div>
     );

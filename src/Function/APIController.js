@@ -183,8 +183,10 @@ export async function getTagRankingCurrent(tag_name) { //”z—ñŽw’è‰Â”\
 export async function getTagSuggests(country_id, value) {
     return await axios.get(`${DislitBaseURL}/tag/suggests?country_id=${country_id}&value=${value}`);
 }
-export async function getTagRankingCurrentServers(tag_name) {
-    return await axios.get(`${DislitBaseURL}/tag/${tag_name}/ranking/current`);
+export async function getTagRankingCurrentServers(tag_name, getDataCount) {
+    return await axios.get(
+        `${DislitBaseURL}/tag/${tag_name}/ranking/current?getDataCount=${getDataCount}&page=${1}`,
+    );
 }
 
 ////  POST

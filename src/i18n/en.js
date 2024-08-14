@@ -32,7 +32,12 @@ function ENi18n() {
             },
             dashboard: {
                 dashboard: {
-                    discordServer: "Discord Servers"
+                    dashboardTitle: "Dashboard"
+                }
+            },
+            setting: {
+                setting: {
+                    settingTitle: "Setting"
                 }
             },
             tagView: {

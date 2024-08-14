@@ -13,7 +13,7 @@ import { ViewServerHeader } from '../Component/union/viewServerHeaderUnion';
 import { ViewServerBody } from '../Component/union/viewServerBodyUnion';
 import { ToastContainer, toast } from 'react-toastify';
 import { useTranslation } from "react-i18next";
-
+import nl2br from 'react-newline-to-break'; 
 
 export function ServerView() {
     const { t } = useTranslation();
@@ -109,7 +109,7 @@ export function ServerView() {
                         <Card.Body>
                             <ViewServerBody
                                 params={params}
-                                currentServerDescription={currentServerDescription}
+                                currentServerDescription={nl2br(currentServerDescription)}
                                 currentServer={currentServer}
                                 serverUpdatedLog={serverUpdatedLog}
                                 serverCurrentUpdatedLog={serverCurrentUpdatedLog}

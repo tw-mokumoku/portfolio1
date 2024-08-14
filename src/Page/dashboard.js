@@ -47,7 +47,7 @@ export function DashBoard() {
                         <DashboardUserPanel />
                     </Col>
                     <Col xl={9}>
-                        <p className="fs-2">{t('dashboard.dashboard.discordServer')}</p>
+                        <p className="fs-2">{t('dashboard.dashboard.dashboardTitle')}</p>
                         <Row xs={1} md={2} xl={3}>
                             {serverPanels}
                         </Row>
