@@ -17,17 +17,23 @@ export function TagView() {
     const [guildCards, setGuildCards] = useState([<></>]);
     const [loading, setLoading] = useState(true);
     const [hasResult, setHasResult] = useState(false);
+    const [prevTagName, setPrevTagName] = useState("");
+    const [tagRankingCurrentServersCount, setTagRankingCurrentServersCount] = useState("");
 
     useEffect(() => {
-        getTagRankingCurrentServers(params['name'])
+        var getTagRankingCurrentServersCount = false;
+        if (prevTagName != params.name) getTagRankingCurrentServersCount = true;
+        setPrevTagName(params.name);
+        getTagRankingCurrentServers(params['name'], getTagRankingCurrentServersCount)
             .then((response) => {
-                if (response.data === "" || response.data.length === 0) {
+                if (response.data.data === "" || response.data.data.length === 0) {
                     setLoading(false);
                     setHasResult(false);
                     return;
                 }
+                setTagRankingCurrentServersCount(response.data.count);
                 setGuildCards(
-                    response.data.map((value, index) => {
+                    response.data.data.map((value, index) => {
                         return <GuildCard
                             key={index}
                             guildID={value['id']}

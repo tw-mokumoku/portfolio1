@@ -91,6 +91,9 @@ export function DashboardUserPanel() {
                     <SimpleButton
                         icon={<SettingsTwoToneIcon style={{ fill: "#cecece" }} />}
                         title={t('sectionUnion.dashboardUserPanel.setting')}
+                        onClick={() => {
+                            navigate('/setting')
+                        }}
                     />
                     <SimpleButton
                         icon={<LogoutIcon style={{ fill: "#ff6666" }} />}

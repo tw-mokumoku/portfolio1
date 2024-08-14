@@ -44,7 +44,12 @@ function JPi18n() {
             },
             dashboard: {
                 dashboard: {
-                    discordServer: "ディスコード サーバー"
+                    dashboardTitle: "ダッシュボード"
+                }
+            },
+            setting: {
+                setting: {
+                    settingTitle: "設定"
                 }
             },
             tagView: {

@@ -15,6 +15,7 @@ import { getServerTags } from '../../Function/APIController';
 import { useNavigate } from "react-router-dom";
 import './conversion.css';
 import { useTranslation } from "react-i18next";
+import nl2br from 'react-newline-to-break';
 export function ToButton(tag_names) {
     const navigate = useNavigate();
     if (!Array.isArray(tag_names)) return tag_names
@@ -63,7 +64,7 @@ export function OpenableOverflowContainer(props) {
     }, [isOpen]);
     return (
         <div style={{ minHeight: '160px' }}>
-            <div ref={ref} className="overflow-hidden" style={{ height: overflowHeight }}>
+            <div ref={ref} className="overflow-hidden" style={{ height: overflowHeight, fontSize: '1rem' }}>
                 {props.children}
             </div>
             <div className="w-100">
@@ -112,7 +113,7 @@ export function GuildCard(props) {
                         {ToButton(guildtags)}
                     </div>
                     <OpenableOverflowContainer>
-                        {props.guildDescription}
+                        {nl2br(props.guildDescription)}
                     </OpenableOverflowContainer>
                     <div className={props.cardDataClassName + " guild-card-data-container"}>
                         {props.dataString}
