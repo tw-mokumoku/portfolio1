@@ -20,16 +20,6 @@ function JPi18n() {
             },
             home: {
                 home: {
-                    helmet: {
-                        title: "【Discord List】Discordサーバー掲示板｜通話が活発か一目でわかる！",
-                        description: "ディスコードリストは全てのdiscordユーザーのサーバー検索のお悩みを解決します。サーバーに入る前から今通話中の人数が一目で分かる掲示板サイトです。もう活発なサーバー探しに悩まなくても大丈夫！あなたがdiscordを楽しめる環境を全力でサポートする掲示板サービス、ディスコードリストです。",
-                        keywords1: "ディスコードリスト",
-                        keywords2: "discord",
-                        keywords3: "ディスコード",
-                        keywords4: "discord list",
-                        keywords5: "掲示板",
-                        ogDescription: "通話が活発か一目でわかる！検索したら通話人数が一覧で表示される。さっそくDiscord Listでサーバーを探しましょう♪",
-                    },
                     skip: "スキップ",
                     next: "次へ",
                     back: "戻る",
