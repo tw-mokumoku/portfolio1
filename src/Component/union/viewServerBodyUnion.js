@@ -101,6 +101,7 @@ export function ViewServerBody(props) {
 
     const VCLogInfoContainerRef = useRef(null);
     useEffect(() => {
+        window.scrollTo(0, 0);
         const checkVCLogInfoElementDisplay = () => {
             if (window.getComputedStyle(VCLogInfoContainerRef.current).display == 'block') setShowPeriodVCLogInfo(true);
             else setShowPeriodVCLogInfo(false);
@@ -132,12 +133,6 @@ export function ViewServerBody(props) {
                     {ToButton(props.guildTags)}
                 </div>
             </FirstEditCategory>
-            <BodySeparater />
-            <EditCategory title={t('viewServerBodyUnion.viewServerBody.descriptionTitle')}>
-                <p className="view-server-body-description">
-                    {props.currentServerDescription}
-                </p>
-            </EditCategory>
             <BodySeparater />
             <EditCategory title={t('viewServerBodyUnion.viewServerBody.basicInfoTitle')}>
                 <BasicInfo {...props} />
@@ -187,6 +182,12 @@ export function ViewServerBody(props) {
                     />
                 </EditCategory>
             </div>
+            <BodySeparater />
+            <EditCategory title={t('viewServerBodyUnion.viewServerBody.descriptionTitle')}>
+                <p className="view-server-body-description">
+                    {props.currentServerDescription}
+                </p>
+            </EditCategory>
         </div>
     );
 }
