@@ -41,6 +41,8 @@ export function getLanguageLocalStorage() {
     if (i18nextLocalStorarge == 'en-GB') return 'US';
     if (i18nextLocalStorarge == 'en-CA') return 'US';
     if (i18nextLocalStorarge == 'en-AU') return 'US';
+    if (i18nextLocalStorarge == 'en-AU') return 'US';
+    if (i18nextLocalStorarge == 'ko') return 'KR';
     if (i18nextLocalStorarge == 'ja') return 'JP';
 }
 

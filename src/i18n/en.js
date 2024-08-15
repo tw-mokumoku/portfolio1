@@ -76,6 +76,7 @@ function ENi18n() {
                     language: "Language",
                     jp: "Japanese",
                     us: "English",
+                    ko: "Korean",
                     tag: "Tag",
                     pleaseEnterTag: "Please enter tags",
                     noOptionText: "No matching tags found",

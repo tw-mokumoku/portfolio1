@@ -3,6 +3,7 @@ import { initReactI18next } from "react-i18next";
 import LanguageDetector from 'i18next-browser-languagedetector';
 import JPi18n from './jp.js';
 import ENi18n from './en.js';
+import KOi18n from './ko.js';
 
 const STORAGE_KEY = 'i18next';
 
@@ -21,7 +22,8 @@ i18n
         // or even better, manage them via a UI: https://react.i18next.com/guides/multiple-translation-files#manage-your-translations-with-a-management-gui)
         resources: {
             en: ENi18n,
-            ja: JPi18n
+            ja: JPi18n,
+            ko: KOi18n
         },
         //lng: "ja", // if you're using a language detector, do not define the lng option
         fallbackLng: "en",
