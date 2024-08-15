@@ -1,22 +1,25 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Helmet } from "react-helmet";
-
+import { Helmet } from 'react-helmet';
 export function JPHome() {
     const navigate = useNavigate();
     useEffect(() => {
         navigate("/");
     }, []);
     return (
-        <Helmet>
-            <title>yDiscord ListzDiscordƒT[ƒo[Œf¦”Âb’Ê˜b‚ªŠˆ”­‚©ˆê–Ú‚Å‚í‚©‚éI</title>
-            <meta name="description"
-                content="ƒfƒBƒXƒR[ƒhƒŠƒXƒg‚Í‘S‚Ä‚Ìdiscordƒ†[ƒU[‚ÌƒT[ƒo[ŒŸõ‚Ì‚¨”Y‚İ‚ğ‰ğŒˆ‚µ‚Ü‚·BƒT[ƒo[‚É“ü‚é‘O‚©‚ç¡’Ê˜b’†‚Ìl”‚ªˆê–Ú‚Å•ª‚©‚éŒf¦”ÂƒTƒCƒg‚Å‚·B‚à‚¤Šˆ”­‚ÈƒT[ƒo[’T‚µ‚É”Y‚Ü‚È‚­‚Ä‚à‘åä•vI‚ ‚È‚½‚ªdiscord‚ğŠy‚µ‚ß‚éŠÂ‹«‚ğ‘S—Í‚ÅƒTƒ|[ƒg‚·‚éŒf¦”ÂƒT[ƒrƒXAƒfƒBƒXƒR[ƒhƒŠƒXƒg‚Å‚·B" />
-            <meta name="keywords" content="ƒfƒBƒXƒR[ƒhƒŠƒXƒg, discord, ƒfƒBƒXƒR[ƒh, discord list, Œf¦”Â" />
-            <meta property="og:type" content="website" />
-            <meta property="og:title" content="Discord List" />
-            <meta property="og:description" content="’Ê˜b‚ªŠˆ”­‚©ˆê–Ú‚Å‚í‚©‚éIŒŸõ‚µ‚½‚ç’Ê˜bl”‚ªˆê——‚Å•\¦‚³‚ê‚éB‚³‚Á‚»‚­Discord List‚ÅƒT[ƒo[‚ğ’T‚µ‚Ü‚µ‚å‚¤ô" />
-            <meta property="og:url" content="https://discordlist.kolysis.com/" />
-        </Helmet>
+        <>
+            <Helmet>
+                <title>ã€Discord Listã€‘Discordã‚µãƒ¼ãƒãƒ¼æ²ç¤ºæ¿ï½œé€šè©±ãŒæ´»ç™ºã‹ä¸€ç›®ã§ã‚ã‹ã‚‹ï¼</title>
+                <meta name="title" content="ã€Discord Listã€‘Discordã‚µãƒ¼ãƒãƒ¼æ²ç¤ºæ¿ï½œé€šè©±ãŒæ´»ç™ºã‹ä¸€ç›®ã§ã‚ã‹ã‚‹ï¼" />
+                <meta name="description"
+                    content="ãƒ‡ã‚£ã‚¹ã‚³ãƒ¼ãƒ‰ãƒªã‚¹ãƒˆã¯å…¨ã¦ã®discordãƒ¦ãƒ¼ã‚¶ãƒ¼ã®ã‚µãƒ¼ãƒãƒ¼æ¤œç´¢ã®ãŠæ‚©ã¿ã‚’è§£æ±ºã—ã¾ã™ã€‚ã‚µãƒ¼ãƒãƒ¼ã«å…¥ã‚‹å‰ã‹ã‚‰ä»Šé€šè©±ä¸­ã®äººæ•°ãŒä¸€ç›®ã§åˆ†ã‹ã‚‹æ²ç¤ºæ¿ã‚µã‚¤ãƒˆã§ã™ã€‚ã‚‚ã†æ´»ç™ºãªã‚µãƒ¼ãƒãƒ¼æ¢ã—ã«æ‚©ã¾ãªãã¦ã‚‚å¤§ä¸ˆå¤«ï¼ã‚ãªãŸãŒdiscordã‚’æ¥½ã—ã‚ã‚‹ç’°å¢ƒã‚’å…¨åŠ›ã§ã‚µãƒãƒ¼ãƒˆã™ã‚‹æ²ç¤ºæ¿ã‚µãƒ¼ãƒ“ã‚¹ã€ãƒ‡ã‚£ã‚¹ã‚³ãƒ¼ãƒ‰ãƒªã‚¹ãƒˆã§ã™ã€‚" />
+                <meta name="keywords" content="ãƒ‡ã‚£ã‚¹ã‚³ãƒ¼ãƒ‰ãƒªã‚¹ãƒˆ, discord, ãƒ‡ã‚£ã‚¹ã‚³ãƒ¼ãƒ‰, discord list, æ²ç¤ºæ¿" />
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content="Discord List" />
+                <meta property="og:description" content="é€šè©±ãŒæ´»ç™ºã‹ä¸€ç›®ã§ã‚ã‹ã‚‹ï¼æ¤œç´¢ã—ãŸã‚‰é€šè©±äººæ•°ãŒä¸€è¦§ã§è¡¨ç¤ºã•ã‚Œã‚‹ã€‚ã•ã£ããDiscord Listã§ã‚µãƒ¼ãƒãƒ¼ã‚’æ¢ã—ã¾ã—ã‚‡ã†â™ª" />
+                <meta property="og:url" content="https://discordlist.kolysis.com/jp" />
+            </Helmet>
+            <div></div>
+        </>
     );
 }
