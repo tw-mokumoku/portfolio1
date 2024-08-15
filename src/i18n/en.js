@@ -157,7 +157,7 @@ function ENi18n() {
                 serverPanelButtons: {
                     view: "view",
                     edit: "edit",
-                    addToDiscord: "Add to Discord"
+                    addToDiscord: "Add to Discord List"
                 }
             },
             DateCalc: {

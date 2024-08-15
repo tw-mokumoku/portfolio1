@@ -169,7 +169,7 @@ function JPi18n() {
                 serverPanelButtons: {
                     view: "表示",
                     edit: "編集",
-                    addToDiscord: "ディスコードに追加"
+                    addToDiscord: "Discord Listに追加"
                 }
             },
             DateCalc: {
