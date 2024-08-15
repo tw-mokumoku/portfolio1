@@ -13,6 +13,7 @@ import { getLanguageLocalStorage, hasHomeTourFlagLocalStorage, setHomeTourFlagLo
 import Joyride, { ACTIONS, EVENTS, ORIGIN, STATUS, CallBackProps } from 'react-joyride';
 import { useTranslation } from "react-i18next";
 import { timeDiff } from '../Function/DateCalc';
+import { Helmet } from "react-helmet";
 
 export function Home(props) {
     const { t } = useTranslation();
@@ -142,6 +143,16 @@ export function Home(props) {
     }, []);
     return (
         <>
+            <Helmet>
+                <title>{t('home.home.helmet.title')}</title>
+                <meta name="description"
+                    content={t('home.home.helmet.description')} />
+                <meta name="keywords" content={`${t('home.home.helmet.keywords1')}, ${t('home.home.helmet.keywords2')}, ${t('home.home.helmet.keywords3')}, ${t('home.home.helmet.keywords4')}, ${t('home.home.helmet.keywords5')}`} />
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content="Discord List" />
+                <meta property="og:description" content={t('home.home.helmet.ogDescription')} />
+                <meta property="og:url" content="https://discordlist.kolysis.com/" />
+            </Helmet>
             <OverlayLoading active={loading} />
             <Joyride
                 continuous
