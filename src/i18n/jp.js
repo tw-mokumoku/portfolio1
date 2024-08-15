@@ -88,6 +88,7 @@ function JPi18n() {
                     language: "言語",
                     jp: "日本語",
                     us: "英語",
+                    ko: "韓国語",
                     tag: "タグ",
                     pleaseEnterTag: "タグを入力してください",
                     noOptionText: "該当するタグが見つかりませんでした",
