@@ -4,6 +4,9 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import JPi18n from './jp.js';
 import ENi18n from './en.js';
 import KOi18n from './ko.js';
+import CNi18n from './cn.js';
+import ESi18n from './es.js';
+import FRi18n from './fr.js';
 
 const STORAGE_KEY = 'i18next';
 
@@ -23,7 +26,10 @@ i18n
         resources: {
             en: ENi18n,
             ja: JPi18n,
-            ko: KOi18n
+            ko: KOi18n,
+            cn: CNi18n,
+            es: ESi18n,
+            fr: FRi18n,
         },
         //lng: "ja", // if you're using a language detector, do not define the lng option
         fallbackLng: "en",

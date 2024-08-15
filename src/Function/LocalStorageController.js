@@ -44,6 +44,13 @@ export function getLanguageLocalStorage() {
     if (i18nextLocalStorarge == 'en-AU') return 'US';
     if (i18nextLocalStorarge == 'ko') return 'KR';
     if (i18nextLocalStorarge == 'ja') return 'JP';
+    if (i18nextLocalStorarge == 'zh-HK') return 'CN';
+    if (i18nextLocalStorarge == 'zh-TW') return 'CN';
+    if (i18nextLocalStorarge == 'zh-CN') return 'CN';
+    if (i18nextLocalStorarge == 'es-ES') return 'ES';
+    if (i18nextLocalStorarge == 'es-419') return 'ES';
+    if (i18nextLocalStorarge == 'fr-CA') return 'FR';
+    if (i18nextLocalStorarge == 'fr-FR') return 'FR';
 }
 
 /*****************  remove  ********************/

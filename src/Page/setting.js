@@ -19,6 +19,9 @@ export function Setting() {
         if (event.target.value == "JP") i18n.changeLanguage("ja");
         if (event.target.value == "US") i18n.changeLanguage("en-US");
         if (event.target.value == "KR") i18n.changeLanguage("ko");
+        if (event.target.value == "CN") i18n.changeLanguage("cn");
+        if (event.target.value == "ES") i18n.changeLanguage("es");
+        if (event.target.value == "FR") i18n.changeLanguage("fr");
     }
 
     useEffect(() => {
@@ -49,6 +52,9 @@ export function Setting() {
                                         <option value="JP">{t('serveredit.serverEdit.jp')}</option>
                                         <option value="US">{t('serveredit.serverEdit.us')}</option>
                                         <option value="KR">{t('serveredit.serverEdit.ko')}</option>
+                                        <option value="CN">{t('serveredit.serverEdit.cn')}</option>
+                                        <option value="ES">{t('serveredit.serverEdit.es')}</option>
+                                        <option value="FR">{t('serveredit.serverEdit.fr')}</option>
                                     </select>
                                 </EditCategory>
                             </Card.Body>
