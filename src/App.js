@@ -14,6 +14,8 @@ import { SearchResult } from './Page/searchresult';
 
 import './i18n/i18n';
 import { Setting } from './Page/setting';
+import { JPHome } from './Page/countryPages/jpHome';
+import { ENHome } from './Page/countryPages/enHome';
 
 function App() {
     return (
@@ -27,6 +29,8 @@ function App() {
                 <Route exact path="/tag/:name" element={<TagView />} />
                 <Route path="/search" element={<SearchResult />} />
                 <Route exact path="/setting" element={<Setting />} />
+                <Route exact path="/jp" element={<JPHome />} />
+                <Route exact path="/en" element={<ENHome />} />
             </Routes>
         </div>
     );

@@ -8,16 +8,6 @@ function ENi18n() {
             },
             home: {
                 home: {
-                    helmet: {
-                        title: "【Discord List】Discord Server Bulletin Board｜You can find out right away if the call is active!",
-                        description: "Discord List solves the server search problems of all discord users. It is a bulletin board site where you can find out right away the number of people currently on the call even before you enter the server. You don't have to worry about finding an active servers anymore! DiscordList is a service that supports you to enjoy discord as much as possible.",
-                        keywords1: "Discord List",
-                        keywords2: "discord",
-                        keywords3: "Disocrd",
-                        keywords4: "discord list",
-                        keywords5: "bulletin board",
-                        ogDescription: "You can find out right away if the call is active! The number of voice chat connection will be listed after you search. Let's quickly find a server on the Discord List♪",
-                    },
                     skip: "skip",
                     next: "next",
                     back: "back",
