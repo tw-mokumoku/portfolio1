@@ -15,7 +15,7 @@ import Card from 'react-bootstrap/Card';
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 
-export function HeaderUnion() {
+export function HeaderUnion(props) {
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
@@ -29,7 +29,7 @@ export function HeaderUnion() {
         if (event.target.value == "CN") i18n.changeLanguage("cn");
         if (event.target.value == "ES") i18n.changeLanguage("es");
         if (event.target.value == "FR") i18n.changeLanguage("fr");
-        window.location.reload();
+        if (props.setDidSelectedRegionChange) props.setDidSelectedRegionChange(true);
     }
 
     useEffect(() => {
