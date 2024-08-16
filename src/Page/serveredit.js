@@ -214,6 +214,10 @@ export function ServerEdit(props) {
                                     >
                                         <option value="JP">{t('serveredit.serverEdit.jp')}</option>
                                         <option value="US">{t('serveredit.serverEdit.us')}</option>
+                                        <option value="KO">{t('serveredit.serverEdit.ko')}</option>
+                                        <option value="CN">{t('serveredit.serverEdit.cn')}</option>
+                                        <option value="ES">{t('serveredit.serverEdit.es')}</option>
+                                        <option value="FR">{t('serveredit.serverEdit.fr')}</option>
                                     </select>
                                 </EditCategory>
                                 <EditCategory
