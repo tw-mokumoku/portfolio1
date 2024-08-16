@@ -32,8 +32,8 @@ function CNi18n() {
                     guildCardTitleTour1: "单击此处查看有关服务器的更多详细信息。",
                     guildCardTitleTour2: "现在让我们按下亮点吧！",
                     updatedDataString: "更新：",
-                    guildCardDisplayExplaination1: "目前，它们按最近更新的顺序显示。",
-                    guildCardDisplayExplaination2: "如果您想按VC数量顺序显示，请搜索或点击标签。"
+                    guildCardDisplayExplaination1: "目前以最新更新的顺序显示",
+                    guildCardDisplayExplaination2: "如果你想以VC活跃人数顺序显示，请搜索或者点击标签"
                 }
             },
             serverview: {
@@ -49,7 +49,7 @@ function CNi18n() {
             },
             setting: {
                 setting: {
-                    settingTitle: "环境"
+                    settingTitle: "设置"
                 }
             },
             tagView: {
@@ -86,10 +86,10 @@ function CNi18n() {
                     edit1: "'",
                     edit2: "' 编辑",
                     language: "语言",
-                    jp: "日本人",
+                    jp: "日语",
                     us: "英语",
-                    ko: "韩国人",
-                    cn: "中国人",
+                    ko: "韩语",
+                    cn: "中文",
                     es: "西班牙语",
                     fr: "法语",
                     tag: "标签",
@@ -109,7 +109,7 @@ function CNi18n() {
                     dailyInfoTitle: "每日资讯",
                     weeklyInfoTitle: "每周资讯",
                     monthlyInfoTitle: "每月信息",
-                    vcConnectionGraphTitle: "VC连接图",
+                    vcConnectionGraphTitle: "语音连接统计图",
                 },
                 basicInfo: {
                     latestUpdatedDate: "最后更新日期",
@@ -125,8 +125,8 @@ function CNi18n() {
             },
             vcLogChartTabs: {
                 vcLogChartTabs: {
-                    daily: "天",
-                    weekly: "星期",
+                    daily: "每天",
+                    weekly: "每周",
                     monthly: "每月",
                 },
                 vCLogInfo: {
@@ -144,7 +144,7 @@ function CNi18n() {
             },
             bigSection: {
                 bigTitle: {
-                    title: "欢迎来到不和谐列表",
+                    title: "欢迎来到Discord List",
                     subtitle: "搜索服务器并寻找朋友！"
                 }
             },
@@ -153,10 +153,10 @@ function CNi18n() {
                     title: "热门标签列表"
                 },
                 dashboardUserPanel: {
-                    general: "一般的",
+                    general: "一般",
                     dashboard: "仪表板",
-                    setting: "环境",
-                    logout: "退出"
+                    setting: "设置",
+                    logout: "登出"
                 }
             },
             conversion: {
@@ -171,9 +171,9 @@ function CNi18n() {
             },
             button: {
                 serverPanelButtons: {
-                    view: "展示",
+                    view: "详情",
                     edit: "编辑",
-                    addToDiscord: "添加到不和谐列表"
+                    addToDiscord: "添加到Discord List"
                 }
             },
             DateCalc: {

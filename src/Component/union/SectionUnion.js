@@ -16,20 +16,30 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { getLanguageLocalStorage } from '../../Function/LocalStorageController';
 
-export function TagListSection() {
+export function TagListSection(props) {
     const { t } = useTranslation();
     const [tagButtons, setTagButtons] = useState(<></>);
-    useEffect(() => {
+    const getCountryRankingTagFunction = () => {
         getCountryRankingTag(getLanguageLocalStorage())
             .then((response) => {
-                if (response.data == null || response.data.length == 0) return;
+                if (response.data == null || response.data.length == 0) {
+                    setTagButtons([]);
+                    return;
+                }
                 setTagButtons(
                     response.data.map((value, key) => {
                         return <TagButton key={key} tagName={value['name']} />
                     })
                 );
             });
+    }
+    useEffect(() => {
+        getCountryRankingTagFunction();
     }, []);
+    useEffect(() => {
+        if (props.didSelectedRegionChange === false) return;
+        getCountryRankingTagFunction();
+    }, [props.didSelectedRegionChange]);
     return (
         <div className="popular-tour">
             <div className="d-flex justify-content-center">

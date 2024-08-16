@@ -172,7 +172,7 @@ export function Home(props) {
             <Container>
                 <HeaderUnion setDidSelectedRegionChange={setDidSelectedRegionChange} />
                 <BigTitle />
-                <TagListSection />
+                <TagListSection didSelectedRegionChange={didSelectedRegionChange} />
                 <p className="fs-6 mb-0">
                     {t('home.home.guildCardDisplayExplaination1')}
                 </p>

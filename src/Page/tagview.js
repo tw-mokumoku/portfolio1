@@ -25,7 +25,6 @@ export function TagView() {
     const cardAmountPerLoad = 24;
     const [hasMoreServers, setHasMoreServers] = useState(true);
     const [didAPIExecuted, setDidAPIExecuted] = useState(false);
-    const [didSelectedRegionChange, setDidSelectedRegionChange] = useState(false);
 
 
     const getTagRankingCurrentServersFunction = () => {
@@ -67,11 +66,6 @@ export function TagView() {
     useEffect(() => {
         getTagRankingCurrentServersFunction();
     }, [params]);
-    useEffect(() => {
-        if (didSelectedRegionChange === false) return;
-        getTagRankingCurrentServersFunction();
-        setDidSelectedRegionChange(false);
-    }, [didSelectedRegionChange]);
 
     const addTagRankingCurrentServers = () => {
         if (didAPIExecuted) return;
@@ -181,7 +175,7 @@ export function TagView() {
         <>
             <OverlayLoading active={loading} />
             <Container>
-                <HeaderUnion setDidSelectedRegionChange={setDidSelectedRegionChange} />
+                <HeaderUnion />
                 <div className="mt-3 mb-5 d-flex justify-content-center align-items-center">
                     <SearchBar />
                 </div>
