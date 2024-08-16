@@ -29,7 +29,7 @@ export function HeaderUnion(props) {
         if (event.target.value == "CN") i18n.changeLanguage("cn");
         if (event.target.value == "ES") i18n.changeLanguage("es");
         if (event.target.value == "FR") i18n.changeLanguage("fr");
-        if (props.setDidSelectedRegionChange) props.setDidSelectedRegionChange(true);
+        if (props.setDidSelectedRegionChange) props.setDidSelectedRegionChange(!props.didSelectedRegionChange);
     }
 
     useEffect(() => {

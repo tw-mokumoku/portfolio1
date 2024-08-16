@@ -33,7 +33,7 @@ export function toTagButton(tagData) {
 }
 */
 export function TagButton(props) {
-    return <Button className="m-1 my-2 py-1 px-2 btn-secondary" href={`/tag/${props.tagName}`}>{props.tagName}</Button>;
+    return <Button className="m-1 my-2 mt-3 ms-2 py-1 px-2 btn-secondary" href={`/tag/${props.tagName}`}>{props.tagName}</Button>;
 }
 
 export function OpenableOverflowContainer(props) {
