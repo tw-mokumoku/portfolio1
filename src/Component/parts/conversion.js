@@ -109,7 +109,7 @@ export function GuildCard(props) {
                     </div>
                 </Card.Header>
                 <Card.Body className="pt-2">
-                    <div className={props.cardTagClassName + " mb-3"} style={{ height: '90px' }}>
+                    <div className={props.cardTagClassName + " mb-3"} style={{ minHeight: '90px' }}>
                         {ToButton(guildtags)}
                     </div>
                     <OpenableOverflowContainer>

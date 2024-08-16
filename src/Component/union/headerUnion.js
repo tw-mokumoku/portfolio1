@@ -12,11 +12,12 @@ import { hasDiscordAccessTokenCookie } from '../../Function/OAuthController';
 import { getLanguageLocalStorage, hasCurrentDiscordUserDataLocalStorage } from '../../Function/LocalStorageController';
 import { useTranslation } from "react-i18next";
 import Card from 'react-bootstrap/Card';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 
 export function HeaderUnion() {
     const { t, i18n } = useTranslation();
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [selectedRegion, setSelectedRegion] = useState("");
 
@@ -28,6 +29,7 @@ export function HeaderUnion() {
         if (event.target.value == "CN") i18n.changeLanguage("cn");
         if (event.target.value == "ES") i18n.changeLanguage("es");
         if (event.target.value == "FR") i18n.changeLanguage("fr");
+        window.location.reload();
     }
 
     useEffect(() => {
