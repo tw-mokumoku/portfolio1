@@ -19,6 +19,7 @@ export function Home(props) {
     const [guildCards, setGuildCards] = useState([<></>]);
     const [loading, setLoading] = useState(true);
     const [running, setRunning] = useState(false);
+    const [didSelectedRegionChange, setDidSelectedRegionChange] = useState(false);
     const steps = [
         {
             target: '.search-bar-tour',
@@ -107,7 +108,7 @@ export function Home(props) {
         }
     }
 
-    useEffect(() => {
+    const getServerRankingCountryUpdatedLogFunction = () => {
         getServerRankingCountryUpdatedLog(getLanguageLocalStorage())
             .then((response) => {
                 setGuildCards(
@@ -139,7 +140,15 @@ export function Home(props) {
                 setLoading(false);
                 if (!hasHomeTourFlagLocalStorage()) setRunning(true);
             });
+    }
+    useEffect(() => {
+        getServerRankingCountryUpdatedLogFunction();
     }, []);
+    useEffect(() => {
+        if (didSelectedRegionChange === false) return;
+        getServerRankingCountryUpdatedLogFunction();
+        setDidSelectedRegionChange(false);
+    }, [didSelectedRegionChange]);
     return (
         <>
             <OverlayLoading active={loading} />
@@ -161,7 +170,7 @@ export function Home(props) {
                 callback={handleJoyrideCallback}
             />
             <Container>
-                <HeaderUnion />
+                <HeaderUnion setDidSelectedRegionChange={setDidSelectedRegionChange} />
                 <BigTitle />
                 <TagListSection />
                 <p className="fs-6 mb-0">

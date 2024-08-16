@@ -9,6 +9,8 @@ import { OverlayLoading } from "react-loading-randomizable";
 import { GuildCard } from '../Component/parts/conversion';
 import Stack from 'react-bootstrap/Stack';
 import { useTranslation } from "react-i18next";
+import { getLanguageLocalStorage } from '../Function/LocalStorageController';
+import { useNavigate } from "react-router-dom";
 
 export function SearchResult(props) {
     const { t } = useTranslation();
@@ -18,8 +20,10 @@ export function SearchResult(props) {
     const [guildCards, setGuildCards] = useState([<></>]);
     const [loading, setLoading] = useState(true);
     const [hasResult, setHasResult] = useState(false);
+    const [didSelectedRegionChange, setDidSelectedRegionChange] = useState(false);
+    const navigate = useNavigate();
 
-    useEffect(() => {
+    const getSeachFunction = () => {
         getSearch(queryParams, countryParams)
             .then((response) => {
                 if (response.data === "" || response.data.length === 0) {
@@ -51,14 +55,26 @@ export function SearchResult(props) {
                 );
                 setHasResult(true);
                 setLoading(false);
-            })
+            });
+    }
+
+    useEffect(() => {
+        getSeachFunction();
     }, [searchParams]);
+    useEffect(() => {
+        if (didSelectedRegionChange === false) return;
+        navigate(`/search?q=${searchParams.get("q")}&country=${getLanguageLocalStorage()}`);
+        /*
+        getSeachFunction();
+        */
+        setDidSelectedRegionChange(false);
+    }, [didSelectedRegionChange]);
 
     return (
         <>
             <OverlayLoading active={loading} />
             <Container>
-                <HeaderUnion />
+                <HeaderUnion setDidSelectedRegionChange={setDidSelectedRegionChange} />
                 <div className="mt-3 mb-5 d-flex justify-content-center align-items-center">
                     <SearchBar />
                 </div>

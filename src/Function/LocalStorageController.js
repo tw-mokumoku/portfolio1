@@ -47,10 +47,13 @@ export function getLanguageLocalStorage() {
     if (i18nextLocalStorarge == 'zh-HK') return 'CN';
     if (i18nextLocalStorarge == 'zh-TW') return 'CN';
     if (i18nextLocalStorarge == 'zh-CN') return 'CN';
+    if (i18nextLocalStorarge == 'cn') return 'CN';
     if (i18nextLocalStorarge == 'es-ES') return 'ES';
     if (i18nextLocalStorarge == 'es-419') return 'ES';
+    if (i18nextLocalStorarge == 'es') return 'ES';
     if (i18nextLocalStorarge == 'fr-CA') return 'FR';
     if (i18nextLocalStorarge == 'fr-FR') return 'FR';
+    if (i18nextLocalStorarge == 'fr') return 'FR';
 }
 
 /*****************  remove  ********************/

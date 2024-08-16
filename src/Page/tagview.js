@@ -25,8 +25,10 @@ export function TagView() {
     const cardAmountPerLoad = 24;
     const [hasMoreServers, setHasMoreServers] = useState(true);
     const [didAPIExecuted, setDidAPIExecuted] = useState(false);
+    const [didSelectedRegionChange, setDidSelectedRegionChange] = useState(false);
 
-    useEffect(() => {
+
+    const getTagRankingCurrentServersFunction = () => {
         setDidAPIExecuted(true);
         getTagRankingCurrentServers(params['name'], cardAmountPerLoad, 0)
             .then((response) => {
@@ -36,31 +38,40 @@ export function TagView() {
                     return;
                 }
                 const tmpGuildCards = response.data.map((value, index) => {
-                        return <GuildCard
-                            key={index}
-                            guildID={value['id']}
-                            guildIcon={value['icon'] ? getDiscordGuildIcon(value['id'], value['icon']) : ""}
-                            guildName={value['name']}
-                            guildInviteURL={value['invite_url']}
-                            guildDescription={value['description']}
-                            dataString={
-                                <>
-                                    {t('tagView.tagView.currentVCConnectionNumber')}：
-                                    {value['user_num'] !== 0 ?
-                                        <span className="ms-1" style={{ color: '#12c74b' }}>{value['user_num']}</span>
-                                        :
-                                        <span className="ms-1">{value['user_num']}</span>
-                                    }
-                                </>
-                            }
-                        />
-                    })
+                    return <GuildCard
+                        key={index}
+                        guildID={value['id']}
+                        guildIcon={value['icon'] ? getDiscordGuildIcon(value['id'], value['icon']) : ""}
+                        guildName={value['name']}
+                        guildInviteURL={value['invite_url']}
+                        guildDescription={value['description']}
+                        dataString={
+                            <>
+                                {t('tagView.tagView.currentVCConnectionNumber')}：
+                                {value['user_num'] !== 0 ?
+                                    <span className="ms-1" style={{ color: '#12c74b' }}>{value['user_num']}</span>
+                                    :
+                                    <span className="ms-1">{value['user_num']}</span>
+                                }
+                            </>
+                        }
+                    />
+                })
                 setGuildCards(tmpGuildCards);
                 setLoading(false);
                 setDidAPIExecuted(false);
                 if (tmpGuildCards.length != cardAmountPerLoad) setHasMoreServers(false);
             });
-    }, [params])
+    }
+
+    useEffect(() => {
+        getTagRankingCurrentServersFunction();
+    }, [params]);
+    useEffect(() => {
+        if (didSelectedRegionChange === false) return;
+        getTagRankingCurrentServersFunction();
+        setDidSelectedRegionChange(false);
+    }, [didSelectedRegionChange]);
 
     const addTagRankingCurrentServers = () => {
         if (didAPIExecuted) return;
@@ -170,7 +181,7 @@ export function TagView() {
         <>
             <OverlayLoading active={loading} />
             <Container>
-                <HeaderUnion />
+                <HeaderUnion setDidSelectedRegionChange={setDidSelectedRegionChange} />
                 <div className="mt-3 mb-5 d-flex justify-content-center align-items-center">
                     <SearchBar />
                 </div>
