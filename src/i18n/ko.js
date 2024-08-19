@@ -134,6 +134,13 @@
                 bigTitle: {
                     title: "Discord List에 오신 것을 환영합니다",
                     subtitle: "서버를 검색하여 친구를 찾아보세요!"
+                },
+                recommendPanel: {
+                    dailyRanking: "일간 순위",
+                    weeklyRanking: "주간 순위",
+                    monthlyRanking: "월간 순위",
+                    rankText: "위치",
+                    clickToReadMore: "\n\n . . . 계속을 클릭하여 읽기"
                 }
             },
             sectionUnion: {

@@ -134,6 +134,13 @@ function ENi18n() {
                 bigTitle: {
                     title: "Welcome to Discord List",
                     subtitle: "Search servers and find friends!"
+                },
+                recommendPanel: {
+                    dailyRanking: "Daily ranking: ",
+                    weeklyRanking: "Weekly ranking: ",
+                    monthlyRanking: "Monthly ranking: ",
+                    rankText: "",
+                    clickToReadMore: "\n\n . . . Click to read more"
                 }
             },
             sectionUnion: {

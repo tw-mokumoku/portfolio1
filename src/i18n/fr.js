@@ -134,6 +134,13 @@ function FRi18n() {
                 bigTitle: {
                     title: "Bienvenue sur la liste Discord",
                     subtitle: "Recherchez des serveurs et trouvez des amis !"
+                },
+                recommendPanel: {
+                    dailyRanking: "Classement quotidien",
+                    weeklyRanking: "Classement hebdomadaire",
+                    monthlyRanking: "Classement mensuel",
+                    rankText: "rang",
+                    clickToReadMore: "\n\n . . . Cliquez pour en savoir plus"
                 }
             },
             sectionUnion: {

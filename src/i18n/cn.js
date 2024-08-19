@@ -146,6 +146,13 @@ function CNi18n() {
                 bigTitle: {
                     title: "欢迎来到Discord List",
                     subtitle: "搜索服务器并寻找朋友！"
+                },
+                recommendPanel: {
+                    dailyRanking: "每日排名",
+                    weeklyRanking: "每周排名",
+                    monthlyRanking: "每月排名",
+                    rankText: "名",
+                    clickToReadMore: "\n\n . . . 点击阅读更多"
                 }
             },
             sectionUnion: {

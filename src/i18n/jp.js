@@ -146,6 +146,13 @@ function JPi18n() {
                 bigTitle: {
                     title: "Discord Listへようこそ",
                     subtitle: "サーバーを検索して友達を見つけましょう！"
+                },
+                recommendPanel: {
+                    dailyRanking: "日間ランキング",
+                    weeklyRanking: "週間ランキング",
+                    monthlyRanking: "月間ランキング",
+                    rankText: "位",
+                    clickToReadMore: "\n\n . . . 続きをクリックして読む"
                 }
             },
             sectionUnion: {

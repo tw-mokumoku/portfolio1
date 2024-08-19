@@ -14,6 +14,8 @@ import { useTranslation } from "react-i18next";
 import Card from 'react-bootstrap/Card';
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import LeaderboardIcon from '@mui/icons-material/Leaderboard';
+import './headerUnion.css';
 
 export function HeaderUnion(props) {
     const { t, i18n } = useTranslation();
@@ -41,47 +43,52 @@ export function HeaderUnion(props) {
             <Navbar.Brand href="/">
                 Discord List
             </Navbar.Brand>
-            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                {/*
             <Navbar.Collapse id="responsive-navbar-nav" className="align-items-end">
                 <Nav variant="underline" className="me-auto" style={{ marginBottom: "2px" }} >
-                    {/*
                     <Nav.Link href="/search">詳細検索</Nav.Link>
-                    */}
-                </Nav>
-                <Nav>
-                    <Row>
-                        <Col>
-                            <div className="w-100 h-100 d-flex align-items-center">
-                                <select
-                                    className="server-edit-region-select"
-                                    value={selectedRegion}
-                                    onChange={onRegionChange}
-                                >
-                                    <option value="JP">{t('serveredit.serverEdit.jp')}</option>
-                                    <option value="US">{t('serveredit.serverEdit.us')}</option>
-                                    <option value="KR">{t('serveredit.serverEdit.ko')}</option>
-                                    <option value="CN">{t('serveredit.serverEdit.cn')}</option>
-                                    <option value="ES">{t('serveredit.serverEdit.es')}</option>
-                                    <option value="FR">{t('serveredit.serverEdit.fr')}</option>
-                                </select>
-                            </div>
-                        </Col>
-
-                        <Col xs="auto">
-                            <div className="header-login-tour">
-                            {
-                                hasDiscordAccessTokenCookie() ?
-                                    <Button className="p-2" href="/dashboard">
-                                            <CurrentDiscordUserIcon alt="" style={{ borderRadius: "30px", border: "2px solid lightblue", width: 40, height: 40 }} />
-                                    </Button>
-                                    :
-                                    <Button href={getDiscordOAuthURL()}>{t('headerUnion.headerUnion.login')}</Button>
-                            }
-                            </div>
-                        </Col>
-                    </Row>
                 </Nav>
             </Navbar.Collapse>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    */}
+            <Nav className="ms-auto">
+                <Row className="d-flex align-items-center">
+                    <Col>
+                        <Button className="p-1" href={'/ranking'}>
+                            <LeaderboardIcon />
+                        </Button>
+                    </Col>
+                    <Col>
+                        <div className="w-100 h-100">
+                            <select
+                                className="header-union-region-select"
+                                value={selectedRegion}
+                                onChange={onRegionChange}
+                            >
+                                <option value="JP">{t('serveredit.serverEdit.jp')}</option>
+                                <option value="US">{t('serveredit.serverEdit.us')}</option>
+                                <option value="KR">{t('serveredit.serverEdit.ko')}</option>
+                                <option value="CN">{t('serveredit.serverEdit.cn')}</option>
+                                <option value="ES">{t('serveredit.serverEdit.es')}</option>
+                                <option value="FR">{t('serveredit.serverEdit.fr')}</option>
+                            </select>
+                        </div>
+                    </Col>
+
+                    <Col>
+                        <div className="header-login-tour">
+                        {
+                            hasDiscordAccessTokenCookie() ?
+                                <Button className="p-2" href="/dashboard">
+                                        <CurrentDiscordUserIcon alt="" style={{ borderRadius: "30px", border: "2px solid lightblue", width: 40, height: 40 }} />
+                                </Button>
+                                :
+                                <Button href={getDiscordOAuthURL()}>{t('headerUnion.headerUnion.login')}</Button>
+                        }
+                        </div>
+                    </Col>
+                </Row>
+            </Nav>
         </Navbar>
     );
 }
