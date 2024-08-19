@@ -22,7 +22,7 @@ export function SearchBar() {
     }
 
     return (
-        <div className="w-75">
+        <div className="w-100">
             <InputGroup className="mt-3 search-bar-tour">
                 <InputGroup.Text id="basic-addon1">
                     <SearchIcon />
@@ -39,13 +39,6 @@ export function SearchBar() {
         </div>
     );
 }
-
-
-
-
-
-
-
 
 
 

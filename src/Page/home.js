@@ -6,7 +6,7 @@ import { GuildCardContainer, TagListSection } from '../Component/union/SectionUn
 import Container from 'react-bootstrap/Container';
 import { GuildCard } from '../Component/parts/conversion';
 import { useEffect, useState } from 'react';
-import { getDiscordGuildIcon, getServerRankingCountryUpdatedLog } from '../Function/APIController';
+import { getDiscordGuildIcon, getRecommend, getServerRankingCountryUpdatedLog } from '../Function/APIController';
 import { OverlayLoading } from "react-loading-randomizable";
 import './home.css';
 import { getLanguageLocalStorage, hasHomeTourFlagLocalStorage, setHomeTourFlagLocalStorage } from '../Function/LocalStorageController';
@@ -20,6 +20,8 @@ export function Home(props) {
     const [loading, setLoading] = useState(true);
     const [running, setRunning] = useState(false);
     const [didSelectedRegionChange, setDidSelectedRegionChange] = useState(false);
+    const [recommendServers, setRecommendServers] = useState([]);
+
     const steps = [
         {
             target: '.search-bar-tour',
@@ -108,7 +110,71 @@ export function Home(props) {
         }
     }
 
+    const getServerRecommendFunction = () => {
+        getRecommend('JP')
+            .then((response) => {
+                console.log(response.data)
+                var tmpRecommendServers = [];
+                response.data.dayRanking
+                    .map((value, index) => {
+                    tmpRecommendServers = [
+                        ...tmpRecommendServers,
+                        {
+                            type: 'dayRanking',
+                            icon: value['icon'] ? getDiscordGuildIcon(value['id'], value['icon']) : "",
+                            avarage_sec_per_log: value.avarage_sec_per_log,
+                            avarage_sec_per_member: value.avarage_sec_per_member,
+                            description: value.description,
+                            id: value.id,
+                            name: value.name,
+                            total_sec: value.total_sec,
+                            rank: value.rank,
+                            member_count: value.member_count
+                        }
+                    ];
+                });
+                response.data.weekRanking.map((value, index) => {
+                    if (!value.is_bot_available || !value.is_public) return null;
+                    tmpRecommendServers = [
+                        ...tmpRecommendServers,
+                        {
+                            type: 'weekRanking',
+                            icon: value['icon'] ? getDiscordGuildIcon(value['id'], value['icon']) : "",
+                            avarage_sec_per_log: value.avarage_sec_per_log,
+                            avarage_sec_per_member: value.avarage_sec_per_member,
+                            description: value.description,
+                            id: value.id,
+                            name: value.name,
+                            total_sec: value.total_sec,
+                            rank: value.rank,
+                            member_count: value.member_count
+                        }
+                    ];
+                });
+                response.data.monthRanking.map((value, index) => {
+                    if (!value.is_bot_available || !value.is_public) return null;
+                    tmpRecommendServers = [
+                        ...tmpRecommendServers,
+                        {
+                            type: 'monthRanking',
+                            icon: value['icon'] ? getDiscordGuildIcon(value['id'], value['icon']) : "",
+                            avarage_sec_per_log: value.avarage_sec_per_log,
+                            avarage_sec_per_member: value.avarage_sec_per_member,
+                            description: value.description,
+                            id: value.id,
+                            name: value.name,
+                            total_sec: value.total_sec,
+                            rank: value.rank,
+                            member_count: value.member_count
+                        }
+                    ];
+                });
+                setRecommendServers(tmpRecommendServers);
+            });
+    }
+
     const getServerRankingCountryUpdatedLogFunction = () => {
+        getServerRecommendFunction();
         getServerRankingCountryUpdatedLog(getLanguageLocalStorage())
             .then((response) => {
                 setGuildCards(
@@ -171,7 +237,7 @@ export function Home(props) {
             />
             <Container>
                 <HeaderUnion setDidSelectedRegionChange={setDidSelectedRegionChange} />
-                <BigTitle />
+                <BigTitle recommendServers={recommendServers} />
                 <TagListSection didSelectedRegionChange={didSelectedRegionChange} />
                 <p className="fs-6 mb-0">
                     {t('home.home.guildCardDisplayExplaination1')}

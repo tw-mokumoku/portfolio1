@@ -49,15 +49,17 @@ export async function createMember(member_id) {
 
 
 /*****************  dislist server  ********************/
+////  GET
 export async function getSearch(query, country_id = "JP") {
     return await axios.get(
         `${DislitBaseURL}/search?${query.map((value) => `query=${value}`).join('&') }&country_id=${country_id}`
     );
 }
-
-
-/*****************  dislist server  ********************/
-////  GET
+export async function getRecommend(country_id = "JP") {
+    return await axios.get(
+        `${DislitBaseURL}/server/recommend?country_id=${country_id}`
+    );
+}
 export async function getServer(server_id) {
     return await axios.get(`${DislitBaseURL}/server/${server_id}`);
 }
@@ -362,7 +364,7 @@ export function CurrentDiscordUserIcon(props) {
         <Avatar>{userdata.username.slice(0, 2)}</Avatar>;
 }
 export function getDiscordGuildIcon(guild_id, guild_icon) {
-    return `${DiscordImageBaseURL}icons/${guild_id}/${guild_icon}.png`;
+    return `${DiscordImageBaseURL}icons/${guild_id}/${guild_icon}.png?size=4096`;
 }
 
 

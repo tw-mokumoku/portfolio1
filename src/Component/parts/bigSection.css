@@ -1,0 +1,116 @@
+.big-section-panel-recommend-container {
+}
+.big-section-panel-recommend {
+    height: 15rem;
+    box-shadow: 0 0 7px 0px #000;
+    display: flex;
+    cursor: pointer;
+}
+.big-section-panel-recommend-img {
+    flex: 8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 5px 0 5px 0px #000;
+}
+.big-section-panel-recommend-info {
+    flex: 4;
+}
+.big-section-panel-recommend-img-background {
+    position: absolute;
+    width: 70vw;
+    z-index: 1;
+    opacity: 0.3;
+    filter: blur(10px);
+}
+.big-section-panel-recommend-img-inner {
+    position: absolute;
+    width: 30vw;
+    z-index: 1;
+    border: 0.1rem solid #92969b;
+    /*
+*/
+    box-shadow: 0 0 30px 0px #5b5d60;
+}
+
+.recommend-panel-left-arrow-container {
+    height: 15rem;
+}
+.recommend-panel-right-arrow-container {
+    height: 15rem;
+}
+@media screen and (min-width: 768px) {
+    .big-section-panel-recommend{
+        height: 24rem;
+    }
+    .recommend-panel-left-arrow-container {
+        height: 24rem;
+    }
+    .recommend-panel-right-arrow-container {
+        height: 24rem;
+    }
+}
+@media (min-width: 1200px) {
+    .big-section-panel-recommend-img-inner {
+        width: 20vw;
+    }
+    .big-section-panel-recommend-img-background {
+        position: absolute;
+        width: 65vw;
+        z-index: 1;
+    }
+    .big-section-panel-recommend {
+        height: 30rem;
+    }
+    .recommend-panel-left-arrow-container {
+        height: 30rem;
+    }
+    .recommend-panel-right-arrow-container {
+        height: 30rem;
+    }
+}
+.recommend-panel-left-arrow-container {
+    position: absolute;
+    display: flex;
+    align-items: center;
+}
+.recommend-panel-left-arrow {
+    z-index: 999;
+    height: 5rem;
+    width: 2.5rem;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.3) 5%, rgba(0, 0, 0, 0) 95%);
+    cursor: pointer;
+}
+.recommend-panel-left-arrow:hover {
+    background: linear-gradient(to right, rgba(171, 218, 244, 0.3) 5%, rgba(171, 218, 244, 0) 95%);
+}
+.recommend-panel-right-arrow-container {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    right: 0;
+    /*
+
+    width: 100%;
+    justify-content: flex-end;
+    */
+}
+.recommend-panel-right-arrow {
+    z-index: 999;
+    height: 5rem;
+    width: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0) 5%, rgba(0, 0, 0, 0.3) 95%);
+    cursor: pointer;
+}
+.recommend-panel-right-arrow:hover {
+    background: linear-gradient(to right, rgba(171, 218, 244, 0) 5%, rgba(171, 218, 244, 0.3) 95%);
+}
+.ranking-recommend-panel-description{
+}

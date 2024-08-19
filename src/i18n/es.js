@@ -134,6 +134,13 @@ function ESi18n() {
                 bigTitle: {
                     title: "Bienvenido a la lista de discordia",
                     subtitle: "¡Busca servidores y encuentra amigos!"
+                },
+                recommendPanel: {
+                    dailyRanking: "Clasificación diaria",
+                    weeklyRanking: "Clasificación semanal",
+                    monthlyRanking: "Clasificación mensual",
+                    rankText: "rango",
+                    clickToReadMore: "\n\n . . . Haga clic para leer más"
                 }
             },
             sectionUnion: {
