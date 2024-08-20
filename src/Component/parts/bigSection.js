@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import nl2br from 'react-newline-to-break';
+import { useInterval } from 'react-use';
 
 /*
 export function BigTitle() {
@@ -50,6 +51,7 @@ function RecommendPanel(props) {
     const [panels, setPanels] = useState([]);
     const [panelIndex, setPanelIndex] = useState(0);
     const [showingPanel, setShowingPanel] = useState(<></>);
+    const [isRunning, setIsRunning] = useState(true);
     useEffect(() => {
         const tmpPanels = props.recommendServers.map((value, index) => {
             var panel = <></>;
@@ -57,8 +59,6 @@ function RecommendPanel(props) {
             if (value.type === 'dayRanking') rankingText = t('bigSection.recommendPanel.dailyRanking');
             if (value.type === 'weekRanking') rankingText = t('bigSection.recommendPanel.weeklyRanking');
             if (value.type === 'monthRanking') rankingText = t('bigSection.recommendPanel.monthlyRanking');
-            let description = value.description.slice(0, 100);
-            if (description.length >= 100) description += t('bigSection.recommendPanel.clickToReadMore');
                 panel = <RankingRecommendPanel
                     icon={value.icon}
                     name={value.name}
@@ -66,7 +66,8 @@ function RecommendPanel(props) {
                     rank={value.rank}
                     member_count={value.member_count}
                     rankingText={rankingText}
-                    description={description}
+                    description={value.description}
+                    setIsRunning={setIsRunning}
                 />
                 return panel;
         });
@@ -95,6 +96,9 @@ function RecommendPanel(props) {
         setShowingPanel(panels[tmpIndex]);
 
     }
+    useInterval(() => {
+        showNextPanel();
+    }, isRunning ? 10000 : null);
     return (
         <div className="big-section-panel-recommend-container pb-2 pt-1">
             <div className="mb-3">注目＆おすすめ</div>
@@ -109,7 +113,7 @@ function RecommendPanel(props) {
                         <KeyboardArrowRightIcon style={{ transform: 'scale(2)' }} />
                     </div>
                 </div>
-                {showingPanel}
+                    {showingPanel}
             </div>
         </div>
     );
@@ -119,18 +123,21 @@ function RankingRecommendPanel(props) {
     const { t } = useTranslation();
     const navigate = useNavigate();
     return (
-        <div className="big-section-panel-recommend" onClick={() => navigate(`/server/${props.id}`)}>
+        <div className="big-section-panel-recommend" onClick={() => navigate(`/server/${props.id}`)} onMouseEnter={() => props.setIsRunning(false)} onMouseLeave={() => props.setIsRunning(true)}>
             <div className="big-section-panel-recommend-img" style={{ background: "black" }}>
                 <img src={props.icon} className="big-section-panel-recommend-img-background" alt=""></img>
                 <img src={props.icon} className="big-section-panel-recommend-img-inner" alt=""></img>
             </div>
             <div className="big-section-panel-recommend-info p-4 pe-5" style={{ background: "#0c0d0f" }}>
-                <p className="fs-4 mb-1">
+                <p className="big-section-panel-recommend-server-name mb-0">
                     {props.name}
                 </p>
-                <p className="mb-5">{props.rankingText} {props.rank} {t('bigSection.recommendPanel.rankText')}</p>
-                <div className="ranking-recommend-panel-description" style={{ fontSize: '0.9rem' }}>
+                <p className="big-section-panel-recommend-server-rank mb-4">{props.rankingText} {props.rank} {t('bigSection.recommendPanel.rankText')}</p>
+                <div className="ranking-recommend-panel-description">
                     {nl2br(props.description)}
+                </div>
+                <div className="ranking-recommend-panel-description">
+                    {'> ' + t('bigSection.recommendPanel.clickToReadMore')}
                 </div>
             </div>
         </div>

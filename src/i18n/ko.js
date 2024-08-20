@@ -140,7 +140,7 @@
                     weeklyRanking: "주간 순위",
                     monthlyRanking: "월간 순위",
                     rankText: "위치",
-                    clickToReadMore: "\n\n . . . 계속을 클릭하여 읽기"
+                    clickToReadMore: "계속을 클릭하여 읽기"
                 }
             },
             sectionUnion: {

@@ -152,7 +152,7 @@ function CNi18n() {
                     weeklyRanking: "每周排名",
                     monthlyRanking: "每月排名",
                     rankText: "名",
-                    clickToReadMore: "\n\n . . . 点击阅读更多"
+                    clickToReadMore: "点击阅读更多"
                 }
             },
             sectionUnion: {
