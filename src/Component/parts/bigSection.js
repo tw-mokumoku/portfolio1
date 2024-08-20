@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './bigSection.css';
 import { useNavigate } from "react-router-dom";
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useEffect } from 'react';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
@@ -47,6 +47,69 @@ export function BigTitle(props) {
 }
 
 function RecommendPanel(props) {
+    return (
+        <div className="big-section-panel-recommend-container pb-2 pt-1">
+            <div className="mb-3">注目＆おすすめ</div>
+            <div className="wide-ranking-recommend-panel">
+                <WideRankingRecommendPanel {...props} />
+            </div>
+            <CompactRankingRecommendPanels {...props} />
+            <div className="compact-ranking-recommend-panel">
+            </div>
+        </div>
+    );
+}
+
+function CompactRankingRecommendPanels(props) {
+    const { t } = useTranslation();
+    const [panels, setPanels] = useState([]);
+    useEffect(() => {
+        const tmpPanels = props.recommendServers.map((value, index) => {
+            var panel = <></>;
+            var rankingText = "";
+            if (value.type === 'dayRanking') rankingText = t('bigSection.recommendPanel.dailyRanking');
+            if (value.type === 'weekRanking') rankingText = t('bigSection.recommendPanel.weeklyRanking');
+            if (value.type === 'monthRanking') rankingText = t('bigSection.recommendPanel.monthlyRanking');
+            panel = <CompactRankingRecommendPanel
+                icon={value.icon}
+                name={value.name}
+                id={value.id}
+                rank={value.rank}
+                member_count={value.member_count}
+                rankingText={rankingText}
+                description={value.description}
+            />
+            return panel;
+        });
+        setPanels(tmpPanels);
+    }, [props.recommendServers]);
+    return (
+        <div className="big-section-panel-recommend-scroll-container" style={{ position: 'static', display: 'flex', overflowX: 'auto', gap: '0px 20px' }}>
+            {panels}
+        </div>
+    );
+}
+
+function CompactRankingRecommendPanel(props) {
+    const { t } = useTranslation();
+    const navigate = useNavigate();
+    return (
+        <div className="big-section-panel-recommend" style={{ flexShrink: 0 }} onClick={() => navigate(`/server/${props.id}`)}>
+            <div className="big-section-panel-recommend-img" style={{ background: "black" }}>
+                <img src={props.icon} className="big-section-panel-recommend-img-background" alt=""></img>
+                <img src={props.icon} className="big-section-panel-recommend-img-inner" alt=""></img>
+            </div>
+            <div className="p-2" style={{ background: "#0c0d0f" }}>
+                <p className="big-section-panel-recommend-server-name mb-0">
+                    {props.name}
+                </p>
+                <p className="big-section-panel-recommend-server-rank mb-0">{props.rankingText} {props.rank} {t('bigSection.recommendPanel.rankText')}</p>
+            </div>
+        </div>
+    );
+}
+
+function WideRankingRecommendPanel(props) {
     const { t } = useTranslation();
     const [panels, setPanels] = useState([]);
     const [panelIndex, setPanelIndex] = useState(0);
@@ -59,17 +122,17 @@ function RecommendPanel(props) {
             if (value.type === 'dayRanking') rankingText = t('bigSection.recommendPanel.dailyRanking');
             if (value.type === 'weekRanking') rankingText = t('bigSection.recommendPanel.weeklyRanking');
             if (value.type === 'monthRanking') rankingText = t('bigSection.recommendPanel.monthlyRanking');
-                panel = <RankingRecommendPanel
-                    icon={value.icon}
-                    name={value.name}
-                    id={value.id}
-                    rank={value.rank}
-                    member_count={value.member_count}
-                    rankingText={rankingText}
-                    description={value.description}
-                    setIsRunning={setIsRunning}
-                />
-                return panel;
+            panel = <RankingRecommendPanel
+                icon={value.icon}
+                name={value.name}
+                id={value.id}
+                rank={value.rank}
+                member_count={value.member_count}
+                rankingText={rankingText}
+                description={value.description}
+                setIsRunning={setIsRunning}
+            />
+            return panel;
         });
         console.log(tmpPanels);
         setPanels(tmpPanels);
@@ -77,7 +140,7 @@ function RecommendPanel(props) {
     }, [props.recommendServers]);
     const showNextPanel = () => {
         console.log(panelIndex);
-        var tmpIndex; 
+        var tmpIndex;
         if (panelIndex + 1 == panels.length)
             tmpIndex = 0;
         else
@@ -87,7 +150,7 @@ function RecommendPanel(props) {
     }
     const showPrevPanel = () => {
         console.log(panelIndex);
-        var tmpIndex; 
+        var tmpIndex;
         if (panelIndex == 0)
             tmpIndex = panels.length - 1;
         else
@@ -100,21 +163,18 @@ function RecommendPanel(props) {
         showNextPanel();
     }, isRunning ? 10000 : null);
     return (
-        <div className="big-section-panel-recommend-container pb-2 pt-1">
-            <div className="mb-3">注目＆おすすめ</div>
-            <div style={{ position: 'relative' }}>
-                <div className="recommend-panel-left-arrow-container">
-                    <div className="recommend-panel-left-arrow" onClick={() => showPrevPanel()}>
-                        <KeyboardArrowLeftIcon style={{ transform: 'scale(2)' }} />
-                    </div>
+        <div style={{ position: 'relative' }}>
+            <div className="recommend-panel-left-arrow-container">
+                <div className="recommend-panel-left-arrow" onClick={() => showPrevPanel()}>
+                    <KeyboardArrowLeftIcon style={{ transform: 'scale(2)' }} />
                 </div>
-                <div className="recommend-panel-right-arrow-container">
-                    <div className="recommend-panel-right-arrow" onClick={() => showNextPanel() }>
-                        <KeyboardArrowRightIcon style={{ transform: 'scale(2)' }} />
-                    </div>
-                </div>
-                    {showingPanel}
             </div>
+            <div className="recommend-panel-right-arrow-container">
+                <div className="recommend-panel-right-arrow" onClick={() => showNextPanel()}>
+                    <KeyboardArrowRightIcon style={{ transform: 'scale(2)' }} />
+                </div>
+            </div>
+            {showingPanel}
         </div>
     );
 }
