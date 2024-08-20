@@ -140,7 +140,7 @@ function ESi18n() {
                     weeklyRanking: "Clasificación semanal",
                     monthlyRanking: "Clasificación mensual",
                     rankText: "rango",
-                    clickToReadMore: "\n\n . . . Haga clic para leer más"
+                    clickToReadMore: "Haga clic para leer más"
                 }
             },
             sectionUnion: {

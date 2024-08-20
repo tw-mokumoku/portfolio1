@@ -152,7 +152,7 @@ function JPi18n() {
                     weeklyRanking: "週間ランキング",
                     monthlyRanking: "月間ランキング",
                     rankText: "位",
-                    clickToReadMore: "\n\n . . . 続きをクリックして読む"
+                    clickToReadMore: "続きをクリックして読む"
                 }
             },
             sectionUnion: {

@@ -140,7 +140,7 @@ function FRi18n() {
                     weeklyRanking: "Classement hebdomadaire",
                     monthlyRanking: "Classement mensuel",
                     rankText: "rang",
-                    clickToReadMore: "\n\n . . . Cliquez pour en savoir plus"
+                    clickToReadMore: "Cliquez pour en savoir plus"
                 }
             },
             sectionUnion: {

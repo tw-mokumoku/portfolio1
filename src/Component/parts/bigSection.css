@@ -41,36 +41,6 @@
 .recommend-panel-right-arrow-container {
     height: 15rem;
 }
-@media screen and (min-width: 768px) {
-    .big-section-panel-recommend{
-        height: 24rem;
-    }
-    .recommend-panel-left-arrow-container {
-        height: 24rem;
-    }
-    .recommend-panel-right-arrow-container {
-        height: 24rem;
-    }
-}
-@media (min-width: 1200px) {
-    .big-section-panel-recommend-img-inner {
-        width: 20vw;
-    }
-    .big-section-panel-recommend-img-background {
-        position: absolute;
-        width: 65vw;
-        z-index: 1;
-    }
-    .big-section-panel-recommend {
-        height: 30rem;
-    }
-    .recommend-panel-left-arrow-container {
-        height: 30rem;
-    }
-    .recommend-panel-right-arrow-container {
-        height: 30rem;
-    }
-}
 .recommend-panel-left-arrow-container {
     position: absolute;
     display: flex;
@@ -112,5 +82,68 @@
 .recommend-panel-right-arrow:hover {
     background: linear-gradient(to right, rgba(171, 218, 244, 0) 5%, rgba(171, 218, 244, 0.3) 95%);
 }
-.ranking-recommend-panel-description{
+.big-section-panel-recommend-server-name{
+    font-size: 0.9rem;
+}
+.big-section-panel-recommend-server-rank {
+    font-size: 0.7rem;
+}
+.ranking-recommend-panel-description {
+    display: -webkit-box; /* 必須 */
+    -webkit-box-orient: vertical; /* 必須 */
+    -webkit-line-clamp: 4; /* 行数を制限 */
+    overflow: hidden; /* はみ出た部分を非表示 */
+    font-size: 0.6rem;
+    margin-bottom: 1vw;
+}
+
+@media screen and (min-width: 768px) {
+    .big-section-panel-recommend{
+        height: 24rem;
+    }
+    .recommend-panel-left-arrow-container {
+        height: 24rem;
+    }
+    .recommend-panel-right-arrow-container {
+        height: 24rem;
+    }
+    .big-section-panel-recommend-server-name {
+        font-size: 1.3rem;
+    }
+    .big-section-panel-recommend-server-rank {
+        font-size: 1rem;
+    }
+    .ranking-recommend-panel-description {
+        font-size: 0.9rem;
+        -webkit-line-clamp: 7; /* 行数を制限 */
+    }
+}
+@media (min-width: 1200px) {
+    .big-section-panel-recommend-img-inner {
+        width: 20vw;
+    }
+    .big-section-panel-recommend-img-background {
+        position: absolute;
+        width: 65vw;
+        z-index: 1;
+    }
+    .big-section-panel-recommend {
+        height: 30rem;
+    }
+    .recommend-panel-left-arrow-container {
+        height: 30rem;
+    }
+    .recommend-panel-right-arrow-container {
+        height: 30rem;
+    }
+    .big-section-panel-recommend-server-name {
+        font-size: 1.8rem;
+    }
+    .big-section-panel-recommend-server-rank {
+        font-size: 1.2rem;
+    }
+    .ranking-recommend-panel-description {
+        font-size: 0.95rem;
+        -webkit-line-clamp: 10; /* 行数を制限 */
+    }
 }

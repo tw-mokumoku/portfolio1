@@ -140,7 +140,7 @@ function ENi18n() {
                     weeklyRanking: "Weekly ranking: ",
                     monthlyRanking: "Monthly ranking: ",
                     rankText: "",
-                    clickToReadMore: "\n\n . . . Click to read more"
+                    clickToReadMore: "Click to read more"
                 }
             },
             sectionUnion: {
