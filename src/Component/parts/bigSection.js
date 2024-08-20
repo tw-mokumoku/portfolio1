@@ -53,8 +53,8 @@ function RecommendPanel(props) {
             <div className="wide-ranking-recommend-panel">
                 <WideRankingRecommendPanel {...props} />
             </div>
-            <CompactRankingRecommendPanels {...props} />
             <div className="compact-ranking-recommend-panel">
+                <CompactRankingRecommendPanels {...props} />
             </div>
         </div>
     );
