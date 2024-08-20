@@ -1,8 +1,8 @@
 .big-section-panel-recommend-container {
 }
 .big-section-panel-recommend {
-    height: 18rem;
-    width: 24rem;
+    height: 15rem;
+    width: 18rem;
     box-shadow: 0 0 7px 0px #000;
     display: flex;
     cursor: pointer;
