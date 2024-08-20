@@ -3,7 +3,6 @@
 .big-section-panel-recommend {
     height: 15rem;
     width: 18rem;
-    box-shadow: 0 0 7px 0px #000;
     display: flex;
     cursor: pointer;
     flex-direction: column;
@@ -112,6 +111,7 @@
         flex-direction: row;
         height: 24rem;
         width: auto;
+        box-shadow: 0 0 7px 0px #000;
     }
     .big-section-panel-recommend-img {
         box-shadow: 5px 0 5px 0px #000;
