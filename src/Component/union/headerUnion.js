@@ -47,7 +47,6 @@ export function HeaderUnion(props) {
     const [loginLink, setLoginLink] = useState('/dashboard');
     const [LoginTitle, setLoginTitle] = useState(t('headerUnion.headerUnion.login'));
     const [modalShow, setModalShow] = useState(false);
-    const [content, setContent] = useState(<></>);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -86,10 +85,12 @@ export function HeaderUnion(props) {
                         title={t('headerUnion.headerUnion.language')}
                         onClick={() => setModalShow(true)}
                     />
+                    {/*
                     <OffcanvasMenu
                         title={t('headerUnion.headerUnion.ranking')}
                         onClick={() => navigate('/ranking')}
                     />
+                    */}
                 </Offcanvas.Body>
             </Offcanvas>
         </Navbar>
@@ -132,11 +133,13 @@ function HeaderItems(props) {
 
     return (
         <Row className="d-flex align-items-center">
+            {/*
             <Col>
                 <Button className="p-1" href={'/ranking'}>
                     <LeaderboardIcon />
                 </Button>
             </Col>
+            */}
             <Col>
                 <div className="w-100 h-100">
                     <select

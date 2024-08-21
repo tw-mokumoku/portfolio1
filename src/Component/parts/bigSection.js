@@ -135,7 +135,6 @@ function WideRankingRecommendPanel(props) {
             />
             return panel;
         });
-        console.log(tmpPanels);
         setPanels(tmpPanels);
         setShowingPanel(tmpPanels[0]);
     }, [props.recommendServers]);
@@ -165,16 +164,24 @@ function WideRankingRecommendPanel(props) {
     }, isRunning ? 10000 : null);
     return (
         <div style={{ position: 'relative' }}>
-            <div className="recommend-panel-left-arrow-container">
-                <div className="recommend-panel-left-arrow" onClick={() => showPrevPanel()}>
-                    <KeyboardArrowLeftIcon style={{ transform: 'scale(2)' }} />
-                </div>
-            </div>
-            <div className="recommend-panel-right-arrow-container">
-                <div className="recommend-panel-right-arrow" onClick={() => showNextPanel()}>
-                    <KeyboardArrowRightIcon style={{ transform: 'scale(2)' }} />
-                </div>
-            </div>
+            {
+                panels.length != 0
+                    ?
+                    <>
+                        <div className="recommend-panel-left-arrow-container">
+                            <div className="recommend-panel-left-arrow" onClick={() => showPrevPanel()}>
+                                <KeyboardArrowLeftIcon style={{ transform: 'scale(2)' }} />
+                            </div>
+                        </div>
+                        <div className="recommend-panel-right-arrow-container">
+                            <div className="recommend-panel-right-arrow" onClick={() => showNextPanel()}>
+                                <KeyboardArrowRightIcon style={{ transform: 'scale(2)' }} />
+                            </div>
+                        </div>
+                    </>
+                    :
+                    <></>
+            }
             {showingPanel}
         </div>
     );
