@@ -14,8 +14,14 @@ function CNi18n() {
     return {
         translation: {
             headerUnion: {
+                myVerticallyCenteredModal: {
+                    changeLanguage: "改变语言"
+                },
                 headerUnion: {
-                    login: "登录"
+                    login: "登录",
+                    dashboard: "仪表板",
+                    language: "语言",
+                    ranking: "排行"
                 }
             },
             home: {
@@ -152,7 +158,8 @@ function CNi18n() {
                     weeklyRanking: "每周排名",
                     monthlyRanking: "每月排名",
                     rankText: "名",
-                    clickToReadMore: "点击阅读更多"
+                    clickToReadMore: "点击阅读更多",
+                    featureRecommended: "注意力＆推荐"
                 }
             },
             sectionUnion: {

@@ -2,8 +2,14 @@ function FRi18n() {
     return {
         translation: {
             headerUnion: {
+                myVerticallyCenteredModal: {
+                    changeLanguage: "changer de langue"
+                },
                 headerUnion: {
-                    login: "Se connecter"
+                    login: "Se connecter",
+                    dashboard: "tableau de bord",
+                    language: "langue",
+                    ranking: "Classement"
                 }
             },
             home: {
@@ -140,7 +146,8 @@ function FRi18n() {
                     weeklyRanking: "Classement hebdomadaire",
                     monthlyRanking: "Classement mensuel",
                     rankText: "rang",
-                    clickToReadMore: "Cliquez pour en savoir plus"
+                    clickToReadMore: "Cliquez pour en savoir plus",
+                    featureRecommended: "attention＆recommandation"
                 }
             },
             sectionUnion: {
