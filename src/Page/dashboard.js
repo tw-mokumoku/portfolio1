@@ -19,6 +19,7 @@ export function DashBoard() {
     const [serverPanels, setServerPanels] = useState(<></>)
     const [loading, setLoading] = useState(true);
     useEffect(() => {
+        if (!hasDiscordOAuthTokenCookie()) return;
         getCurrentUserGuilds()
             .then((response) => {
                 setServerPanels(

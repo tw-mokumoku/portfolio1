@@ -11,7 +11,7 @@ import { CurrentDiscordUserIcon, getCountryRankingTag, getCurrentDiscordUserGlob
 import InfoTwoToneIcon from '@mui/icons-material/InfoTwoTone';
 import SettingsTwoToneIcon from '@mui/icons-material/SettingsTwoTone';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { disconnectViaDiscord, disconnectVisDislist } from '../../Function/LoginController';
+import { checkLocalAndOAuth, disconnectViaDiscord, disconnectVisDislist } from '../../Function/LoginController';
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { getLanguageLocalStorage } from '../../Function/LocalStorageController';
@@ -68,10 +68,14 @@ export function DashboardUserPanel() {
     const [globalName, setGlobalName] = useState("");
     const [userIcon, setUserIcon] = useState(<></>);
     useEffect(() => {
-        setGlobalName(getCurrentDiscordUserGlobalName());
-        setUserIcon(
-            <CurrentDiscordUserIcon alt="" style={{ borderRadius: "30px", border: "2px solid lightblue", width: 60, height: 60 }} />
-        );
+        checkLocalAndOAuth()
+            .then(() => {
+
+                setGlobalName(getCurrentDiscordUserGlobalName());
+                setUserIcon(
+                    <CurrentDiscordUserIcon alt="" style={{ borderRadius: "30px", border: "2px solid lightblue", width: 60, height: 60 }} />
+                );
+            });
     }, []);
     return (
         <Card className="mb-5">

@@ -13,6 +13,7 @@ import { getLanguageLocalStorage, hasHomeTourFlagLocalStorage, setHomeTourFlagLo
 import Joyride, { ACTIONS, EVENTS, ORIGIN, STATUS, CallBackProps } from 'react-joyride';
 import { useTranslation } from "react-i18next";
 import { timeDiff } from '../Function/DateCalc';
+import { checkLocalAndOAuth } from '../Function/LoginController';
 
 export function Home(props) {
     const { t } = useTranslation();
@@ -113,7 +114,6 @@ export function Home(props) {
     const getServerRecommendFunction = () => {
         getRecommend('JP')
             .then((response) => {
-                console.log(response.data)
                 var tmpRecommendServers = [];
                 response.data.dayRanking
                     .map((value, index) => {
@@ -208,7 +208,10 @@ export function Home(props) {
             });
     }
     useEffect(() => {
-        getServerRankingCountryUpdatedLogFunction();
+        checkLocalAndOAuth()
+            .then(() => {
+                getServerRankingCountryUpdatedLogFunction();
+            })
     }, []);
     useEffect(() => {
         if (didSelectedRegionChange === false) return;

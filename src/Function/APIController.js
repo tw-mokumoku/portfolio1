@@ -3,6 +3,8 @@ import { getDiscordOAuthPageURL } from './LocalRemoteSwitcher';
 import { getDiscordAccessTokenCookie, hasDiscordOAuthTokenCookie } from './OAuthController';
 import { getCurrentDiscordUserDataLocalStorage } from './LocalStorageController';
 import { Avatar } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { checkLocalAndOAuth } from './LoginController';
 
 
 const DiscordBaseURL = "https://discord.com/api";
@@ -357,11 +359,20 @@ export function getCurrentDiscordUserIconURL() {
     return `${DiscordImageBaseURL}avatars/${userdata.id}/${userdata.avatar}.png`;
 }
 export function CurrentDiscordUserIcon(props) {
-    const userdata = getCurrentDiscordUserDataLocalStorage();
-    return userdata.avatar ?
-        <Avatar src={getCurrentDiscordUserIconURL()} {...props} />
-        :
-        <Avatar>{userdata.username.slice(0, 2)}</Avatar>;
+    const [avatar, setAvatar] = useState(<></>);
+    useEffect(() => {
+        checkLocalAndOAuth()
+            .then(() => {
+                const userdata = getCurrentDiscordUserDataLocalStorage();
+                setAvatar(
+                    userdata.avatar ?
+                        <Avatar src={getCurrentDiscordUserIconURL()} {...props} />
+                        :
+                        <Avatar>{userdata.username.slice(0, 2)}</Avatar>
+                )
+            });
+    }, []);
+    return avatar;
 }
 export function getDiscordGuildIcon(guild_id, guild_icon) {
     return `${DiscordImageBaseURL}icons/${guild_id}/${guild_icon}.png?size=4096`;
