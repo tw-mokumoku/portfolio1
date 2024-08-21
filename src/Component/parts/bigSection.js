@@ -47,9 +47,10 @@ export function BigTitle(props) {
 }
 
 function RecommendPanel(props) {
+    const { t } = useTranslation();
     return (
         <div className="big-section-panel-recommend-container pb-2 pt-1">
-            <div className="mb-3">注目＆おすすめ</div>
+            <div className="mb-3">{t('bigSection.recommendPanel.featureRecommended')}</div>
             <div className="wide-ranking-recommend-panel">
                 <WideRankingRecommendPanel {...props} />
             </div>

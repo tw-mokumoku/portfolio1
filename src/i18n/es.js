@@ -2,8 +2,14 @@ function ESi18n() {
     return {
         translation: {
             headerUnion: {
+                myVerticallyCenteredModal: {
+                    changeLanguage: "cambiar idioma"
+                },
                 headerUnion: {
-                    login: "Acceso"
+                    login: "Acceso",
+                    dashboard: "panel",
+                    language: "idioma",
+                    ranking: "Categoría"
                 }
             },
             home: {
@@ -140,7 +146,8 @@ function ESi18n() {
                     weeklyRanking: "Clasificación semanal",
                     monthlyRanking: "Clasificación mensual",
                     rankText: "rango",
-                    clickToReadMore: "Haga clic para leer más"
+                    clickToReadMore: "Haga clic para leer más",
+                    featureRecommended: "atención＆recomendación"
                 }
             },
             sectionUnion: {

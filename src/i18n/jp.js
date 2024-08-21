@@ -14,8 +14,14 @@ function JPi18n() {
     return {
         translation: {
             headerUnion: {
+                myVerticallyCenteredModal: {
+                    changeLanguage: "言語を変更"
+                },
                 headerUnion: {
-                    login: "ログイン"
+                    login: "ログイン",
+                    dashboard: "ダッシュボード",
+                    language: "言語",
+                    ranking: "ランキング"
                 }
             },
             home: {
@@ -152,7 +158,8 @@ function JPi18n() {
                     weeklyRanking: "週間ランキング",
                     monthlyRanking: "月間ランキング",
                     rankText: "位",
-                    clickToReadMore: "続きをクリックして読む"
+                    clickToReadMore: "続きをクリックして読む",
+                    featureRecommended: "注目＆おすすめ"
                 }
             },
             sectionUnion: {

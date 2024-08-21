@@ -2,8 +2,14 @@
     return {
         translation: {
             headerUnion: {
+                myVerticallyCenteredModal: {
+                    changeLanguage: "언어 변경"
+                },
                 headerUnion: {
-                    login: "로그인"
+                    login: "로그인",
+                    dashboard: "대시보드",
+                    language: "언어",
+                    ranking: "랭킹"
                 }
             },
             home: {
@@ -140,7 +146,8 @@
                     weeklyRanking: "주간 순위",
                     monthlyRanking: "월간 순위",
                     rankText: "위치",
-                    clickToReadMore: "계속을 클릭하여 읽기"
+                    clickToReadMore: "계속을 클릭하여 읽기",
+                    featureRecommended: "주목 ＆ 추천"
                 }
             },
             sectionUnion: {

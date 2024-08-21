@@ -24,8 +24,8 @@ i18n
         // (tip move them in a JSON file and import them,
         // or even better, manage them via a UI: https://react.i18next.com/guides/multiple-translation-files#manage-your-translations-with-a-management-gui)
         resources: {
-            en: ENi18n,
             ja: JPi18n,
+            en: ENi18n,
             ko: KOi18n,
             cn: CNi18n,
             es: ESi18n,
