@@ -19,6 +19,7 @@ import './headerUnion.css';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import MenuIcon from '@mui/icons-material/Menu';
 import Modal from 'react-bootstrap/Modal';
+import { checkLocalAndOAuth } from '../../Function/LoginController';
 
 function MyVerticallyCenteredModal(props) {
     const { t, i18n } = useTranslation();
@@ -46,6 +47,7 @@ export function HeaderUnion(props) {
     const [loginLink, setLoginLink] = useState('/dashboard');
     const [LoginTitle, setLoginTitle] = useState(t('headerUnion.headerUnion.login'));
     const [modalShow, setModalShow] = useState(false);
+    const [content, setContent] = useState(<></>);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -53,8 +55,7 @@ export function HeaderUnion(props) {
         const discordOAuthURL = getDiscordOAuthURL();
         setLoginTitle(discordAccessTokenCookie ? t('headerUnion.headerUnion.dashboard') : t('headerUnion.headerUnion.login'));
         setLoginLink(discordAccessTokenCookie ? '/dashboard' : discordOAuthURL);
-    })
-
+    }, []);
     return (
         <Navbar expand="lg" sticky="top">
             <MyVerticallyCenteredModal
