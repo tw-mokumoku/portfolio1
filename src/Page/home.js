@@ -112,7 +112,7 @@ export function Home(props) {
     }
 
     const getServerRecommendFunction = () => {
-        getRecommend('JP')
+        getRecommend(getLanguageLocalStorage())
             .then((response) => {
                 var tmpRecommendServers = [];
                 response.data.dayRanking
