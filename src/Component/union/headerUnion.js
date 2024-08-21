@@ -75,7 +75,7 @@ export function HeaderUnion(props) {
                     <HeaderItems {...props} />
                 </div>
             </Nav>
-            <Offcanvas show={show} onHide={() => setShow(false)}>
+            <Offcanvas style={{ width: '15rem' }} show={show} onHide={() => setShow(false)}>
                 <Offcanvas.Body className="header-union-offcanvas-body">
                     <OffcanvasMenu
                         title={LoginTitle}
