@@ -41,8 +41,8 @@ export function DashBoard() {
     return (
         <>
             <OverlayLoading active={loading} />
+            <HeaderUnion />
             <Container>
-                <HeaderUnion />
                 <Row className="mt-5">
                     <Col xl={3}>
                         <DashboardUserPanel />

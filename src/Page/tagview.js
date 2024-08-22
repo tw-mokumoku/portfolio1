@@ -174,8 +174,8 @@ export function TagView() {
     return (
         <>
             <OverlayLoading active={loading} />
+            <HeaderUnion />
             <Container>
-                <HeaderUnion />
                 <div className="mt-3 mb-5 d-flex justify-content-center align-items-center">
                     <SearchBar />
                 </div>
