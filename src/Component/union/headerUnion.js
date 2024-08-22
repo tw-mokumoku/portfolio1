@@ -20,6 +20,9 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import MenuIcon from '@mui/icons-material/Menu';
 import Modal from 'react-bootstrap/Modal';
 import { checkLocalAndOAuth } from '../../Function/LoginController';
+import { SearchBar } from '../parts/searchBar';
+import Container from 'react-bootstrap/Container';
+import { useWindowScroll } from 'react-use';
 
 function MyVerticallyCenteredModal(props) {
     const { t, i18n } = useTranslation();
@@ -42,6 +45,7 @@ function MyVerticallyCenteredModal(props) {
     );
 }
 export function HeaderUnion(props) {
+    const { x, y } = useWindowScroll();
     const { t, i18n } = useTranslation();
     const [show, setShow] = useState(false);
     const [modalShow, setModalShow] = useState(false);
@@ -65,40 +69,42 @@ export function HeaderUnion(props) {
         )
     }, []);
     return (
-        <Navbar expand="lg" sticky="top">
-            <MyVerticallyCenteredModal
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-                {...props}
-            />
-            <div className="header-union-show-offcanvas p-2" onClick={() => setShow(true)}>
-                <MenuIcon />
-            </div>
-            <Navbar.Brand className="header-union-navbar-brand" href="/">
-                <div>
-                    Discord List
+        <Navbar expand="lg" sticky="top" style={{ boxShadow: y === 0 ? 'none': 'rgba(0, 0, 0, 0.25) 0px 0px 6px 2px' }}>
+            <Container>
+                <MyVerticallyCenteredModal
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                    {...props}
+                />
+                <div className="header-union-show-offcanvas p-2" onClick={() => setShow(true)}>
+                    <MenuIcon />
                 </div>
-            </Navbar.Brand>
-            <Nav className="ms-auto">
-                <div className="header-union-pc-view">
-                    <HeaderItems {...props} />
-                </div>
-            </Nav>
-            <Offcanvas style={{ width: '15rem' }} show={show} onHide={() => setShow(false)}>
-                <Offcanvas.Body className="header-union-offcanvas-body">
-                    {loginOffcanvasMenu}
-                    <OffcanvasMenu
-                        title={t('headerUnion.headerUnion.language')}
-                        onClick={() => setModalShow(true)}
-                    />
-                    {/*
-                    <OffcanvasMenu
-                        title={t('headerUnion.headerUnion.ranking')}
-                        onClick={() => navigate('/ranking')}
-                    />
-                    */}
-                </Offcanvas.Body>
-            </Offcanvas>
+                <Navbar.Brand className="header-union-navbar-brand" href="/">
+                    <div>
+                        Discord List
+                    </div>
+                </Navbar.Brand>
+                <Nav className="ms-auto">
+                    <div className="header-union-pc-view">
+                        <HeaderItems {...props} />
+                    </div>
+                </Nav>
+                <Offcanvas style={{ width: '15rem' }} show={show} onHide={() => setShow(false)}>
+                    <Offcanvas.Body className="header-union-offcanvas-body">
+                        {loginOffcanvasMenu}
+                        <OffcanvasMenu
+                            title={t('headerUnion.headerUnion.language')}
+                            onClick={() => setModalShow(true)}
+                        />
+                        {/*
+                        <OffcanvasMenu
+                            title={t('headerUnion.headerUnion.ranking')}
+                            onClick={() => navigate('/ranking')}
+                        />
+                        */}
+                    </Offcanvas.Body>
+                </Offcanvas>
+            </Container>
         </Navbar>
     );
 }
