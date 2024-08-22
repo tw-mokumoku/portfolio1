@@ -191,7 +191,11 @@ function RankingRecommendPanel(props) {
     const { t } = useTranslation();
     const navigate = useNavigate();
     return (
-        <div className="big-section-panel-recommend" onClick={() => navigate(`/server/${props.id}`)} onMouseEnter={() => props.setIsRunning(false)} onMouseLeave={() => props.setIsRunning(true)}>
+        <div className="big-section-panel-recommend"
+            onClick={() => navigate(`/server/${props.id}`)}
+            onMouseEnter={() => props.setIsRunning(false)}
+            onMouseLeave={() => props.setIsRunning(true)}
+        >
             <div className="big-section-panel-recommend-img" style={{ background: "black" }}>
                 <img src={props.icon} className="big-section-panel-recommend-img-background" alt=""></img>
                 <img src={props.icon} className="big-section-panel-recommend-img-inner" alt=""></img>
