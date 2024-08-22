@@ -238,8 +238,8 @@ export function Home(props) {
                 }}
                 callback={handleJoyrideCallback}
             />
+            <HeaderUnion setDidSelectedRegionChange={setDidSelectedRegionChange} />
             <Container>
-                <HeaderUnion setDidSelectedRegionChange={setDidSelectedRegionChange} />
                 <BigTitle recommendServers={recommendServers} />
                 <TagListSection didSelectedRegionChange={didSelectedRegionChange} />
                 <p className="fs-6 mb-0">
