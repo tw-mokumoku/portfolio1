@@ -73,8 +73,8 @@ export function SearchResult(props) {
     return (
         <>
             <OverlayLoading active={loading} />
+            <HeaderUnion setDidSelectedRegionChange={setDidSelectedRegionChange} />
             <Container>
-                <HeaderUnion setDidSelectedRegionChange={setDidSelectedRegionChange} />
                 <div className="mt-3 mb-5 d-flex justify-content-center align-items-center">
                     <SearchBar />
                 </div>

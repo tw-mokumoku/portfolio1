@@ -192,8 +192,8 @@ export function ServerEdit(props) {
         <>
             <OverlayLoading active={loading} />
             <ToastContainer />
+            <HeaderUnion />
             <Container>
-                <HeaderUnion />
                 <Row className="mt-5">
                     <Col xl={3}>
                         <DashboardUserPanel />

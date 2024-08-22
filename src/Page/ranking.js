@@ -21,8 +21,8 @@ export function Ranking(props) {
     return (
         <>
             <OverlayLoading active={loading} />
+            <HeaderUnion setDidSelectedRegionChange={setDidSelectedRegionChange} />
             <Container>
-                <HeaderUnion setDidSelectedRegionChange={setDidSelectedRegionChange} />
             </Container>
         </>
     );

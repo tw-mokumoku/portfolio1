@@ -94,8 +94,8 @@ export function ServerView() {
         <>
             <OverlayLoading active={loading} />
             <ToastContainer />
+            <HeaderUnion />
             <Container>
-                <HeaderUnion />
                 <Row className="mt-5">
                     <Card className="mb-4">
                         <Card.Header>
