@@ -44,16 +44,25 @@ function MyVerticallyCenteredModal(props) {
 export function HeaderUnion(props) {
     const { t, i18n } = useTranslation();
     const [show, setShow] = useState(false);
-    const [loginLink, setLoginLink] = useState('/dashboard');
-    const [LoginTitle, setLoginTitle] = useState(t('headerUnion.headerUnion.login'));
     const [modalShow, setModalShow] = useState(false);
     const navigate = useNavigate();
+    const [loginOffcanvasMenu, setLoginOffcanvasMenu] = useState(<></>);
 
     useEffect(() => {
         const discordAccessTokenCookie = hasDiscordAccessTokenCookie();
         const discordOAuthURL = getDiscordOAuthURL();
-        setLoginTitle(discordAccessTokenCookie ? t('headerUnion.headerUnion.dashboard') : t('headerUnion.headerUnion.login'));
-        setLoginLink(discordAccessTokenCookie ? '/dashboard' : discordOAuthURL);
+        setLoginOffcanvasMenu(discordAccessTokenCookie?
+            <OffcanvasMenu
+                title={t('headerUnion.headerUnion.dashboard')}
+                onClick={() => navigate('/dashboard')}
+            />
+            :
+            <div className="offcanvas-menu-container">
+                <div className="offcanvas-menu fs-5" onClick={() => window.location.replace(discordOAuthURL)}>
+                    {t('headerUnion.headerUnion.login')}
+                </div>
+            </div>
+        )
     }, []);
     return (
         <Navbar expand="lg" sticky="top">
@@ -62,7 +71,7 @@ export function HeaderUnion(props) {
                 onHide={() => setModalShow(false)}
                 {...props}
             />
-            <div className="header-union-show-offcanvas" onClick={() => setShow(true)}>
+            <div className="header-union-show-offcanvas p-2" onClick={() => setShow(true)}>
                 <MenuIcon />
             </div>
             <Navbar.Brand className="header-union-navbar-brand" href="/">
@@ -77,10 +86,7 @@ export function HeaderUnion(props) {
             </Nav>
             <Offcanvas style={{ width: '15rem' }} show={show} onHide={() => setShow(false)}>
                 <Offcanvas.Body className="header-union-offcanvas-body">
-                    <OffcanvasMenu
-                        title={LoginTitle}
-                        onClick={() => navigate(loginLink)}
-                    />
+                    {loginOffcanvasMenu}
                     <OffcanvasMenu
                         title={t('headerUnion.headerUnion.language')}
                         onClick={() => setModalShow(true)}
@@ -111,7 +117,6 @@ function OffcanvasMenu(props) {
 
 function HeaderItems(props) {
     const { t, i18n } = useTranslation();
-    const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [selectedRegion, setSelectedRegion] = useState("");
 
@@ -132,44 +137,37 @@ function HeaderItems(props) {
     }, []);
 
     return (
-        <Row className="d-flex align-items-center">
+        <div className="d-flex align-items-center gap-4">
             {/*
-            <Col>
-                <Button className="p-1" href={'/ranking'}>
-                    <LeaderboardIcon />
-                </Button>
-            </Col>
+            <Button className="p-1" href={'/ranking'}>
+                <LeaderboardIcon />
+            </Button>
             */}
-            <Col>
-                <div className="w-100 h-100">
-                    <select
-                        className="header-union-region-select"
-                        value={selectedRegion}
-                        onChange={onRegionChange}
-                    >
-                        <option value="JP">{t('serveredit.serverEdit.jp')}</option>
-                        <option value="US">{t('serveredit.serverEdit.us')}</option>
-                        <option value="KR">{t('serveredit.serverEdit.ko')}</option>
-                        <option value="CN">{t('serveredit.serverEdit.cn')}</option>
-                        <option value="ES">{t('serveredit.serverEdit.es')}</option>
-                        <option value="FR">{t('serveredit.serverEdit.fr')}</option>
-                    </select>
-                </div>
-            </Col>
-
-            <Col>
-                <div className="header-login-tour">
-                {
-                    hasDiscordAccessTokenCookie() ?
-                        <Button className="p-2" href="/dashboard">
-                                <CurrentDiscordUserIcon alt="" style={{ borderRadius: "30px", border: "2px solid lightblue", width: 40, height: 40 }} />
-                        </Button>
-                        :
-                        <Button href={getDiscordOAuthURL()}>{t('headerUnion.headerUnion.login')}</Button>
-                }
-                </div>
-            </Col>
-        </Row>
+            <div className="h-100">
+                <select
+                    className="header-union-region-select"
+                    value={selectedRegion}
+                    onChange={onRegionChange}
+                >
+                    <option value="JP">{t('serveredit.serverEdit.jp')}</option>
+                    <option value="US">{t('serveredit.serverEdit.us')}</option>
+                    <option value="KR">{t('serveredit.serverEdit.ko')}</option>
+                    <option value="CN">{t('serveredit.serverEdit.cn')}</option>
+                    <option value="ES">{t('serveredit.serverEdit.es')}</option>
+                    <option value="FR">{t('serveredit.serverEdit.fr')}</option>
+                </select>
+            </div>
+            <div className="header-login-tour">
+            {
+                hasDiscordAccessTokenCookie() ?
+                    <Button className="p-2" href="/dashboard">
+                        <CurrentDiscordUserIcon alt="" style={{ borderRadius: "30px", border: "2px solid lightblue", width: 40, height: 40 }} />
+                    </Button>
+                    :
+                    <Button className="p-2 px-3" href={getDiscordOAuthURL()}>{t('headerUnion.headerUnion.login')}</Button>
+            }
+            </div>
+        </div>
     );
 }
 function SelectableRegionPanel(props) {
