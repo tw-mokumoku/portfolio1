@@ -60,6 +60,9 @@ export function SearchResult(props) {
 
     useEffect(() => {
         getSeachFunction();
+        if (window.getSelection) {
+            window.getSelection().removeAllRanges();
+        }
     }, [searchParams]);
     useEffect(() => {
         if (didSelectedRegionChange === false) return;

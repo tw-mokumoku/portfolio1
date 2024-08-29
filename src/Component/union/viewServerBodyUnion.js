@@ -103,7 +103,6 @@ export function ViewServerBody(props) {
     useEffect(() => {
         window.scrollTo(0, 0);
         const checkVCLogInfoElementDisplay = () => {
-            if (typeof VCLogInfoContainerRef.current != Element) return;
             if (window.getComputedStyle(VCLogInfoContainerRef.current).display == 'block') setShowPeriodVCLogInfo(true);
             else setShowPeriodVCLogInfo(false);
         }
