@@ -31,7 +31,7 @@ export function Home(props) {
     const [recommendServers, setRecommendServers] = useState([]);
 
     const [hasResult, setHasResult] = useState(true);
-    const cardAmountPerLoad = 6;
+    const cardAmountPerLoad = 24;
     const [hasMoreServers, setHasMoreServers] = useState(true);
     const [didAPIExecuted, setDidAPIExecuted] = useState(false);
 
