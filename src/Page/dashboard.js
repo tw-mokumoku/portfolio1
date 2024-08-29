@@ -6,10 +6,10 @@ import Col from 'react-bootstrap/Col';
 import './dashboard.css';
 import { Navigate } from "react-router-dom";
 import { ServerPanel } from '../Component/parts/Panel';
-import { hasDiscordOAuthTokenCookie } from '../Function/OAuthController';
+import { hasDiscordOAuthTokenCookie, has_SessionManagerDiscordListUID } from '../Function/OAuthController';
 import { DashboardUserPanel } from '../Component/union/SectionUnion';
 import { useEffect } from 'react';
-import { getCurrentUserGuilds } from '../Function/APIController';
+import { getCurrentUserGuilds, getMemberDataGuilds } from '../Function/APIController';
 import { useState } from 'react';
 import { OverlayLoading } from "react-loading-randomizable";
 import { useTranslation } from "react-i18next";
@@ -19,8 +19,8 @@ export function DashBoard() {
     const [serverPanels, setServerPanels] = useState(<></>)
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        if (!hasDiscordOAuthTokenCookie()) return;
-        getCurrentUserGuilds()
+        if (!has_SessionManagerDiscordListUID()) return;
+        getMemberDataGuilds()
             .then((response) => {
                 setServerPanels(
                     response.data.filter(value => value.owner).map((value, key) => {
@@ -36,7 +36,7 @@ export function DashBoard() {
             })
     }, []);
     window.history.replaceState('', '', '/dashboard');
-    if (!hasDiscordOAuthTokenCookie()) return <Navigate to="/" />
+    if (!has_SessionManagerDiscordListUID()) return <Navigate to="/" />
 
     return (
         <>

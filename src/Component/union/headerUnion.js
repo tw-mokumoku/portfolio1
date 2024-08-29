@@ -7,8 +7,8 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { switchPrefersColorScheme } from '../../Function/ThemeController';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import { getDiscordOAuthURL } from '../../Function/LocalRemoteSwitcher';
-import { CurrentDiscordUserIcon } from '../../Function/APIController';
-import { hasDiscordAccessTokenCookie } from '../../Function/OAuthController';
+import { CurrentDiscordUserIcon, getLogin } from '../../Function/APIController';
+import { hasDiscordAccessTokenCookie, has_SessionManagerDiscordListUID } from '../../Function/OAuthController';
 import { getLanguageLocalStorage, hasCurrentDiscordUserDataLocalStorage } from '../../Function/LocalStorageController';
 import { useTranslation } from "react-i18next";
 import Card from 'react-bootstrap/Card';
@@ -53,16 +53,14 @@ export function HeaderUnion(props) {
     const [loginOffcanvasMenu, setLoginOffcanvasMenu] = useState(<></>);
 
     useEffect(() => {
-        const discordAccessTokenCookie = hasDiscordAccessTokenCookie();
-        const discordOAuthURL = getDiscordOAuthURL();
-        setLoginOffcanvasMenu(discordAccessTokenCookie?
+        setLoginOffcanvasMenu(has_SessionManagerDiscordListUID() ?
             <OffcanvasMenu
                 title={t('headerUnion.headerUnion.dashboard')}
                 onClick={() => navigate('/dashboard')}
             />
             :
             <div className="offcanvas-menu-container">
-                <div className="offcanvas-menu fs-5" onClick={() => window.location.replace(discordOAuthURL)}>
+                <div className="offcanvas-menu fs-5" onClick={() => window.location.replace(getDiscordOAuthURL())}>
                     {t('headerUnion.headerUnion.login')}
                 </div>
             </div>
@@ -122,6 +120,7 @@ function OffcanvasMenu(props) {
 
 
 function HeaderItems(props) {
+    const navigate = useNavigate();
     const { t, i18n } = useTranslation();
     const [loading, setLoading] = useState(true);
     const [selectedRegion, setSelectedRegion] = useState("");
@@ -165,7 +164,7 @@ function HeaderItems(props) {
             </div>
             <div className="header-login-tour">
             {
-                hasDiscordAccessTokenCookie() ?
+                has_SessionManagerDiscordListUID() ?
                     <Button className="p-2" href="/dashboard">
                         <CurrentDiscordUserIcon alt="" style={{ borderRadius: "30px", border: "2px solid lightblue", width: 40, height: 40 }} />
                     </Button>
@@ -176,6 +175,7 @@ function HeaderItems(props) {
         </div>
     );
 }
+
 function SelectableRegionPanel(props) {
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();

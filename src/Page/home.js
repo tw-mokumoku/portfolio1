@@ -14,14 +14,26 @@ import Joyride, { ACTIONS, EVENTS, ORIGIN, STATUS, CallBackProps } from 'react-j
 import { useTranslation } from "react-i18next";
 import { timeDiff } from '../Function/DateCalc';
 import { checkLocalAndOAuth } from '../Function/LoginController';
+import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
+import { Avatar } from '@mui/material';
+import Placeholder from 'react-bootstrap/Placeholder';
+import { useParams } from "react-router-dom";
+import InfiniteScroll from 'react-infinite-scroller';
 
 export function Home(props) {
     const { t } = useTranslation();
+    const params = useParams();
     const [guildCards, setGuildCards] = useState([<></>]);
     const [loading, setLoading] = useState(true);
     const [running, setRunning] = useState(false);
     const [didSelectedRegionChange, setDidSelectedRegionChange] = useState(false);
     const [recommendServers, setRecommendServers] = useState([]);
+
+    const [hasResult, setHasResult] = useState(true);
+    const cardAmountPerLoad = 6;
+    const [hasMoreServers, setHasMoreServers] = useState(true);
+    const [didAPIExecuted, setDidAPIExecuted] = useState(false);
 
     const steps = [
         {
@@ -174,39 +186,114 @@ export function Home(props) {
     }
 
     const getServerRankingCountryUpdatedLogFunction = () => {
+        setDidAPIExecuted(true);
         getServerRecommendFunction();
-        getServerRankingCountryUpdatedLog(getLanguageLocalStorage())
+        getServerRankingCountryUpdatedLog(getLanguageLocalStorage(), cardAmountPerLoad, 0)
             .then((response) => {
-                setGuildCards(
-                    response.data.map((value, index) => {
-                        return <GuildCard
-                            key={index}
-                            cardTitleName={index == 0 ? "guild-card-title-tour" : ""}
-                            cardTagClassName={index == 0 ? "guild-card-tag-tour" : ""}
-                            cardDataClassName={index == 0 ? "guild-card-data-tag-tour" : ""}
-                            guildID={value['id']}
-                            guildIcon={value['icon'] ? getDiscordGuildIcon(value['id'], value['icon']) : ""}
-                            guildName={value['name']}
-                            guildInviteURL={value['invite_url']}
-                            guildDescription={value['description']}
-                            dataString={
-                                <>
-                                    {t('tagView.tagView.currentVCConnectionNumber')}：
-                                    {value['user_num'] !== 0 ?
-                                        <span className="ms-1" style={{ color: '#12c74b' }}>{value['user_num']}</span>
-                                        :
-                                        <span className="ms-1">{value['user_num']}</span>
-                                    }
-                                </>
+                if (response.data === "" || response.data.length === 0) {
+                    setLoading(false);
+                    setHasResult(false);
+                    return;
+                }
+                const tmpGuildCards = response.data.map((value, index) => {
+                    return <GuildCard
+                    key={index}
+                    cardTitleName={index == 0 ? "guild-card-title-tour" : ""}
+                    cardTagClassName={index == 0 ? "guild-card-tag-tour" : ""}
+                    cardDataClassName={index == 0 ? "guild-card-data-tag-tour" : ""}
+                    guildID={value['id']}
+                    guildIcon={value['icon'] ? getDiscordGuildIcon(value['id'], value['icon']) : ""}
+                    guildName={value['name']}
+                    guildInviteURL={value['invite_url']}
+                    guildDescription={value['description']}
+                    dataString={
+                        <>
+                            {t('tagView.tagView.currentVCConnectionNumber')}：
+                            {value['user_num'] !== 0 ?
+                                <span className="ms-1" style={{ color: '#12c74b' }}>{value['user_num']}</span>
+                                :
+                                <span className="ms-1">{value['user_num']}</span>
                             }
-//                            dataString={t('home.home.updatedDataString') + timeDiff(t, new Date(value['updated_epoch'] * 1000))}
-                        />
-                    })
-                )
+                        </>
+                        }
+                    />
+                });
+                setGuildCards(tmpGuildCards);
                 setLoading(false);
+                setDidAPIExecuted(false);
+                if (tmpGuildCards.length != cardAmountPerLoad) setHasMoreServers(false);
                 if (!hasHomeTourFlagLocalStorage()) setRunning(true);
             });
     }
+
+    const addServerRankingCountryUpdatedLog = () =>{
+        if (didAPIExecuted) return;
+        setDidAPIExecuted(true);
+        getServerRankingCountryUpdatedLog(getLanguageLocalStorage(), cardAmountPerLoad, guildCards.length)
+            .then((response) => {
+                const tmpGuildCards = response.data.map((value, index) => {
+                    return <GuildCard
+                    key={index}
+                    cardTitleName={index == 0 ? "guild-card-title-tour" : ""}
+                    cardTagClassName={index == 0 ? "guild-card-tag-tour" : ""}
+                    cardDataClassName={index == 0 ? "guild-card-data-tag-tour" : ""}
+                    guildID={value['id']}
+                    guildIcon={value['icon'] ? getDiscordGuildIcon(value['id'], value['icon']) : ""}
+                    guildName={value['name']}
+                    guildInviteURL={value['invite_url']}
+                    guildDescription={value['description']}
+                    dataString={
+                        <>
+                            {t('tagView.tagView.currentVCConnectionNumber')}：
+                            {value['user_num'] !== 0 ?
+                                <span className="ms-1" style={{ color: '#12c74b' }}>{value['user_num']}</span>
+                                :
+                                <span className="ms-1">{value['user_num']}</span>
+                            }
+                        </>
+                        }
+                    />
+                });
+                setGuildCards(guildCards.concat(tmpGuildCards));
+                if (tmpGuildCards.length != cardAmountPerLoad) setHasMoreServers(false);
+                setDidAPIExecuted(false);
+            });
+
+    }
+
+    const onLoadMore = () => {
+        addServerRankingCountryUpdatedLog();
+    }
+
+    const loaderPlaceHolder = () => {
+        return (
+            <Col>
+                <Card cardName="m-3">
+                    <Card.Header className="d-flex">
+                        <Avatar src="https://holder.js/100px100" sx={{ width: 60, height: 60 }} className="sp-icon me-4" variant="rounded" />
+                        <div className="d-flex w-100 align-items-center ">
+                            <Placeholder className="w-100" as={Card.Title} animation="glow">
+                                <Placeholder xs={8} />
+                            </Placeholder>
+                        </div>
+                    </Card.Header>
+                    <Card.Body className="pt-2">
+                        <Placeholder as={Card.Text} animation="glow">
+                            <Placeholder xs={7} /> <Placeholder xs={4} />
+                            <Placeholder xs={4} /> <Placeholder xs={6} />
+                            <Placeholder xs={8} />
+                            <br />
+                            <br />
+                            <Placeholder xs={6} /><Placeholder xs={8} />
+                        </Placeholder>
+                    </Card.Body>
+                    <Card.Footer className="pb-4 d-flex justify-content-center">
+                    </Card.Footer>
+                </Card>
+            </Col>        
+        );
+    }
+
     useEffect(() => {
         checkLocalAndOAuth()
             .then(() => {
@@ -248,13 +335,49 @@ export function Home(props) {
                 <p className="fs-6">
                     {t('home.home.guildCardDisplayExplaination2')}
                 </p>
-                <GuildCardContainer>
-                    {guildCards}
-                </GuildCardContainer>
+                
+                {!loading ?
+                    <>
+                        {hasResult ?
+                            <>
+                                <InfiniteScroll
+                                    pageStart={1}
+                                    loadMore={onLoadMore}
+                                    hasMore={hasMoreServers}
+                                    loader={
+                                        <GuildCardContainer>
+                                            {
+                                                [...Array(3)].map(() => loaderPlaceHolder())
+                                            }
+                                        </GuildCardContainer>
+                                    }
+                                >
+                                    <GuildCardContainer>
+                                            {guildCards}
+                                    </GuildCardContainer>
+                                </InfiniteScroll>
+                            </>
+                            :
+                            <>
+                                <div className="d-flex justify-content-center align-items-center mb-5">
+                                    <p className="mb-5">
+                                        {t('tagView.tagView.tagNotFound1')}{params['name']}{t('tagView.tagView.tagNotFound2')}
+                                    </p>
+                                </div>
+                            </>
+                        }
+                    </>
+                    :
+                    <></>
+                }
             </Container>
         </>
     );
 }
-
+/*
+                <GuildCardContainer>
+                    {guildCards}
+                </GuildCardContainer>
+*/
 // meta 情報 section
 // サーバーパネルズ section

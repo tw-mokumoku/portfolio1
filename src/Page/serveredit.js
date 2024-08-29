@@ -1,4 +1,4 @@
-import { hasDiscordOAuthTokenCookie } from "../Function/OAuthController";
+import { hasDiscordOAuthTokenCookie, has_SessionManagerDiscordListUID } from "../Function/OAuthController";
 import { useNavigate, Navigate, useParams } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -8,7 +8,7 @@ import { HeaderUnion } from "../Component/union/headerUnion";
 import { DashboardUserPanel } from "../Component/union/SectionUnion";
 import { ReactTags } from 'react-tag-autocomplete'
 import { useCallback, useState } from "react";
-import { getCurrentUserGuilds, getServer, getServerTags, getTagSuggests, updateServer } from "../Function/APIController";
+import { getCurrentUserGuilds, getMemberDataGuilds, getServer, getServerTags, getTagSuggests, updateServer } from "../Function/APIController";
 import Button from 'react-bootstrap/Button';
 import { useEffect } from "react";
 import './serveredit.css';
@@ -19,7 +19,6 @@ import "react-toggle/style.css";
 import Toggle from 'react-toggle';
 import { useDebounce } from 'react-use';
 import { useTranslation } from "react-i18next";
-
 export function ServerEdit(props) {
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -160,7 +159,7 @@ export function ServerEdit(props) {
     }
 
     useEffect(() => {
-        getCurrentUserGuilds().then((response) => {
+        getMemberDataGuilds().then((response) => {
             const userOwnerGuilds = response.data.filter(value => value.id == params['id'] && value.owner);
             if (userOwnerGuilds.length == 0) navigate(`/server/${params['id']}`);
             setLoading(false);
@@ -171,7 +170,6 @@ export function ServerEdit(props) {
                 setInitialSelectedTags(serverTags);
                 setSelectedTags(serverTags);
             }).catch((response) => {
-                console.log(response);
             });
 
         getServer(params['id'])
@@ -187,7 +185,7 @@ export function ServerEdit(props) {
             })
     }, [params]);
 
-    if (!hasDiscordOAuthTokenCookie()) return <Navigate to="/" />;
+    if (!has_SessionManagerDiscordListUID()) return <Navigate to="/" />;
     return (
         <>
             <OverlayLoading active={loading} />

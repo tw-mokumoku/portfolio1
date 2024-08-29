@@ -1,0 +1,26 @@
+.new-server-view-bg-img {
+    position: absolute;
+    -webkit-mask: linear-gradient(180deg, black 58%, rgba(0, 0, 0, 0) 95%), radial-gradient(15.77% 44.22% at 50% 104.95%, rgba(66, 66, 66, 0) 0%, #333333 100%), radial-gradient(30.95% 86.8% at 30.69% 13.2%, rgba(66, 66, 66, 0.33) 0%, #333333 100%), radial-gradient(51.31% 143.89% at 49.99% 24.75%, #000000 0%, #000000 52.6%, rgba(0, 0, 0, 0.18) 83.33%, rgba(0, 0, 0, 0) 95.31%), radial-gradient(51.31% 143.89% at 49.99% 24.75%, #000000 0%, #000000 52.6%, rgba(0, 0, 0, 0.18) 83.33%, rgba(0, 0, 0, 0) 95.31%), linear-gradient(180deg, #000000 90%, rgba(0, 0, 0, 0) 100%);
+    -webkit-mask-composite: source-in;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    overflow: hidden;
+    height: 42rem;
+}
+.new-server-view-main-info-bg {
+    background: black;
+    height: 25rem;
+    margin-top: 13rem;
+    position: relative;
+    background: #0000004f;
+    backdrop-filter: blur(20px);
+}
+.new-server-view-main-info-icon{
+    height: 100%
+}
+.new-server-view-main-info-container{
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+}

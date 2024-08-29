@@ -50,7 +50,6 @@ function RecommendPanel(props) {
     const { t } = useTranslation();
     return (
         <div className="big-section-panel-recommend-container pb-2 pt-1">
-            <div className="mb-3">{t('bigSection.recommendPanel.featureRecommended')}</div>
             <div className="wide-ranking-recommend-panel">
                 <WideRankingRecommendPanel {...props} />
             </div>
@@ -85,9 +84,18 @@ function CompactRankingRecommendPanels(props) {
         setPanels(tmpPanels);
     }, [props.recommendServers]);
     return (
-        <div className="big-section-panel-recommend-scroll-container" style={{ position: 'static', display: 'flex', overflowX: 'auto', gap: '0px 20px' }}>
-            {panels}
-        </div>
+        <>
+            {
+                panels.length != 0
+                ?
+                <div className="mb-3">{t('bigSection.recommendPanel.featureRecommended')}</div>
+                :
+                <></>
+            }
+            <div className="big-section-panel-recommend-scroll-container" style={{ position: 'static', display: 'flex', overflowX: 'auto', gap: '0px 20px' }}>
+                {panels}
+            </div>
+        </>
     );
 }
 
@@ -116,6 +124,7 @@ function WideRankingRecommendPanel(props) {
     const [panelIndex, setPanelIndex] = useState(0);
     const [showingPanel, setShowingPanel] = useState(<></>);
     const [isRunning, setIsRunning] = useState(true);
+    const [interval, setInterval] = useState(10000);
     useEffect(() => {
         const tmpPanels = props.recommendServers.map((value, index) => {
             var panel = <></>;
@@ -139,7 +148,7 @@ function WideRankingRecommendPanel(props) {
         setShowingPanel(tmpPanels[0]);
     }, [props.recommendServers]);
     const showNextPanel = () => {
-        console.log(panelIndex);
+        setInterval(10000);
         var tmpIndex;
         if (panelIndex + 1 == panels.length)
             tmpIndex = 0;
@@ -149,7 +158,6 @@ function WideRankingRecommendPanel(props) {
         setShowingPanel(panels[tmpIndex]);
     }
     const showPrevPanel = () => {
-        console.log(panelIndex);
         var tmpIndex;
         if (panelIndex == 0)
             tmpIndex = panels.length - 1;
@@ -161,29 +169,38 @@ function WideRankingRecommendPanel(props) {
     }
     useInterval(() => {
         showNextPanel();
-    }, isRunning ? 10000 : null);
+    }, isRunning ? interval : null);
     return (
-        <div style={{ position: 'relative' }}>
+        <>
             {
                 panels.length != 0
+                ?
+                <div className="mb-3">{t('bigSection.recommendPanel.featureRecommended')}</div>
+                :
+                <></>
+            }
+            <div style={{ position: 'relative' }}>
+                {
+                    panels.length != 0
                     ?
                     <>
-                        <div className="recommend-panel-left-arrow-container">
-                            <div className="recommend-panel-left-arrow" onClick={() => showPrevPanel()}>
-                                <KeyboardArrowLeftIcon style={{ transform: 'scale(2)' }} />
+                            <div className="recommend-panel-left-arrow-container">
+                                <div className="recommend-panel-left-arrow" onClick={() => showPrevPanel()}>
+                                    <KeyboardArrowLeftIcon style={{ transform: 'scale(2)' }} />
+                                </div>
                             </div>
-                        </div>
-                        <div className="recommend-panel-right-arrow-container">
-                            <div className="recommend-panel-right-arrow" onClick={() => showNextPanel()}>
-                                <KeyboardArrowRightIcon style={{ transform: 'scale(2)' }} />
+                            <div className="recommend-panel-right-arrow-container">
+                                <div className="recommend-panel-right-arrow" onClick={() => showNextPanel()}>
+                                    <KeyboardArrowRightIcon style={{ transform: 'scale(2)' }} />
+                                </div>
                             </div>
-                        </div>
-                    </>
-                    :
-                    <></>
-            }
-            {showingPanel}
-        </div>
+                        </>
+                        :
+                        <></>
+                    }
+                {showingPanel}
+            </div>
+        </>
     );
 }
 
@@ -201,15 +218,17 @@ function RankingRecommendPanel(props) {
                 <img src={props.icon} className="big-section-panel-recommend-img-inner" alt=""></img>
             </div>
             <div className="big-section-panel-recommend-info p-4 pe-5" style={{ background: "#0c0d0f" }}>
-                <p className="big-section-panel-recommend-server-name mb-0">
+                <p className="big-section-panel-recommend-server-name mb-0" style={{ fontSize: '25px' }}>
                     {props.name}
                 </p>
-                <p className="big-section-panel-recommend-server-rank mb-4">{props.rankingText} {props.rank} {t('bigSection.recommendPanel.rankText')}</p>
-                <div className="ranking-recommend-panel-description">
+                <p className="big-section-panel-recommend-server-rank mb-4" style={{ fontSize: '14px' }}>
+                    {props.rankingText} {props.rank} {t('bigSection.recommendPanel.rankText')}
+                </p>
+                <div className="ranking-recommend-panel-description" style={{ fontSize: '14px', color: '#acb2b8' }}>
                     {nl2br(props.description)}
                 </div>
-                <div className="ranking-recommend-panel-description">
-                    {'> ' + t('bigSection.recommendPanel.clickToReadMore')}
+                <div className="ranking-recommend-panel-description" style={{ fontSize: '14px' }}>
+                    {'-> ' + t('bigSection.recommendPanel.clickToReadMore')}
                 </div>
             </div>
         </div>
