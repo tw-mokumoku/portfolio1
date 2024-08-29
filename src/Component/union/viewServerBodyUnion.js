@@ -129,12 +129,6 @@ export function ViewServerBody(props) {
 
     return (
         <div>
-            <FirstEditCategory title={t('viewServerBodyUnion.viewServerBody.tagTitle')}>
-                <div className="mb-3" style={{ minHeight: '40px' }}>
-                    {ToButton(props.guildTags)}
-                </div>
-            </FirstEditCategory>
-            <BodySeparater />
             <EditCategory title={t('viewServerBodyUnion.viewServerBody.basicInfoTitle')}>
                 <BasicInfo {...props} />
             </EditCategory>
@@ -263,7 +257,7 @@ function BodySeparater(props) {
     );
 }
 
-function FirstEditCategory(props) {
+export function FirstEditCategory(props) {
     return (
         <div className="edit-category pb-2">
             <div

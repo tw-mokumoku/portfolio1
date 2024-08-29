@@ -9,8 +9,13 @@ import { useParams } from "react-router-dom";
 import { getDiscordGuildIcon, getServer, getServerCurrentActiveUsers, getServerTags, getServerUpdatedLog } from "../Function/APIController";
 import { ToastContainer, toast } from 'react-toastify';
 import { Avatar } from '@mui/material';
+import { FirstEditCategory, ViewServerBody } from "../Component/union/viewServerBodyUnion";
+import nl2br from 'react-newline-to-break'; 
+import { ToButton } from "../Component/parts/conversion";
+import { useNavigate } from "react-router-dom";
 
 export function NewServerView() {
+    const navigate = useNavigate();
     const { t } = useTranslation();
     const params = useParams();
     const [serverIcon, setServerIcon] = useState(<></>);
@@ -23,6 +28,7 @@ export function NewServerView() {
     const [serverCurrentUpdatedLog, setServerCurrentUpdatedLog] = useState();
     const [serverInviteURL, setServerInviteURL] = useState();
     const [guildTags, setGuildTags] = useState();
+
     useEffect(() => {
         setServerID(params['id']);
         const getServerPromise = getServer(params['id'])
@@ -91,14 +97,70 @@ export function NewServerView() {
                 <img src={currentServer ? getDiscordGuildIcon(params['id'], currentServer.icon) : ""} className="w-100" alt=""></img>
             </div>
             <Container>
-                <div className="new-server-view-main-info-bg d-flex">
-                    <div className="new-server-view-main-info-icon">
-                        <img src={currentServer ? getDiscordGuildIcon(params['id'], currentServer.icon) : ""} className="h-100" alt=""></img>
+                <div className="new-server-view-main-info-bg">
+                    <div className="new-server-view--container d-flex">
+                        <div className="new-server-view-main-info-icon">
+                            <img src={currentServer ? getDiscordGuildIcon(params['id'], currentServer.icon) : ""} className="h-100" alt=""></img>
+                        </div>
                         <div className="new-server-view-main-info-container">
-                            ゲーム開発完全に理解した
+                            <div className="fs-3 fw-bold">{currentServerName}</div>
+                            <div style={{ color: '#acb2b8' }}>@{params['id']}</div>
+                            <div className="d-flex">
+                                <div className="new-server-view-tags py-2 px-4 mt-2" onClick={() => window.open(serverInviteURL)}>
+                                    サーバーに参加
+                                </div>
+                            </div>
+                            <div className="d-flex mt-2" style={{ flexWrap: 'wrap' }}>
+                                {
+                                    guildTags ?
+                                        guildTags.map((tag_name, index) =>
+                                            <div className="new-server-view-tags"
+                                                key={index}
+                                                onClick={() => navigate(`/tag/${tag_name}`)}
+                                            >
+                                                {tag_name}
+                                            </div>
+                                        )
+                                    :<></>
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div className="new-server-view-space my-4 py-3"></div>
+                <div className="new-server-view-narrow-header-container">
+                    <div className="new-server-view-narrow-bg-img mb-3">
+                        <img src={currentServer ? getDiscordGuildIcon(params['id'], currentServer.icon) : ""} className="w-100" alt=""></img>
+                    </div>
+                    <div className="fs-3 fw-bold">{currentServerName}</div>
+                    <div style={{ color: '#acb2b8' }}>@{params['id']}</div>
+                    <div className="d-flex mt-2" style={{ flexWrap: 'wrap' }}>
+                        {
+                            guildTags ?
+                                guildTags.map((tag_name, index) =>
+                                    <div className="new-server-view-tags"
+                                        key={index}
+                                        onClick={() => navigate(`/tag/${tag_name}`)}
+                                    >
+                                        {tag_name}
+                                    </div>
+                                )
+                                : <></>
+                        }
+                    </div>
+                    <div className="new-server-view-tags py-2 px-3 mt-4 mb-2" onClick={() => window.open(serverInviteURL)}>
+                        サーバーに参加
+                    </div>
+                </div>
+                <ViewServerBody
+                    params={params}
+                    currentServerDescription={nl2br(currentServerDescription)}
+                    currentServer={currentServer}
+                    serverUpdatedLog={serverUpdatedLog}
+                    serverCurrentUpdatedLog={serverCurrentUpdatedLog}
+                    guildTags={guildTags}
+                    showTags={false}
+                />
             </Container>
         </>
     );
