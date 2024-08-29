@@ -130,45 +130,6 @@ export function TagView() {
                 </Card>
             </Col>        
         );
-/*
-        <Col>
-            <Card cardName="m-3">
-                <Card.Header>
-                    <div className={props.cardTitleName}>
-                        <button className="to-guild-view-button w-100" onClick={() => navigate(`/server/${props.guildID}`)}>
-                            <Stack direction="horizontal">
-                                <Avatar src={props.guildIcon} sx={{ width: 60, height: 60 }} className="sp-icon me-4" alt={props.guildName} variant="rounded">
-                                    {props.guildName[0]}
-                                </Avatar>
-                                <Card.Title className="fs-5">{props.guildName}</Card.Title>
-                            </Stack>
-                        </button>
-                    </div>
-                </Card.Header>
-                <Card.Body className="pt-2">
-                    <div className={props.cardTagClassName + " mb-3"} style={{ height: '90px' }}>
-                        {ToButton(guildtags)}
-                    </div>
-                    <OpenableOverflowContainer>
-                        {nl2br(props.guildDescription)}
-                    </OpenableOverflowContainer>
-                    <div className={props.cardDataClassName + " guild-card-data-container"}>
-                        {props.dataString}
-                    </div>
-                </Card.Body>
-                <Card.Footer className="pb-4 d-flex justify-content-center">
-                    <Button className="d-flex flex-row py-2" onClick={() => window.open(props.guildInviteURL)}>
-                        <div style={{ height: "100%", width: "23px" }} className="me-2">
-                            <FaDiscord className="h-100 w-100" />
-                        </div>
-                        <div className="">
-                            {t('conversion.guildCard.joinServer')}
-                        </div>
-                    </Button>
-                </Card.Footer>
-            </Card>
-    </Col>
-*/
     }
 
     return (

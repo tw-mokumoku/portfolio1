@@ -1,49 +1,23 @@
 import { deleteCookie, getCookie, hasCookie, setCookie } from "./CookieController";
 
-const discordOAuthToken = "discord_oauth_token";
-const discordAccessToken = "discord_access_token";
-const discordRefreshToken = "discord_refresh_token";
+const _smdluidKeyName = "_smdluid";
 
 /*****************  set  ********************/
-export function setDiscordOAuthTokenCookie(token) {
-    setCookie(discordOAuthToken, token, 604800);
-}
-export function setDiscordAccessTokenCookie(token) {
-    setCookie(discordAccessToken, token, 604800);
-}
-export function setDiscordRefreshTokenCookie(token) {
-    setCookie(discordRefreshToken, token, 604800);
+export function set_SessionManagerDiscordListUID(_smdluid) {
+    setCookie(_smdluidKeyName, _smdluid, 31536000)
 }
 
 /*****************  get  ********************/
-export function getDiscordAccessTokenCookie() {
-    return getCookie(discordAccessToken);
-}
-export function getDiscordRefreshTokenCookie() {
-    return getCookie(discordRefreshToken);
-}
-export function getDiscordOAuthTokenCookie() {
-    return getCookie(discordOAuthToken);
+export function get_SessionManagerDiscordListUID() {
+    return getCookie(_smdluidKeyName);
 }
 
 /*****************  delete  ********************/
-export function deleteDiscordAccessTokenCookie() {
-    deleteCookie(discordAccessToken);
-}
-export function deleteDiscordRefreshTokenCookie() {
-    deleteCookie(discordRefreshToken);
-}
-export function deleteDiscordOAuthTokenCookie() {
-    deleteCookie(discordOAuthToken);
+export function delete_SessionManagerDiscordListUID() {
+    deleteCookie(_smdluidKeyName);
 }
 
 /*****************  has  ********************/
-export function hasDiscordOAuthTokenCookie() {
-    return hasCookie(discordOAuthToken);
-}
-export function hasDiscordAccessTokenCookie() {
-    return hasCookie(discordAccessToken);
-}
-export function hasDiscordRefreshTokenCookie() {
-    return hasCookie(discordRefreshToken);
+export function has_SessionManagerDiscordListUID() {
+    return hasCookie(_smdluidKeyName);
 }

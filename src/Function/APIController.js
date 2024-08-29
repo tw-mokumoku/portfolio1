@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getDiscordOAuthPageURL } from './LocalRemoteSwitcher';
-import { getDiscordAccessTokenCookie, hasDiscordOAuthTokenCookie } from './OAuthController';
-import { getCurrentDiscordUserDataLocalStorage } from './LocalStorageController';
+import { getDiscordAccessTokenCookie, get_SessionManagerDiscordListUID, hasDiscordOAuthTokenCookie } from './OAuthController';
+import { getCurrentDiscordUserDataLocalStorage, getMemberDataLocalStorage } from './LocalStorageController';
 import { Avatar } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { checkLocalAndOAuth } from './LoginController';
@@ -9,13 +9,21 @@ import { checkLocalAndOAuth } from './LoginController';
 
 const DiscordBaseURL = "https://discord.com/api";
 const DiscordImageBaseURL = "https://cdn.discordapp.com/";
-const DislitBaseURL = "https://nfvdoa532a.execute-api.ap-northeast-1.amazonaws.com/InitialStage";
+//const DislitBaseURL = "https://nfvdoa532a.execute-api.ap-northeast-1.amazonaws.com/InitialStage";
+const DislitBaseURL = "https://xixj7gp1xl.execute-api.ap-northeast-1.amazonaws.com/InitialStage";
 
 /***************************************************************/
 /***************************************************************/
 /**************************  dislist  **************************/
 /***************************************************************/
 /***************************************************************/
+/*****************  dislist country  ********************/
+////  GET
+export async function getLogin(redirect_uri, code){
+    return await axios.get(`${DislitBaseURL}/login?redirect_uri=${redirect_uri}&code=${code}`)
+}
+
+
 /*****************  dislist country  ********************/
 ////  GET
 export async function getCountryServers(country_id) {
@@ -46,7 +54,7 @@ export async function getMember(member_id) {
 
 ////  POST
 export async function createMember(member_id) {
-    return await axios.post(`${DislitBaseURL}/member/${member_id}`);
+    return await axios.post(`${DislitBaseURL}/member/${member_id}?_smdluid=${get_SessionManagerDiscordListUID()}`);
 }
 
 
@@ -80,8 +88,8 @@ export async function getServerMembers(server_id) {
 export async function getServerCurrentActiveUsers(server_id) {
     return await axios.get(`${DislitBaseURL}/server/${server_id}/current_active_users`);
 }
-export async function getServerRankingCountryUpdatedLog(country_id) {
-    return await axios.get(`${DislitBaseURL}/server/ranking/${country_id}/updated_log`);
+export async function getServerRankingCountryUpdatedLog(country_id, limit, offset) {
+    return await axios.get(`${DislitBaseURL}/server/ranking/${country_id}/updated_log?limit=${limit}&offset=${offset}`);
 }
 
 ////  POST
@@ -92,13 +100,8 @@ export async function createServer(id, name) {
     }
 
     return await axios.post(
-        `${DislitBaseURL}/server`,
-        data,
-        {
-            headers: {
-                'Authorization': `Bearer ${getDiscordAccessTokenCookie()}`
-            }
-        }
+        `${DislitBaseURL}/server?_smdluid=${get_SessionManagerDiscordListUID()}`,
+        data
     );
 }
 
@@ -116,59 +119,34 @@ export async function updateServer({ id, name = null, invite_url = null, descrip
     if (removed_tag_pairs != null) data['removed_tag_pairs'] = removed_tag_pairs;
 
     return await axios.patch(
-        `${DislitBaseURL}/server/${id}`,
-        data,
-        {
-            headers: {
-                'Authorization': `Bearer ${getDiscordAccessTokenCookie()}`
-            }
-        }
+        `${DislitBaseURL}/server/${id}?_smdluid=${get_SessionManagerDiscordListUID()}`,
+        data
     );
 }
 export async function updateServerUpdatedLog(server_id, updated_epoch) {
     return await axios.patch(
-        `${DislitBaseURL}/server/${server_id}/updated_log`,
+        `${DislitBaseURL}/server/${server_id}/updated_log?_smdluid=${get_SessionManagerDiscordListUID()}`,
         {
             updated_epoch: `${updated_epoch}`
-        },
-        {
-            headers: {
-                'Authorization': `Bearer ${getDiscordAccessTokenCookie()}`
-            }
         }
     );
 }
 export async function updateServerCurrentActiveUsers(server_id, user_num) {
     return await axios.patch(
-        `${DislitBaseURL}/server/${server_id}/current_active_users`,
+        `${DislitBaseURL}/server/${server_id}/current_active_users?_smdluid=${get_SessionManagerDiscordListUID()}`,
         {
             user_num: `${user_num}`
-        },
-        {
-            headers: {
-                'Authorization': `Bearer ${getDiscordAccessTokenCookie()}`
-            }
         }
     );
 }
 export async function incrementServerCurrentActiveUsers(server_id) {
     return await axios.patch(
         `${DislitBaseURL}/server/${server_id}/current_active_users/increment`,
-        {
-            headers: {
-                'Authorization': `Bearer ${getDiscordAccessTokenCookie()}`
-            }
-        }
     );
 }
 export async function decrementServerCurrentActiveUsers(server_id) {
     return await axios.patch(
-        `${DislitBaseURL}/server/${server_id}/current_active_users/increment`,
-        {
-            headers: {
-                'Authorization': `Bearer ${getDiscordAccessTokenCookie()}`
-            }
-        }
+        `${DislitBaseURL}/server/${server_id}/current_active_users/increment`
     );
 }
 
@@ -177,7 +155,7 @@ export async function decrementServerCurrentActiveUsers(server_id) {
 export async function getTagServers(tag_name) {
     return await axios.get(`${DislitBaseURL}/tag/${tag_name}/servers`);
 }
-export async function getTagRankingCurrent(tag_name) { //îzóÒéwíËâ¬î\
+export async function getTagRankingCurrent(tag_name) { //ÔøΩzÔøΩÔøΩwÔøΩÔøΩ¬î\
     return await axios.get(
         `${DislitBaseURL}/tag/ranking/current`,
         {
@@ -194,17 +172,12 @@ export async function getTagRankingCurrentServers(tag_name, limit, offset) {
 }
 
 ////  POST
-export async function createTag(name, country_id) { // îÒêÑèß
+export async function createTag(name, country_id) { // ÔøΩÒêÑèÔøΩ
     return await axios.post(
-        `${DislitBaseURL}/tag`,
+        `${DislitBaseURL}/tag?_smdluid=${get_SessionManagerDiscordListUID()}`,
         {
             name: `${name}`,
             country_id: `${country_id}`
-        },
-        {
-            headers: {
-                'Authorization': `Bearer ${getDiscordAccessTokenCookie()}`
-            }
         }
     );
 }
@@ -214,15 +187,10 @@ export async function createTag(name, country_id) { // îÒêÑèß
 ////  POST
 export async function createTagPair(server_id, tag_name) {
     return await axios.post(
-        `${DislitBaseURL}/tag_pair`,
+        `${DislitBaseURL}/tag_pair?_smdluid=${get_SessionManagerDiscordListUID()}`,
         {
             server_id: `${server_id}`,
             tag_name: `${tag_name}`
-        },
-        {
-            headers: {
-                'Authorization': `Bearer ${getDiscordAccessTokenCookie()}`
-            }
         }
     );
 }
@@ -230,14 +198,11 @@ export async function createTagPair(server_id, tag_name) {
 ////  DELETE
 export async function deleteTagPair(server_id, tag_name) {
     return await axios.delete(
-        `${DislitBaseURL}/tag_pair`,
+        `${DislitBaseURL}/tag_pair?_smdluid=${get_SessionManagerDiscordListUID()}`,
         {
             data: {
                 server_id: `${server_id}`,
                 tag_name: `${tag_name}`
-            },
-            headers: {
-                'Authorization': `Bearer ${getDiscordAccessTokenCookie()}`
             }
         }
     );
@@ -248,15 +213,10 @@ export async function deleteTagPair(server_id, tag_name) {
 ////  POST
 export async function createUpdatedLog(server_id, updated_epoch) {
     return await axios.post(
-        `${DislitBaseURL}/updated_log`,
+        `${DislitBaseURL}/updated_log?_smdluid=${get_SessionManagerDiscordListUID()}`,
         {
             server_id: `${server_id}`,
             updated_epoch: `${updated_epoch}`
-        },
-        {
-            headers: {
-                'Authorization': `Bearer ${getDiscordAccessTokenCookie()}`
-            }
         }
     );
 }
@@ -266,17 +226,12 @@ export async function createUpdatedLog(server_id, updated_epoch) {
 ////  POST
 export async function createVCLog(server_id, member_id, start_epoch, interval_sec) {
     return await axios.post(
-        `${DislitBaseURL}/updated_log`,
+        `${DislitBaseURL}/updated_log?_smdluid=${get_SessionManagerDiscordListUID()}`,
         {
             server_id: `${server_id}`,
             member_id: `${member_id}`,
             start_epoch: `${start_epoch}`,
             interval_sec: `${interval_sec}`,
-        },
-        {
-            headers: {
-                'Authorization': `Bearer ${getDiscordAccessTokenCookie()}`
-            }
         }
     );
 }
@@ -286,16 +241,23 @@ export async function createVCLog(server_id, member_id, start_epoch, interval_se
 ////  POST
 export async function deleteMemberPair(server_id, member_id) {
     return await axios.delete(
-        `${DislitBaseURL}/member_pair`,
+        `${DislitBaseURL}/member_pair?_smdluid=${get_SessionManagerDiscordListUID()}`,
         {
             server_id: `${server_id}`,
             member_id: `${member_id}`
-        },
-        {
-            headers: {
-                'Authorization': `Bearer ${getDiscordAccessTokenCookie()}`
-            }
         });
+}
+
+/*****************  dislist member_data  ********************/
+export async function getMemberData() {
+    return axios.get(
+        `${DislitBaseURL}/member_data?_smdluid=${get_SessionManagerDiscordListUID()}`
+    )
+}
+export async function getMemberDataGuilds() {
+    return axios.get(
+        `${DislitBaseURL}/member_data/guilds?_smdluid=${get_SessionManagerDiscordListUID()}`
+    );
 }
 
 
@@ -306,64 +268,18 @@ export async function deleteMemberPair(server_id, member_id) {
 /**************************  Discord  **************************/
 /***************************************************************/
 /***************************************************************/
-
-/*****************  Axios  ********************/
-// Discord
-export async function postDiscordAuthentication(token) {
-    /* axios.post(url[, data[, config]]) */
-    return await axios.post(
-        'https://discordapp.com/api/oauth2/token',
-        {
-            'client_id': '1226955908991418510',
-            'client_secret': 'cNpdt3Qz4AhZEZpjd-5CcSvsIZM8oylZ',
-            'grant_type': 'authorization_code',
-            'code': token,
-            'redirect_uri': getDiscordOAuthPageURL()
-        },
-        {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        }
-    );
-}
-async function getDiscordAPI(API_ENDPOINT) {
-    if (!hasDiscordOAuthTokenCookie()) return;
-    return await axios.get(API_ENDPOINT, {
-        headers: {
-            'Authorization': `Bearer ${getDiscordAccessTokenCookie()}`
-        }
-    });
-}
-
-/*****************  data  ********************/
-// Discord
-export async function getDiscordUser(user_id) {
-    return getDiscordAPI((DiscordBaseURL + `/users/${user_id}`));
-}
-export async function getCurrentDiscordUser() {
-    return getDiscordUser('@me');
-}
-export async function getCurrentUserGuilds() {
-    return getDiscordAPI((DiscordBaseURL + `/users/@me/guilds`));
-}
-export async function getGuild(guild_id) {
-    return getDiscordAPI((DiscordBaseURL + `/guilds/${guild_id}`));
-}
-
-
 /*****************  img  ********************/
 // Discord
 export function getCurrentDiscordUserIconURL() {
-    const userdata = getCurrentDiscordUserDataLocalStorage();
-    return `${DiscordImageBaseURL}avatars/${userdata.id}/${userdata.avatar}.png`;
+    const userdata = getMemberDataLocalStorage();
+    return `${DiscordImageBaseURL}avatars/${userdata.member_id}/${userdata.avatar}.png`;
 }
 export function CurrentDiscordUserIcon(props) {
     const [avatar, setAvatar] = useState(<></>);
     useEffect(() => {
         checkLocalAndOAuth()
             .then(() => {
-                const userdata = getCurrentDiscordUserDataLocalStorage();
+                const userdata = getMemberDataLocalStorage();
                 setAvatar(
                     userdata.avatar ?
                         <Avatar src={getCurrentDiscordUserIconURL()} {...props} />
@@ -382,11 +298,11 @@ export function getDiscordGuildIcon(guild_id, guild_icon) {
 /***************** string ********************/
 // Discord
 export function getCurrentDiscordUserName() {
-    const userdata = getCurrentDiscordUserDataLocalStorage();
+    const userdata = getMemberDataLocalStorage();
     return userdata.username;
 }
 export function getCurrentDiscordUserGlobalName() {
-    const userdata = getCurrentDiscordUserDataLocalStorage();
+    const userdata = getMemberDataLocalStorage();
 
     return userdata.global_name ? userdata.global_name : userdata.username;
 }

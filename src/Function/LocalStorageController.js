@@ -1,7 +1,8 @@
-import { getCurrentDiscordUser, getCurrentUserGuilds, getServer } from "./APIController";
+import { getCurrentDiscordUser, getCurrentUserGuilds, getMemberData, getServer } from "./APIController";
 const currentDiscodUserData = "current_discord_user_data";
 const didHomeTourFlag = "did_home_tour_flag";
 const i18next = "i18next";
+const memberDataString = "member_data"
 
 
 /*****************  set  ********************/
@@ -11,14 +12,17 @@ function setLocalStorage(key, value) {
 function setLocalStorageJSON(key, value) {
     setLocalStorage(key, JSON.stringify(value));
 }
-export function setCurrentDiscordUserDataLocalStorage() {
-    return getCurrentDiscordUser()
+export function setMemberDataLocalStorage() {
+    return getMemberData()
         .then((response) => {
-            setLocalStorageJSON(currentDiscodUserData, response.data);
-        });
+            setLocalStorageJSON(memberDataString, response.data);
+        })
 }
 export function setHomeTourFlagLocalStorage() {
     setLocalStorageJSON(didHomeTourFlag, true);
+}
+export function setMemberDataLocalStorgae(member_data) {
+    setLocalStorageJSON(memberDataString, member_data);
 }
 
 /*****************  get  ********************/
@@ -28,8 +32,8 @@ function getLocalStorage(key) {
 function getLocalStorageJSON(key) {
     return JSON.parse(getLocalStorage(key));
 }
-export function getCurrentDiscordUserDataLocalStorage() {
-    return getLocalStorageJSON(currentDiscodUserData);
+export function getMemberDataLocalStorage() {
+    return getLocalStorageJSON(memberDataString);
 }
 function geti18nextLocalStorage() {
     return getLocalStorage(i18next);
@@ -60,17 +64,17 @@ export function getLanguageLocalStorage() {
 function removeLocalStorage(key) {
     localStorage.removeItem(key);
 }
-export function removeCurrentDiscordUserDataLocalStorage() {
-    return removeLocalStorage(currentDiscodUserData);
+export function removeMemberDataLocalStorage() {
+    return removeLocalStorage(memberDataString);
 }
 
 /*****************  has  ********************/
 function hasLocalStorage(key) {
     return (localStorage.getItem(key) != null);
 }
-export function hasCurrentDiscordUserDataLocalStorage() {
-    return hasLocalStorage(currentDiscodUserData);
-}
 export function hasHomeTourFlagLocalStorage() {
     return hasLocalStorage(didHomeTourFlag);
+}
+export function hasMemberDataLocalStorage() {
+    return hasLocalStorage(memberDataString);
 }

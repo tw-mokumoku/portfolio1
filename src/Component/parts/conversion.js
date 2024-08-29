@@ -19,21 +19,25 @@ import nl2br from 'react-newline-to-break';
 export function ToButton(tag_names) {
     const navigate = useNavigate();
     if (!Array.isArray(tag_names)) return tag_names
-    return tag_names.map((tag_name, index) => <Button className="m-1 my-2 py-1 px-2 btn-secondary" key={index} onClick={() => navigate(`/tag/${tag_name}`) }>{tag_name}</Button>);
-    //return tag_names.map((tag_name, index) => <Button className="m-1 my-2 py-1 px-2 btn-secondary" key={index} href={`/tag/${tag_name}`}>{tag_name}</Button>);
+    return tag_names.map(
+        (tag_name, index) => 
+        <Button className="m-1 my-2 py-1 px-2 btn-secondary"
+            key={index}
+            onClick={() => navigate(`/tag/${tag_name}`) }
+            style={{ fontSize: '12px', color: '#acb2b8' }}
+        >
+            {tag_name}
+        </Button>
+    );
 }
 
-// expect [{ name: '', count: '' }]
-/*
-export function toTagButton(tagData) {
-    console.log(tagData);
-    //if (!Array.isArray(tag_names)) return tag_names
-    return toTagButton()
-    return tag_names.map((tag_name, index) => <Button className="m-1 my-2 py-1 px-2 btn-secondary" key={index} href={`/tag/${tag_name}`}>{tag_name}</Button>);
-}
-*/
 export function TagButton(props) {
-    return <Button className="m-1 my-2 mt-3 ms-2 py-1 px-2 btn-secondary" href={`/tag/${props.tagName}`}>{props.tagName}</Button>;
+    return <Button className="m-1 my-2 mt-3 ms-2 py-1 px-2 btn-secondary"
+        href={`/tag/${props.tagName}`}
+        style={{ fontSize: '14px', color: '#acb2b8', fontWeight: '700' }}
+        >
+            {props.tagName}
+        </Button>;
 }
 
 export function OpenableOverflowContainer(props) {
@@ -64,7 +68,7 @@ export function OpenableOverflowContainer(props) {
     }, [isOpen]);
     return (
         <div style={{ minHeight: '160px' }}>
-            <div ref={ref} className="overflow-hidden" style={{ height: overflowHeight, fontSize: '1rem' }}>
+            <div ref={ref} className="overflow-hidden" style={{ height: overflowHeight, fontSize: '14px', lineHeight: '1.5em', color: '#acb2b8' }}>
                 {props.children}
             </div>
             <div className="w-100">
@@ -124,7 +128,7 @@ export function GuildCard(props) {
                         <div style={{ height: "100%", width: "23px" }} className="me-2">
                             <FaDiscord className="h-100 w-100" />
                         </div>
-                        <div className="">
+                        <div className="" style={{ fontSize: '14px' }}>
                             {t('conversion.guildCard.joinServer')}
                         </div>
                     </Button>

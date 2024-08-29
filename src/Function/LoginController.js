@@ -1,22 +1,19 @@
-import { hasCurrentDiscordUserDataLocalStorage, removeCurrentDiscordUserDataLocalStorage, setCurrentDiscordUserDataLocalStorage } from "./LocalStorageController";
-import { deleteDiscordAccessTokenCookie, deleteDiscordOAuthTokenCookie, deleteDiscordRefreshTokenCookie, hasDiscordOAuthTokenCookie } from "./OAuthController";
+import { hasMemberDataLocalStorage, removeMemberDataLocalStorage, setMemberDataLocalStorage } from "./LocalStorageController";
+import { delete_SessionManagerDiscordListUID, has_SessionManagerDiscordListUID } from "./OAuthController";
 
 export function disconnectViaDiscord() {
-    deleteDiscordAccessTokenCookie();
-    deleteDiscordRefreshTokenCookie();
-    deleteDiscordOAuthTokenCookie();
-    removeCurrentDiscordUserDataLocalStorage();
+    delete_SessionManagerDiscordListUID();
+    removeMemberDataLocalStorage();
 }
 export function checkLocalAndOAuth() {
     return new Promise((resolve, reject) => {
-        if (hasDiscordOAuthTokenCookie() && !hasCurrentDiscordUserDataLocalStorage()) {
-            setCurrentDiscordUserDataLocalStorage()
+        if (has_SessionManagerDiscordListUID() && !hasMemberDataLocalStorage()) {
+            setMemberDataLocalStorage()
                 .then(() => {
-                    //window.location.reload();
                     resolve();
                 });
         } else {
             resolve();
         }
-    })
+    });
 }

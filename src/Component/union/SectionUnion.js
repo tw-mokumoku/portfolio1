@@ -14,7 +14,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { checkLocalAndOAuth, disconnectViaDiscord, disconnectVisDislist } from '../../Function/LoginController';
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { getLanguageLocalStorage } from '../../Function/LocalStorageController';
+import { getLanguageLocalStorage, getMemberDataLocalStorage } from '../../Function/LocalStorageController';
 
 export function TagListSection(props) {
     const { t } = useTranslation();
@@ -70,7 +70,6 @@ export function DashboardUserPanel() {
     useEffect(() => {
         checkLocalAndOAuth()
             .then(() => {
-
                 setGlobalName(getCurrentDiscordUserGlobalName());
                 setUserIcon(
                     <CurrentDiscordUserIcon alt="" style={{ borderRadius: "30px", border: "2px solid lightblue", width: 60, height: 60 }} />
