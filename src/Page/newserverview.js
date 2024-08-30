@@ -148,7 +148,7 @@ export function NewServerView() {
                                 : <></>
                         }
                     </div>
-                    <div className="new-server-view-tags py-2 px-3 mt-4 mb-2" onClick={() => window.open(serverInviteURL)}>
+                    <div className="new-server-view-tags py-2 px-3 mt-4 mb-2" style={{ background: 'linear-gradient( to right, #75b022 5%, #588a1b 95%)' }} onClick={() => window.open(serverInviteURL)}>
                         サーバーに参加
                     </div>
                 </div>
