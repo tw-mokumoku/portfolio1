@@ -59,6 +59,7 @@ export function SearchResult(props) {
     }
 
     useEffect(() => {
+        setLoading(true);
         getSeachFunction();
         if (window.getSelection) {
             window.getSelection().removeAllRanges();
