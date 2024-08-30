@@ -64,6 +64,7 @@ export function TagView() {
     }
 
     useEffect(() => {
+        setLoading(true);
         getTagRankingCurrentServersFunction();
     }, [params]);
 
