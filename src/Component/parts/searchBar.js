@@ -23,8 +23,8 @@ export function SearchBar() {
 
     return (
         <div className="w-100">
-            <InputGroup className="mt-3 search-bar-tour">
-                <InputGroup.Text id="basic-addon1">
+            <InputGroup className="mt-3 search-bar-tour search-bar-inputgroup">
+                <InputGroup.Text className="search-bar-inputgroup-text" id="basic-addon1">
                     <SearchIcon />
                 </InputGroup.Text>
                 <Form.Control
@@ -34,6 +34,7 @@ export function SearchBar() {
                     aria-label="Username"
                     aria-describedby="basic-addon1"
                     onKeyDown={onEnter}
+                    className="search-bar-form-control"
                 />
             </InputGroup>
         </div>

@@ -106,7 +106,7 @@ export function NewServerView() {
                             <div className="fs-3 fw-bold">{currentServerName}</div>
                             <div style={{ color: '#acb2b8' }}>@{params['id']}</div>
                             <div className="d-flex">
-                                <div className="new-server-view-tags py-2 px-4 mt-2" onClick={() => window.open(serverInviteURL)}>
+                                <div className="new-server-view-tags py-2 px-4 mt-2" style={{ background: 'linear-gradient( to right, #75b022 5%, #588a1b 95%)' }} onClick={() => window.open(serverInviteURL)}>
                                     サーバーに参加
                                 </div>
                             </div>

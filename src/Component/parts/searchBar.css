@@ -215,3 +215,12 @@
     font-size: 1rem;
     white-space: nowrap;
 }
+
+@media (max-width: 768px) {
+    .search-bar-inputgroup-text{
+        padding: 1rem;
+    }
+    .search-bar-form-control{
+        padding-left: 0;
+    }
+}
