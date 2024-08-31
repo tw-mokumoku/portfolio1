@@ -33,12 +33,16 @@ function ESi18n() {
             serverview: {
                 serverView: {
                     serverDataMissing: "Falta información del servidor. Ingrese la información del servidor editando el panel.",
-                    failedToGetServerData: "No se pudo obtener la información del servidor. Por favor inténtalo de nuevo."
+                    failedToGetServerData: "No se pudo obtener la información del servidor. Por favor inténtalo de nuevo.",
+                    joinServer: "Unirse al servidor"
                 }
             },
             dashboard: {
                 dashboard: {
-                    dashboardTitle: "panel"
+                    dashboardTitle: "panel",
+                    serverContainerTour: "Aquí verá los servidores que posee como administrador.",
+                    serverPanelButtonEdit: "Los servidores sin información inicial no pueden aparecer en la lista de Discord. Por favor, asegúrese de editar el servidor.",
+                    serverPanelButtonView: "Puede comprobar el estado de contabilización del servidor. Si aparece un error, es que hay elementos no configurados. Por favor, revise la configuración del servidor."
                 }
             },
             setting: {

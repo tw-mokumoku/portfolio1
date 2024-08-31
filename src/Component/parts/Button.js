@@ -11,7 +11,7 @@ export function ServerPanelButtons(props) {
                     <div className="d-flex">
                         <div className="pe-2 w-50">
                             <Button
-                                className="py-2 w-100"
+                                className="server-panel-button-view-tour py-2 w-100"
                                 style={{ borderRadius: "10px" }}
                                 href={`/server/${props.server_id}`}
                             >
@@ -20,7 +20,7 @@ export function ServerPanelButtons(props) {
                         </div>
                         <div className="ps-2 w-50">
                             <Button
-                                className="py-2 w-100"
+                                className="server-panel-button-edit-tour py-2 w-100"
                                 style={{ borderRadius: "10px" }}
                                 href={`/server/edit/${props.server_id}`}
                             >
@@ -41,6 +41,7 @@ export function ServerPanelButtons(props) {
         </>
     );
 }
+
 
 export function SimpleButton(props) {
     return (

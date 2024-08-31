@@ -18,6 +18,7 @@ import { JPHome } from './Page/countryPages/jpHome';
 import { ENHome } from './Page/countryPages/enHome';
 import { Ranking } from './Page/ranking';
 import { NewServerView } from './Page/newserverview';
+import { ServerStepper } from './Page/serverstepper';
 
 function App() {
     return (
@@ -28,6 +29,7 @@ function App() {
                 <Route exact path="/discordauth" element={<DiscordAuth />} />
                 <Route exact path="/server/edit/:id" element={<ServerEdit />} />
                 <Route exact path="/server/:id" element={<NewServerView />} />
+                <Route exact path="/server/stepper/:id" element={<ServerStepper /> } />
                 <Route exact path="/tag/:name" element={<TagView />} />
                 <Route path="/search" element={<SearchResult />} />
                 <Route path="/ranking" element={<Ranking />} />

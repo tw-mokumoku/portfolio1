@@ -184,7 +184,7 @@ function SelectableRegionPanel(props) {
     const onRegionChange = (event) => {
         setSelectedRegion(event.target.value);
         if (event.target.value == "JP") i18n.changeLanguage("ja");
-        if (event.target.value == "US") i18n.changeLanguage("en-US");
+        if (event.target.value == "US") i18n.changeLanguage("US");
         if (event.target.value == "KR") i18n.changeLanguage("ko");
         if (event.target.value == "CN") i18n.changeLanguage("cn");
         if (event.target.value == "ES") i18n.changeLanguage("es");

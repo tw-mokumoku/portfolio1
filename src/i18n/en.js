@@ -33,12 +33,16 @@ function ENi18n() {
             serverview: {
                 serverView: {
                     serverDataMissing: "Server information is missing. Please enter the server information from the dashboard.",
-                    failedToGetServerData: "Failed to obtain server information. Please try again."
+                    failedToGetServerData: "Failed to obtain server information. Please try again.",
+                    joinServer: "Join Server"
                 }
             },
             dashboard: {
                 dashboard: {
-                    dashboardTitle: "Dashboard"
+                    dashboardTitle: "Dashboard",
+                    serverContainerTour: "Here you will see the servers that you own as an administrator.",
+                    serverPanelButtonEdit: "Servers that do not have the initial server information set will not be able to appear on the Discord List. Please be sure to edit the server.",
+                    serverPanelButtonView: "You can check the posting status of the server. If an error is displayed, there are items that have not been set. Please review the server settings."
                 }
             },
             setting: {

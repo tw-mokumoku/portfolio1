@@ -33,12 +33,16 @@
             serverview: {
                 serverView: {
                     serverDataMissing: "서버 정보가 부족합니다. 대시보드 편집에서 서버 정보를 입력합니다.",
-                    failedToGetServerData: "서버 정보를 가져오지 못했습니다. 다시 시도해 주세요."
+                    failedToGetServerData: "서버 정보를 가져오지 못했습니다. 다시 시도해 주세요.",
+                    joinServer: "서버 가입"
                 }
             },
             dashboard: {
                 dashboard: {
-                    dashboardTitle: "대시보드"
+                    dashboardTitle: "대시보드",
+                    serverContainerTour: "여기에 관리자로 소유하고 있는 서버가 표시됩니다.",
+                    serverPanelButtonEdit: "서버의 초기 정보가 설정되지 않은 서버는 Discord List에 표시할 수 없습니다. 반드시 서버 편집을 해주시기 바랍니다.",
+                    serverPanelButtonView: "서버의 게시 상태를 확인할 수 있습니다. 오류가 표시되면 미설정 항목이 존재합니다. 서버 설정을 검토해 주시기 바랍니다."
                 }
             },
             setting: {
