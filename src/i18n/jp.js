@@ -45,12 +45,16 @@ function JPi18n() {
             serverview: {
                 serverView: {
                     serverDataMissing: "サーバー情報が不足しています。ダッシュボードの編集からサーバー情報を入力してください。",
-                    failedToGetServerData: "サーバー情報の取得に失敗しました。再度お試しください。"
+                    failedToGetServerData: "サーバー情報の取得に失敗しました。再度お試しください。",
+                    joinServer: "サーバーに参加"
                 }
             },
             dashboard: {
                 dashboard: {
-                    dashboardTitle: "ダッシュボード"
+                    dashboardTitle: "ダッシュボード",
+                    serverContainerTour: "ここにはあなたが管理者として所有しているサーバーが表示されます。",
+                    serverPanelButtonEdit: "サーバーの初期情報が設定されていないサーバーはDiscord Listに表示することができません。必ずサーバーの編集を行ってください。",
+                    serverPanelButtonView: "サーバーの掲示状態を確認することができます。エラーが表示された場合は未設定項目が存在します。サーバー設定の見直しを行ってください。"
                 }
             },
             setting: {

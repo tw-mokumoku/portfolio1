@@ -45,12 +45,16 @@ function CNi18n() {
             serverview: {
                 serverView: {
                     serverDataMissing: "服务器信息丢失。请通过编辑仪表板输入服务器信息。",
-                    failedToGetServerData: "获取服务器信息失败。请再试一次。"
+                    failedToGetServerData: "获取服务器信息失败。请再试一次。",
+                    joinServer: "加入服务器"
                 }
             },
             dashboard: {
                 dashboard: {
-                    dashboardTitle: "仪表板"
+                    dashboardTitle: "仪表板",
+                    serverContainerTour: "在这里，您将看到自己作为管理员所拥有的服务器。",
+                    serverPanelButtonEdit: "未设置初始服务器信息的服务器无法出现在 Discord 列表中。 请务必编辑服务器。",
+                    serverPanelButtonView: "您可以检查服务器的发布状态。 如果显示错误，则说明存在未配置的项目。 请检查服务器设置。"
                 }
             },
             setting: {

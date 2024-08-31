@@ -13,11 +13,61 @@ import { getCurrentUserGuilds, getMemberDataGuilds } from '../Function/APIContro
 import { useState } from 'react';
 import { OverlayLoading } from "react-loading-randomizable";
 import { useTranslation } from "react-i18next";
+import Joyride, { ACTIONS, EVENTS, ORIGIN, STATUS, CallBackProps } from 'react-joyride';
+import { hasDashboardAfterInviteTourLocalStorage, setDashboardAfterInviteTourLocalStorage, setHomeTourFlagLocalStorage } from '../Function/LocalStorageController';
 
 export function DashBoard() {
     const { t } = useTranslation();
     const [serverPanels, setServerPanels] = useState(<></>)
     const [loading, setLoading] = useState(true);
+    const [afterInviteRunning, setAfterInviteRunning] = useState(false);
+
+
+    const afterInviteSteps = [
+        {
+            target: '.dashboard-server-container-tour',
+            content: t('dashboard.dashboard.serverContainerTour'),
+            locale: {
+                skip: <strong aria-label="skip">{t('home.home.skip')}</strong>,
+                next: t('home.home.next'),
+            },
+            disableBeacon: true,
+            disableOverlayClose: true,
+            placement: 'auto',
+            spotlightClicks: true,
+        },
+        {
+            target: '.server-panel-button-edit-tour',
+            content: t('dashboard.dashboard.serverPanelButtonEditTour'),
+            locale: {
+                skip: <strong aria-label="skip">{t('home.home.skip')}</strong>,
+                next: t('home.home.next'),
+                back: t('home.home.back'),
+                last: t('home.home.last'),
+            },
+            placement: 'auto',
+        },
+        {
+            target: '.server-panel-button-view-tour',
+            content: t('dashboard.dashboard.serverPanelButtonViewTour'),
+            locale: {
+                skip: <strong aria-label="skip">{t('home.home.skip')}</strong>,
+                next: t('home.home.next'),
+                back: t('home.home.back'),
+                last: t('home.home.last'),
+            },
+            placement: 'auto',
+        },
+    ];
+
+    const handleJoyrideCallback = (data: CallBackProps) => {
+        const { action, index, origin, status, type } = data;
+
+        if ([EVENTS.TOUR_END].includes(type)) {
+            setDashboardAfterInviteTourLocalStorage();
+        }
+    }
+
     useEffect(() => {
         if (!has_SessionManagerDiscordListUID()) return;
         getMemberDataGuilds()
@@ -32,6 +82,7 @@ export function DashBoard() {
                         />
                     })
                 );
+                if (!hasDashboardAfterInviteTourLocalStorage()) setAfterInviteRunning(true);
                 setLoading(false);
             })
     }, []);
@@ -41,6 +92,23 @@ export function DashBoard() {
     return (
         <>
             <OverlayLoading active={loading} />
+            <Joyride
+                continuous
+                hideCloseButton
+                run={afterInviteRunning}
+                scrollToFirstStep
+                showProgress
+                showSkipButton
+                steps={afterInviteSteps}
+                spotlightClicks
+                scrollOffset={200}
+                styles={{
+                    options: {
+                        zIndex: 10000
+                    }
+                }}
+                callback={handleJoyrideCallback}
+            />
             <HeaderUnion />
             <Container>
                 <Row className="mt-5">
