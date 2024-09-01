@@ -15,10 +15,11 @@ import { OverlayLoading } from "react-loading-randomizable";
 import { useTranslation } from "react-i18next";
 import Joyride, { ACTIONS, EVENTS, ORIGIN, STATUS, CallBackProps } from 'react-joyride';
 import { hasDashboardAfterInviteTourLocalStorage, setDashboardAfterInviteTourLocalStorage, setHomeTourFlagLocalStorage } from '../Function/LocalStorageController';
+import { ToastContainer, toast } from 'react-toastify';
 
 export function DashBoard() {
     const { t } = useTranslation();
-    const [serverPanels, setServerPanels] = useState(<></>)
+    const [serverPanels, setServerPanels] = useState(<></>);
     const [loading, setLoading] = useState(true);
     const [afterInviteRunning, setAfterInviteRunning] = useState(false);
 
@@ -79,6 +80,8 @@ export function DashBoard() {
                             id={value.id}
                             name={value.name}
                             icon={value.icon}
+                            toastError={toastError}
+                            toastSuccess={toastSuccess}
                         />
                     })
                 );
@@ -89,9 +92,17 @@ export function DashBoard() {
     window.history.replaceState('', '', '/dashboard');
     if (!has_SessionManagerDiscordListUID()) return <Navigate to="/" />
 
+    const toastError = (value) => {
+        toast.error(value);
+    }
+    const toastSuccess = (value) => {
+        toast.success(value);
+    }
+
     return (
         <>
             <OverlayLoading active={loading} />
+            <ToastContainer />
             <Joyride
                 continuous
                 hideCloseButton

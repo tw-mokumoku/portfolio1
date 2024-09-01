@@ -97,11 +97,11 @@ function JPi18n() {
                     edit2: "」 編集",
                     language: "言語",
                     jp: "日本語",
-                    us: "英語",
-                    ko: "韓国語",
-                    cn: "中国語",
-                    es: "スペイン語",
-                    fr: "フランス語",
+                    us: "English",
+                    ko: "한국",
+                    cn: "中文",
+                    es: "español",
+                    fr: "Français",
                     tag: "タグ",
                     pleaseEnterTag: "タグを入力してください",
                     noOptionText: "該当するタグが見つかりませんでした",
@@ -172,6 +172,7 @@ function JPi18n() {
                 },
                 dashboardUserPanel: {
                     general: "全般",
+                    profile: "プロフィール",
                     dashboard: "ダッシュボード",
                     setting: "設定",
                     logout: "ログアウト"
@@ -189,9 +190,18 @@ function JPi18n() {
             },
             button: {
                 serverPanelButtons: {
-                    view: "表示",
-                    edit: "編集",
-                    addToDiscord: "Discord Listに追加"
+                    remain: "残り",
+                    hour: "時間",
+                    minute: "分",
+                    second: "秒",
+                    ableToUp: "で再度サーバーを更新できるようになります！",
+                    serverUpdateSuccess: "サーバー更新成功",
+
+                    setting: "設定",
+                    update: "サーバーの表示順を更新",
+                    addToDiscord: "Discord Listに追加",
+                    mightLackOfInfo: "サーバー未登録 or 設定不足の可能性",
+                    notDisplaying: "このサーバーは Discord List に表示されていません。",
                 }
             },
             DateCalc: {
@@ -207,6 +217,53 @@ function JPi18n() {
                     minutesAgo: "分前",
                     secondAgo: "秒前",
                     secondsAgo: "秒前",
+                }
+            },
+            serverStepper: {
+                serverStepper: {
+                    addToServer: "サーバーに接続",
+                    registerInviteURL: "招待URLを登録",
+                    inputServerInfo: "サーバー情報を入力",
+                    finalConfirmation: "最終確認",
+                    botNotAddedToServer: "サーバーにbotが追加されていません。",
+                    checkServer: "サーバーを確認する",
+                    back: "戻る",
+                    end: "終了",
+                    next: "次へ"
+                },
+                step4panel: {
+                    congratulations: "おめでとうございます！これで Discord List の登録に必要な手順は全て完了です！",
+                    checkView: "それではさっそく、登録したサーバーが Discord Listでどう表示されているのかを確認しに行きましょう♪",
+                    check: "確認"
+                },
+                step2panel: {
+                    botNotAdded: "DListがサーバーに追加されていません。",
+                    inviteURLSettingIncomplete: "招待リンクが設定されていません。",
+                    inviteURLSettingComplete: "招待リンクの設定完了",
+                    description1: "招待リンクとは、「Discord List」と「Discord」を繋ぐパイプのようなものです。",
+                    description2: "招待リンクを作成すると、Discord Listであなたのサーバーに興味を持った人が招待リンクを作成した場所（テキストチャンネル）に参加できるようになります。以下の手順で招待リンクを作成してみましょう！",
+                    title1: "１．サーバー参加者の着地点を選ぼう",
+                    title1Description1: "Discordでは、ユーザーがサーバーに参加して初めに目にするテキストチャンネルを設定することができます。",
+                    title1Description2: "通常これは（ルール、初めまして、いらっしゃい）などの新規ユーザーを歓迎する為の専用テキストチャンネルに設定するのが良いでしょう。",
+                    title2: "２．着地点でDListボットを操作しよう",
+                    title2Description1: "新規ユーザーの着地点が決まれば後は簡単！",
+                    title2Description2: "DListボット(Discord Listボット)を着地点のチャットに /invite という（スラッシュ /） から始まるコマンドを入力すると、Discord Listのアイコンと/inviteという文字のセットでボタンが表示されます。これをクリックすると、着地点に招待リンクを作成することができます。",
+                    title3: "３．「確認」ボタンをクリック",
+                    check: "確認"
+                },
+                step1panel: {
+                    botNotAdded: "DListがサーバーに追加されていません。",
+                    botAdded: "DListボット登録完了",
+                    description1: "Discord ListにDiscordサーバーを登録する場合、DListボット(Discord Listボット)をDiscord List導入予定のサーバーに追加する必要があります。以下の手順でDiscord Listデビューしてみましょう！",
+                    title1: "１．「追加」ボタンをクリック",
+                    title1Description1: "サーバーにDListボットを追加しましょう！",
+                    title2: "２．「確認」ボタンをクリック",
+                    title2Description1: "サーバーにDListボットが追加されたか確認しましょう！",
+                    title3: "３．DListボットの導入に成功！",
+                    title3Description1: "画面右下に「次へ」ボタンが表示されます。",
+                    title4: "４．「次へ」ボタンをクリック",
+                    add: "追加",
+                    check: "確認",
                 }
             }
         }

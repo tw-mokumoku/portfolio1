@@ -84,11 +84,11 @@ function FRi18n() {
                     edit1: "'",
                     edit2: "' modifier",
                     language: "langue",
-                    jp: "japonais",
-                    us: "Anglais",
-                    ko: "coréen",
-                    cn: "Chinois",
-                    es: "Espagnol",
+                    jp: "日本語",
+                    us: "English",
+                    ko: "한국",
+                    cn: "中文",
+                    es: "español",
                     fr: "Français",
                     tag: "étiqueter",
                     pleaseEnterTag: "Veuillez entrer une balise",
@@ -177,9 +177,18 @@ function FRi18n() {
             },
             button: {
                 serverPanelButtons: {
-                    view: "afficher",
-                    edit: "modifier",
-                    addToDiscord: "Ajouter à la liste Discorde"
+                    remain: "restant",
+                    hour: "heure",
+                    minute: "minute",
+                    second: "seconde",
+                    ableToUp: "Vous pourrez à nouveau mettre à jour le serveur dans !",
+                    serverUpdateSuccess: "Mise à jour du serveur réussie",
+
+                    setting: "Paramètres",
+                    update: "Mettre à jour l'ordre d'affichage du serveur",
+                    addToDiscord: "Ajouter à Discord List",
+                    mightLackOfInfo: "Serveur non enregistré ou configuration insuffisante possible",
+                    notDisplaying: "Ce serveur n'est pas affiché dans Discord List."
                 }
             },
             DateCalc: {
@@ -195,6 +204,53 @@ function FRi18n() {
                     minutesAgo: "il y a quelques minutes",
                     secondAgo: "il y a quelques secondes",
                     secondsAgo: "il y a quelques secondes",
+                }
+            },
+            serverStepper: {
+                serverStepper: {
+                    addToServer: "Connexion au serveur",
+                    registerInviteURL: "Enregistrer l'URL de l'invitation",
+                    inputServerInfo: "Saisir les informations relatives au serveur",
+                    finalConfirmation: "confirmation finale",
+                    botNotAddedToServer: "Aucun robot n'a été ajouté au serveur.",
+                    checkServer: "Vérifier le serveur.",
+                    back: "retour",
+                    end: "fin",
+                    next: "Suivant"
+                },
+                step4panel: {
+                    congratulations: "Félicitations, vous êtes maintenant sur la liste Discord ! Vous avez maintenant complété toutes les étapes nécessaires pour vous inscrire à une liste Discord !",
+                    checkView: "Commençons donc par vérifier l'affichage de votre serveur enregistré sur la liste Discord !",
+                    check: "confirmation"
+                },
+                step2panel: {
+                    botNotAdded: "La liste DL n'a pas été ajoutée au serveur.",
+                    inviteURLSettingIncomplete: "Aucun lien d'invitation n'a été établi.",
+                    inviteURLSettingComplete: "La mise en place du lien d'invitation est terminée.",
+                    description1: "Les liens d'invitation sont comme un tuyau entre la liste Discord et le Discord.",
+                    description2: "La création d'un lien d'invitation permet aux personnes intéressées par votre serveur sur la liste Discord de rejoindre l'endroit (canal de texte) où vous avez créé le lien d'invitation. Suivez les étapes ci-dessous pour créer un lien d'invitation !",
+                    title1: "１．Choisissez un lieu d'atterrissage pour les participants au serveur.",
+                    title1Description1: "Discord permet aux utilisateurs de définir le canal de texte qu'ils verront initialement lorsqu'ils rejoindront le serveur.",
+                    title1Description2: "C'est généralement une bonne idée de mettre en place un canal de texte dédié à l'accueil des nouveaux utilisateurs, tel que (règles, ravi de vous rencontrer, bienvenue).",
+                    title2: "２．Exploiter les robots DList sur les sites d'atterrissage.",
+                    title2Description1: "Une fois qu'un nouvel utilisateur a atterri, le reste est facile !",
+                    title2Description2: "Si vous entrez le bot DList (Discord List bot) dans le chat d'un point d'atterrissage avec une commande commençant par (slash /) /invite, un bouton apparaîtra avec une icône de liste Discord et le mot /invite. En cliquant sur ce bouton, vous créerez un lien d'invitation vers le point d'atterrissage.",
+                    title3: "３．Cliquez sur le bouton « Confirmer ».",
+                    check: "confirmation"
+                },
+                step1panel: {
+                    botNotAdded: "La liste DL n'a pas été ajoutée au serveur.",
+                    botAdded: "Enregistrement du robot DList terminé.",
+                    description1: "Si vous souhaitez enregistrer un serveur Discord sur Discord List, vous devez ajouter un bot DList (Discord List bot) au serveur sur lequel vous prévoyez d'installer Discord List. Suivez les étapes ci-dessous pour démarrer votre Discord List !",
+                    title1: "１．Cliquez sur le bouton « Ajouter ».",
+                    title1Description1: "Ajoutez des bots DList à votre serveur !",
+                    title2: "２．Cliquez sur le bouton « Confirmer ».",
+                    title2Description1: "Vérifier que les bots de la DList ont été ajoutés au serveur !",
+                    title3: "３．Introduction réussie des robots DList !",
+                    title3Description1: "Un bouton « Suivant » apparaît dans le coin inférieur droit de l'écran.",
+                    title4: "４．Cliquez sur le bouton « Suivant ».",
+                    add: "ajouter",
+                    check: "confirmation",
                 }
             }
         }

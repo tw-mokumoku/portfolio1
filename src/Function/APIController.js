@@ -123,12 +123,9 @@ export async function updateServer({ id, name = null, invite_url = null, descrip
         data
     );
 }
-export async function updateServerUpdatedLog(server_id, updated_epoch) {
+export async function updateServerUpdatedLog(server_id) {
     return await axios.patch(
-        `${DislitBaseURL}/server/${server_id}/updated_log?_smdluid=${get_SessionManagerDiscordListUID()}`,
-        {
-            updated_epoch: `${updated_epoch}`
-        }
+        `${DislitBaseURL}/server/${server_id}/updated_log?_smdluid=${get_SessionManagerDiscordListUID()}`
     );
 }
 export async function updateServerCurrentActiveUsers(server_id, user_num) {

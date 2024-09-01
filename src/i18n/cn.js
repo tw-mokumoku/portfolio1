@@ -96,12 +96,12 @@ function CNi18n() {
                     edit1: "'",
                     edit2: "' 编辑",
                     language: "语言",
-                    jp: "日语",
-                    us: "英语",
-                    ko: "韩语",
+                    jp: "日本語",
+                    us: "English",
+                    ko: "한국",
                     cn: "中文",
-                    es: "西班牙语",
-                    fr: "法语",
+                    es: "español",
+                    fr: "Français",
                     tag: "标签",
                     pleaseEnterTag: "请输入标签",
                     noOptionText: "没有找到匹配的标签",
@@ -189,9 +189,18 @@ function CNi18n() {
             },
             button: {
                 serverPanelButtons: {
-                    view: "详情",
-                    edit: "编辑",
-                    addToDiscord: "添加到Discord List"
+                    remain: "剩余",
+                    hour: "小时",
+                    minute: "分钟",
+                    second: "秒",
+                    ableToUp: "后可以再次更新服务器！",
+                    serverUpdateSuccess: "服务器更新成功",
+
+                    setting: "设置",
+                    update: "更新服务器显示顺序",
+                    addToDiscord: "添加到Discord List",
+                    mightLackOfInfo: "服务器未注册或设置不足的可能性",
+                    notDisplaying: "该服务器未在Discord List显示。"
                 }
             },
             DateCalc: {
@@ -207,6 +216,53 @@ function CNi18n() {
                     minutesAgo: "分钟前",
                     secondAgo: "几秒钟前",
                     secondsAgo: "几秒钟前",
+                }
+            },
+            serverStepper: {
+                serverStepper: {
+                    addToServer: "连接服务器",
+                    registerInviteURL: "注册邀请链接",
+                    inputServerInfo: "输入服务器信息",
+                    finalConfirmation: "最终确认",
+                    botNotAddedToServer: "服务器未添加bot",
+                    checkServer: "检查服务器",
+                    back: "返回",
+                    end: "结束",
+                    next: "下一步"
+                },
+                step4panel: {
+                    congratulations: "恭喜！您已完成Discord List的注册！",
+                    checkView: "现在，让我们去查看一下您注册的服务器在Discord List上的显示情况吧！",
+                    check: "查看"
+                },
+                step2panel: {
+                    botNotAdded: "DList未添加到服务器",
+                    inviteURLSettingIncomplete: "邀请链接未设置",
+                    inviteURLSettingComplete: "邀请链接设置完成",
+                    description1: "邀请链接是连接『Discord List』和『Discord』的桥梁。",
+                    description2: "创建邀请链接后，对您的服务器感兴趣的Discord List用户就可以加入您创建邀请链接的文本频道。请按照以下步骤创建邀请链接！",
+                    title1: "1. 选择服务器成员的着陆点",
+                    title1Description1: "在Discord中，您可以设置用户加入服务器时首先看到的文本频道。",
+                    title1Description2: "通常，最好设置一个专门的文本频道来欢迎新用户（例如，“规则”、“你好”、“欢迎”）。",
+                    title2: "2. 在着陆点操作DList机器人",
+                    title2Description1: "确定了着陆点后，剩下的就简单了！",
+                    title2Description2: "在着陆点的聊天中，输入以“/invite”（斜杠/）开头的命令给DList机器人（Discord List机器人）。您会看到一个带有Discord List图标和/invite文字的按钮。点击它即可在着陆点创建邀请链接。",
+                    title3: "3. 点击“确认”按钮",
+                    check: "确认"
+                },
+                step1panel: {
+                    botNotAdded: "DList未添加到服务器",
+                    botAdded: "DList机器人注册完成",
+                    description1: "要在Discord List注册Discord服务器，需要将DList机器人（Discord List机器人）添加到您打算引入Discord List的服务器。请按照以下步骤开始使用Discord List！",
+                    title1: "1. 点击“添加”按钮",
+                    title1Description1: "将DList机器人添加到您的服务器！",
+                    title2: "2. 点击“确认”按钮",
+                    title2Description1: "确认DList机器人是否已添加到您的服务器！",
+                    title3: "3. DList机器人已成功引入！",
+                    title3Description1: "屏幕右下角会显示“下一步”按钮。",
+                    title4: "4. 点击“下一步”按钮",
+                    add: "添加",
+                    check: "确认"
                 }
             }
         }

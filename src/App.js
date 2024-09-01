@@ -19,6 +19,7 @@ import { ENHome } from './Page/countryPages/enHome';
 import { Ranking } from './Page/ranking';
 import { NewServerView } from './Page/newserverview';
 import { ServerStepper } from './Page/serverstepper';
+import { Profile } from './Page/profile';
 
 function App() {
     return (
@@ -27,7 +28,6 @@ function App() {
                 <Route exact path="/" element={<Home />} />
                 <Route exact path="/dashboard" element={<DashBoard />} />
                 <Route exact path="/discordauth" element={<DiscordAuth />} />
-                <Route exact path="/server/edit/:id" element={<ServerEdit />} />
                 <Route exact path="/server/:id" element={<NewServerView />} />
                 <Route exact path="/server/stepper/:id" element={<ServerStepper /> } />
                 <Route exact path="/tag/:name" element={<TagView />} />
@@ -41,6 +41,7 @@ function App() {
     );
 }
 /*
+                <Route exact path="/profile" element={<Profile />} />
                 <Route exact path="/server/:id" element={<ServerView />} />
                 <Route exact path="/Search" element={<Search />} />
                 <Route exact path="/Server" element={<Server />} />

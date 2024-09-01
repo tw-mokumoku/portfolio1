@@ -37,20 +37,20 @@ export function Home(props) {
 
     const steps = [
         {
-            target: '.search-bar-tour',
-            content: t('home.home.searchBarTour'),
+            target: '.header-login-tour',
+            content: t('home.home.headerLoginTour'),
             locale: {
                 skip: <strong aria-label="skip">{t('home.home.skip')}</strong>,
                 next: t('home.home.next'),
             },
+            placement: 'auto',
             disableBeacon: true,
             disableOverlayClose: true,
-            placement: 'auto',
             spotlightClicks: true,
         },
         {
-            target: '.header-login-tour',
-            content: t('home.home.headerLoginTour'),
+            target: '.search-bar-tour',
+            content: t('home.home.searchBarTour'),
             locale: {
                 skip: <strong aria-label="skip">{t('home.home.skip')}</strong>,
                 next: t('home.home.next'),
