@@ -15,6 +15,7 @@ import { checkLocalAndOAuth, disconnectViaDiscord, disconnectVisDislist } from '
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { getLanguageLocalStorage, getMemberDataLocalStorage } from '../../Function/LocalStorageController';
+import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 
 export function TagListSection(props) {
     const { t } = useTranslation();
@@ -94,8 +95,17 @@ export function DashboardUserPanel() {
                     >
                         {t('sectionUnion.dashboardUserPanel.general')}
                     </h5>
+                    {/*
                     <SimpleButton
-                        icon={<InfoTwoToneIcon />}
+                        icon={<PersonSearchIcon style={{ fill: "#add7e6" }} />}
+                        title={t('sectionUnion.dashboardUserPanel.profile')}
+                        onClick={() => {
+                            navigate('/profile')
+                        }}
+                    />
+                    */}
+                    <SimpleButton
+                        icon={<InfoTwoToneIcon style={{ fill: "#cdade6" }} />}
                         title={t('sectionUnion.dashboardUserPanel.dashboard')}
                         onClick={() => {
                             navigate('/dashboard')

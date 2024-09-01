@@ -79,17 +79,17 @@ function ENi18n() {
                     emptyTag: "Please select at least one tag",
                     currentlyProcessing: "Currently processing. Please wait for a while.",
                     pending: "Saving datas...",
-                    success: "Saving datas completed",
+                    success: "Completed saving data",
                     error: "Failed to save datas",
                     edit1: "Edit ・",
                     edit2: "・",
                     language: "Language",
-                    jp: "Japanese",
+                    jp: "日本語",
                     us: "English",
-                    ko: "Korean",
-                    cn: "Chinese",
-                    es: "Spanish",
-                    fr: "French",
+                    ko: "한국",
+                    cn: "中文",
+                    es: "español",
+                    fr: "Français",
                     tag: "Tag",
                     pleaseEnterTag: "Please enter tags",
                     noOptionText: "No matching tags found",
@@ -177,9 +177,18 @@ function ENi18n() {
             },
             button: {
                 serverPanelButtons: {
-                    view: "view",
-                    edit: "edit",
-                    addToDiscord: "Add to Discord List"
+                    remain: "",
+                    hour: "hr ",
+                    minute: "min ",
+                    second: "sec",
+                    ableToUp: " until the server is able to be used！",
+                    serverUpdateSuccess: "Server update complete!",
+
+                    setting: "setting",
+                    update: "update server listing order",
+                    addToDiscord: "Add to Discord List",
+                    mightLackOfInfo: "Possibility of server not being registered or wrong settings",
+                    notDisplaying: "This server can not be displayed on Discord List.",
                 }
             },
             DateCalc: {
@@ -195,6 +204,53 @@ function ENi18n() {
                     minutesAgo: "minutes ago",
                     secondAgo: "second ago",
                     secondsAgo: "seconds ago",
+                }
+            },
+            serverStepper: {
+                serverStepper: {
+                    addToServer: "Connect to server",
+                    registerInviteURL: "Register invitation URL",
+                    inputServerInfo: "Enter server information",
+                    finalConfirmation: "Final confirmation",
+                    botNotAddedToServer: "No bots added to the server.",
+                    checkServer: "Check the server",
+                    back: "back",
+                    end: "end",
+                    next: "next"
+                },
+                step4panel: {
+                    congratulations: "Congratulations! All steps necessary to register for a Discord List are now complete!",
+                    checkView: "Now, let's go check how the registered server is displayed on the Discord List♪",
+                    check: "confirm"
+                },
+                step2panel: {
+                    botNotAdded: "DList bot has not been added to the server.",
+                    inviteURLSettingIncomplete: "No invitation link has been set.",
+                    inviteURLSettingComplete: "Invitation link setup completed",
+                    description1: "An invitation link is like a pipe that connects 'Discord List' and 'Discord'.",
+                    description2: "When you create an invite link, people on your Discord List who are interested in your server will be able to join where you created the invite link (text channel). Create an invitation link by following the steps below!",
+                    title1: "１．Choose the landing location for server participants",
+                    title1Description1: "Discord allows you to set up a text channel that users see first when they join your server.",
+                    title1Description2: "Typically, this is a good idea to set up a dedicated text channel to welcome new users, such as (rules, introduction, welcome). ",
+                    title2: "２．Set up the DList bot in the landing location",
+                    title2Description1: "Once you decide where the new users will land, the rest is easy!",
+                    title2Description2: "If you enter the command /invite starting with a slash / in the chat where the DList bot (Discord List bot) lands, a button will be displayed with the Discord List icon and the characters /invite. Click this to create an invitation link to your destination.",
+                    title3: "３．Click the 'Confirm' button",
+                    check: "confirm"
+                },
+                step1panel: {
+                    botNotAdded: "DList bot has not been added to the server.",
+                    botAdded: "DList bot registration completed",
+                    description1: "When registering a Discord server on Discord List, you need to add DList bot (Discord List bot) to the server where you plan to install Discord List. Follow the steps below to make your Discord List debut!",
+                    title1: "１．Click the 'Add' button",
+                    title1Description1: "Add the DList bot to your server!",
+                    title2: "２．Click the 'Confirm' button",
+                    title2Description1: "Check if the DList bot has been added to your server!",
+                    title3: "３．Successfully introduced DList bot!",
+                    title3Description1: "A 'Next' button will appear at the bottom right of the screen.",
+                    title4: "４．Click the 'Next' button",
+                    add: "add",
+                    check: "confirm",
                 }
             }
         }

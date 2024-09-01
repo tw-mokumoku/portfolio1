@@ -84,12 +84,12 @@
                     edit1: "'",
                     edit2: "' 편집",
                     language: "언어",
-                    jp: "일본어",
-                    us: "영어",
+                    jp: "日本語",
+                    us: "English",
                     ko: "한국",
-                    cn: "중국어",
-                    es: "스페인어",
-                    fr: "프랑스어",
+                    cn: "中文",
+                    es: "español",
+                    fr: "Français",
                     tag: "태그",
                     pleaseEnterTag: "태그를 입력하세요.",
                     noOptionText: "해당 태그를 찾을 수 없습니다.",
@@ -177,9 +177,18 @@
             },
             button: {
                 serverPanelButtons: {
-                    view: "표시",
-                    edit: "편집",
-                    addToDiscord: "Discord List에 추가"
+                    remain: "남은",
+                    hour: "시간",
+                    minute: "분",
+                    second: "초",
+                    ableToUp: "후에 서버를 다시 업데이트할 수 있습니다!",
+                    serverUpdateSuccess: "서버 업데이트 성공",
+
+                    setting: "설정",
+                    update: "서버 표시 순서 업데이트",
+                    addToDiscord: "Discord List에 추가",
+                    mightLackOfInfo: "서버 미등록 또는 설정 부족 가능성",
+                    notDisplaying: "이 서버는 Discord List에 표시되지 않습니다."
                 }
             },
             DateCalc: {
@@ -195,6 +204,53 @@
                     minutesAgo: "분 전",
                     secondAgo: "초 전",
                     secondsAgo: "초 전",
+                }
+            },
+            serverStepper: {
+                serverStepper: {
+                    addToServer: "서버에 연결",
+                    registerInviteURL: "초대 URL 등록",
+                    inputServerInfo: "서버 정보 입력",
+                    finalConfirmation: "최종 확인",
+                    botNotAddedToServer: "봇이 서버에 추가되지 않았습니다.",
+                    checkServer: "서버 확인",
+                    back: "뒤로",
+                    end: "종료",
+                    next: "다음"
+                },
+                step4panel: {
+                    congratulations: "축하합니다! 이제 Discord List 등록에 필요한 모든 절차가 완료되었습니다!",
+                    checkView: "그럼 이제 등록한 서버가 Discord List에서 어떻게 표시되는지 확인해 볼까요?",
+                    check: "확인"
+                },
+                step2panel: {
+                    botNotAdded: "DList가 서버에 추가되지 않았습니다.",
+                    inviteURLSettingIncomplete: "초대 링크가 설정되지 않았습니다.",
+                    inviteURLSettingComplete: "초대 링크 설정 완료",
+                    description1: "초대 링크는 'Discord List'와 'Discord'를 연결하는 통로입니다.",
+                    description2: "초대 링크를 생성하면 Discord List에서 귀하의 서버에 관심 있는 사용자가 초대 링크를 생성한 곳(텍스트 채널)에 참여할 수 있습니다. 다음 단계에 따라 초대 링크를 생성해 보세요!",
+                    title1: "1. 서버 참여자의 도착 지점을 선택하세요",
+                    title1Description1: "Discord에서는 사용자가 서버에 처음 참여할 때 보게 되는 텍스트 채널을 설정할 수 있습니다.",
+                    title1Description2: "일반적으로 (규칙, 처음 만나서, 어서 오세요)와 같은 새로운 사용자를 환영하기 위한 전용 텍스트 채널로 설정하는 것이 좋습니다.",
+                    title2: "2. 도착 지점에서 DList 봇을 조작해 보세요",
+                    title2Description1: "새로운 사용자의 도착 지점을 결정하면 나머지는 간단합니다!",
+                    title2Description2: "DList 봇(Discord List 봇)이 있는 도착 지점 채팅에 '/invite'라는 (슬래시/)로 시작하는 명령을 입력하면 Discord List 아이콘과 /invite라는 글자가 함께 있는 버튼이 나타납니다. 이 버튼을 클릭하면 도착 지점에 초대 링크를 생성할 수 있습니다.",
+                    title3: "3. '확인' 버튼을 클릭하세요",
+                    check: "확인"
+                },
+                step1panel: {
+                    botNotAdded: "DList가 서버에 추가되지 않았습니다.",
+                    botAdded: "DList 봇 등록 완료",
+                    description1: "Discord List에 Discord 서버를 등록하려면 DList 봇(Discord List 봇)을 Discord List를 도입할 서버에 추가해야 합니다. 다음 단계에 따라 Discord List를 시작해 보세요!",
+                    title1: "1. '추가' 버튼을 클릭하세요",
+                    title1Description1: "서버에 DList 봇을 추가하세요!",
+                    title2: "2. '확인' 버튼을 클릭하세요",
+                    title2Description1: "서버에 DList 봇이 추가되었는지 확인하세요!",
+                    title3: "3. DList 봇 도입 성공!",
+                    title3Description1: "화면 오른쪽 아래에 '다음' 버튼이 나타납니다.",
+                    title4: "4. '다음' 버튼을 클릭하세요",
+                    add: "추가",
+                    check: "확인"
                 }
             }
         }

@@ -22,7 +22,11 @@ export function ServerPanel(props) {
                 </div>
                 <div className="mb-5">
                     <p className="fs-6 fw-bold mb-4 ms-1">{props.name}</p>
-                    <ServerPanelButtons addedServer={isServerAdded} server_id={props.id} />
+                    <ServerPanelButtons
+                        addedServer={isServerAdded}
+                        server_id={props.id}
+                        toastError={props.toastError}
+                        toastSuccess={props.toastSuccess} />
                 </div>
             </div>
         </Col>
