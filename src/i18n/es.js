@@ -188,7 +188,8 @@ function ESi18n() {
                     update: "Actualizar orden de visualización del servidor",
                     addToDiscord: "Agregar a Discord List",
                     mightLackOfInfo: "Posible servidor no registrado o configuración insuficiente",
-                    notDisplaying: "Este servidor no se muestra en Discord List."
+                    notDisplaying: "Este servidor no se muestra en Discord List.",
+                    updatingServer: "Se está actualizando el servidor."
                 }
             },
             DateCalc: {

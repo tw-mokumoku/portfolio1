@@ -188,7 +188,8 @@
                     update: "서버 표시 순서 업데이트",
                     addToDiscord: "Discord List에 추가",
                     mightLackOfInfo: "서버 미등록 또는 설정 부족 가능성",
-                    notDisplaying: "이 서버는 Discord List에 표시되지 않습니다."
+                    notDisplaying: "이 서버는 Discord List에 표시되지 않습니다.",
+                    updatingServer: "서버 업데이트 중"
                 }
             },
             DateCalc: {

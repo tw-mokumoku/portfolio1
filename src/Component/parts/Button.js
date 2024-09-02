@@ -34,7 +34,7 @@ export function ServerPanelButtons(props) {
         }
         if (isUpdatingServer) return;
         setIsUpdatingServer(true);
-        const toastID = props.toastLoading("ƒf[ƒ^Žæ“¾’†");
+        const toastID = props.toastLoading(t('button.serverPanelButtons.updatingServer'));
         updateServerUpdatedLog(props.server_id)
             .then((response) => {
                 setRemainSecResult(response.data.remain_epoch);

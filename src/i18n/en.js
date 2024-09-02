@@ -189,6 +189,7 @@ function ENi18n() {
                     addToDiscord: "Add to Discord List",
                     mightLackOfInfo: "Possibility of server not being registered or wrong settings",
                     notDisplaying: "This server can not be displayed on Discord List.",
+                    updatingServer: "Updating server"
                 }
             },
             DateCalc: {

@@ -200,7 +200,8 @@ function CNi18n() {
                     update: "更新服务器显示顺序",
                     addToDiscord: "添加到Discord List",
                     mightLackOfInfo: "服务器未注册或设置不足的可能性",
-                    notDisplaying: "该服务器未在Discord List显示。"
+                    notDisplaying: "该服务器未在Discord List显示。",
+                    updatingServer: "服务器正在更新。"
                 }
             },
             DateCalc: {
