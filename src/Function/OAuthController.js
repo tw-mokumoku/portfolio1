@@ -16,7 +16,7 @@ export function set_SessionManagerDiscordListUID(_smdluid, updated_epoch) {
 export function get_SessionManagerDiscordListUID() {
     return (new URLSearchParams(getCookie(_smdluidKeyName))).get('value');
 }
-function get_smdluidUpdatedEpoch() {
+export function get_smdluidUpdatedEpoch() {
     return (new URLSearchParams(getCookie(_smdluidKeyName))).get('ue');
 }
 /*****************  delete  ********************/
@@ -26,7 +26,10 @@ export function delete_SessionManagerDiscordListUID() {
 
 /*****************  has  ********************/
 export function has_SessionManagerDiscordListUID() {
-    return hasCookie(_smdluidKeyName);
+    if (!hasCookie) return false;
+    if (get_SessionManagerDiscordListUID() == null || get_SessionManagerDiscordListUID() == "") return false;
+    if (get_smdluidUpdatedEpoch() == null || get_smdluidUpdatedEpoch() == "") return false;
+    return true;
 }
 
 export async function checkLoginExpiry() {

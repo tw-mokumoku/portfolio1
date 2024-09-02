@@ -202,6 +202,7 @@ function JPi18n() {
                     addToDiscord: "Discord Listに追加",
                     mightLackOfInfo: "サーバー未登録 or 設定不足の可能性",
                     notDisplaying: "このサーバーは Discord List に表示されていません。",
+                    updatingServer: "サーバー更新中"
                 }
             },
             DateCalc: {

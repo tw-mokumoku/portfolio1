@@ -188,7 +188,8 @@ function FRi18n() {
                     update: "Mettre à jour l'ordre d'affichage du serveur",
                     addToDiscord: "Ajouter à Discord List",
                     mightLackOfInfo: "Serveur non enregistré ou configuration insuffisante possible",
-                    notDisplaying: "Ce serveur n'est pas affiché dans Discord List."
+                    notDisplaying: "Ce serveur n'est pas affiché dans Discord List.",
+                    updatingServer: "Le serveur est en cours de mise à jour."
                 }
             },
             DateCalc: {
