@@ -41,8 +41,8 @@
                 dashboard: {
                     dashboardTitle: "대시보드",
                     serverContainerTour: "여기에 관리자로 소유하고 있는 서버가 표시됩니다.",
-                    serverPanelButtonEdit: "서버의 초기 정보가 설정되지 않은 서버는 Discord List에 표시할 수 없습니다. 반드시 서버 편집을 해주시기 바랍니다.",
-                    serverPanelButtonView: "서버의 게시 상태를 확인할 수 있습니다. 오류가 표시되면 미설정 항목이 존재합니다. 서버 설정을 검토해 주시기 바랍니다."
+                    serverPanelButtonEditTour: "서버의 초기 정보가 설정되지 않은 서버는 Discord List에 표시할 수 없습니다. 반드시 서버 편집을 해주시기 바랍니다.",
+                    serverPanelButtonViewTour: "서버의 게시 상태를 확인할 수 있습니다. 오류가 표시되면 미설정 항목이 존재합니다. 서버 설정을 검토해 주시기 바랍니다."
                 }
             },
             setting: {

@@ -41,8 +41,8 @@ function FRi18n() {
                 dashboard: {
                     dashboardTitle: "tableau de bord",
                     serverContainerTour: "Vous y verrez les serveurs que vous possédez en tant qu'administrateur.",
-                    serverPanelButtonEdit: "Les serveurs dont les informations initiales n'ont pas été définies ne peuvent pas apparaître dans la liste Discord. Veillez à éditer le serveur.",
-                    serverPanelButtonView: "Vous pouvez vérifier l'état de l'affichage du serveur. Si une erreur s'affiche, cela signifie que des éléments n'ont pas été configurés. Veuillez revoir les paramètres du serveur."
+                    serverPanelButtonEditTour: "Les serveurs dont les informations initiales n'ont pas été définies ne peuvent pas apparaître dans la liste Discord. Veillez à éditer le serveur.",
+                    serverPanelButtonViewTour: "Vous pouvez vérifier l'état de l'affichage du serveur. Si une erreur s'affiche, cela signifie que des éléments n'ont pas été configurés. Veuillez revoir les paramètres du serveur."
                 }
             },
             setting: {
