@@ -9,7 +9,7 @@ export function ServerPanel(props) {
     const [isServerAdded, setIsServerAdded] = useState(false);
     useEffect(() => {
         getServer(props.id).then((response) => {
-            setIsServerAdded(response.data['is_bot_available'])
+            setIsServerAdded(response.data['is_bot_available']);
         })
     }, []);
 
@@ -26,7 +26,9 @@ export function ServerPanel(props) {
                         addedServer={isServerAdded}
                         server_id={props.id}
                         toastError={props.toastError}
-                        toastSuccess={props.toastSuccess} />
+                        toastSuccess={props.toastSuccess}
+                        toastLoading={props.toastLoading}
+                    />
                 </div>
             </div>
         </Col>

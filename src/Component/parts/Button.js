@@ -11,15 +11,19 @@ export function ServerPanelButtons(props) {
     const { t } = useTranslation();
     const [remainSecResult, setRemainSecResult] = useState(0);
     const [remainSecCheckedEpoch, setRemainSecCheckedEpoch] = useState();
+    const [isUpdatingServer, setIsUpdatingServer] = useState(false);
 
     const onUpdateServerUpdatedLogClicked = () => {
-        const toastRemaining = (remain_epoch) => {
+        const toastRemaining = (remain_epoch, toastID = null) => {
             const remainSecResult = Math.floor(remain_epoch);
             const remainHour = remainSecResult / 3600;
             var remainSec = remainSecResult % 3600;
             const remainMin = remainSec / 60;
             remainSec = remainSec % 60;
-            props.toastError(`${t('button.serverPanelButtons.remain')} ${Math.floor(remainHour)}${t('button.serverPanelButtons.hour')}${Math.floor(remainMin)}${t('button.serverPanelButtons.minute')}${Math.floor(remainSec)}${t('button.serverPanelButtons.second')}${t('button.serverPanelButtons.ableToUp') }`);
+            props.toastError(
+                `${t('button.serverPanelButtons.remain')} ${Math.floor(remainHour)}${t('button.serverPanelButtons.hour')}${Math.floor(remainMin)}${t('button.serverPanelButtons.minute')}${Math.floor(remainSec)}${t('button.serverPanelButtons.second')}${t('button.serverPanelButtons.ableToUp')}`,
+                toastID
+            );
         }
         if (remainSecResult != 0) {
             const timepassed = (Number(Date.now() / 1000) - remainSecCheckedEpoch)
@@ -28,16 +32,21 @@ export function ServerPanelButtons(props) {
             setRemainSecCheckedEpoch(Number(Date.now() / 1000));
             return;
         }
+        if (isUpdatingServer) return;
+        setIsUpdatingServer(true);
+        const toastID = props.toastLoading("ƒf[ƒ^Žæ“¾’†");
         updateServerUpdatedLog(props.server_id)
             .then((response) => {
                 setRemainSecResult(response.data.remain_epoch);
-                props.toastSuccess(t('button.serverPanelButtons.serverUpdateSuccess'));
+                props.toastSuccess(t('button.serverPanelButtons.serverUpdateSuccess'), toastID);
                 setRemainSecCheckedEpoch(Number(Date.now() / 1000));
+                setIsUpdatingServer(false);
             })
             .catch((response) => {
                 setRemainSecResult(response.response.data.remain_epoch);
-                toastRemaining(response.response.data.remain_epoch);
+                toastRemaining(response.response.data.remain_epoch, toastID);
                 setRemainSecCheckedEpoch(Number(Date.now() / 1000));
+                setIsUpdatingServer(false);
             })
     }
     return (

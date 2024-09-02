@@ -8,6 +8,7 @@ import { HeaderUnion } from "../Component/union/headerUnion";
 import { DashboardUserPanel } from "../Component/union/SectionUnion";
 import { useTranslation } from "react-i18next";
 import { getLanguageLocalStorage } from "../Function/LocalStorageController";
+import { checkLoginExpiry } from "../Function/OAuthController";
 
 export function Setting() {
     const { t, i18n } = useTranslation();
@@ -25,8 +26,10 @@ export function Setting() {
     }
 
     useEffect(() => {
-        setSelectedRegion(getLanguageLocalStorage());
-        setLoading(false);
+        checkLoginExpiry().then(() => {
+            setSelectedRegion(getLanguageLocalStorage());
+            setLoading(false);
+        });
     }, []);
     return (
         <>

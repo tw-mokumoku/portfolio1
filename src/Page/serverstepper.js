@@ -27,7 +27,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useCallback } from "react";
 import { useDebounce } from 'react-use';
 import { getTagSuggests, updateServer, getMemberDataGuilds, getServerTags } from "../Function/APIController";
-import { has_SessionManagerDiscordListUID } from "../Function/OAuthController";
+import { checkLoginExpiry, has_SessionManagerDiscordListUID } from "../Function/OAuthController";
 import { Navigate } from "react-router-dom";
 import { ReactTags } from 'react-tag-autocomplete';
 import Toggle from 'react-toggle';
@@ -51,8 +51,9 @@ export function ServerStepper() {
     const [serverEditActive, setServerEditActive] = useState(false);
 
     useEffect(() => {
-        getServer(params['id'])
-            .then((response) => {
+        if (!has_SessionManagerDiscordListUID()) return;
+        checkLoginExpiry().then(() => {
+            getServer(params['id']).then((response) => {
                 let tmpStep = 0;
                 if (response.data == null) {
                     toast.error(t('serverStepper.serverStepper.botNotAddedToServer'));
@@ -68,6 +69,7 @@ export function ServerStepper() {
                 setCurrentStep(tmpStep);
                 setLoading(false);
             });
+        });
     }, []);
 
     useEffect(() => {
@@ -76,10 +78,6 @@ export function ServerStepper() {
         if (activeStep == 2) setServerEditActive(true);
         else setServerEditActive(false);
     }, [activeStep]);
-
-    const isStepOptional = (step) => {
-        return step === 1;
-    };
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -92,6 +90,7 @@ export function ServerStepper() {
 
     const setActiveStepFunc = (value) => setActiveStep(value);
 
+    if (!has_SessionManagerDiscordListUID()) return <Navigate to="/" />;
     return (
         <>
             <OverlayLoading active={loading} />

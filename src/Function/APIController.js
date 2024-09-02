@@ -17,10 +17,13 @@ const DislitBaseURL = "https://xixj7gp1xl.execute-api.ap-northeast-1.amazonaws.c
 /**************************  dislist  **************************/
 /***************************************************************/
 /***************************************************************/
-/*****************  dislist country  ********************/
+/*****************  dislist login  ********************/
 ////  GET
 export async function getLogin(redirect_uri, code){
-    return await axios.get(`${DislitBaseURL}/login?redirect_uri=${redirect_uri}&code=${code}`)
+    return await axios.get(`${DislitBaseURL}/login?redirect_uri=${redirect_uri}&code=${code}`);
+}
+export async function getCheckLogin() {
+    return await axios.get(`${DislitBaseURL}/login/check?_smdluid=${get_SessionManagerDiscordListUID()}`);
 }
 
 
