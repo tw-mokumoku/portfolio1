@@ -53,8 +53,8 @@ function CNi18n() {
                 dashboard: {
                     dashboardTitle: "仪表板",
                     serverContainerTour: "在这里，您将看到自己作为管理员所拥有的服务器。",
-                    serverPanelButtonEdit: "未设置初始服务器信息的服务器无法出现在 Discord 列表中。 请务必编辑服务器。",
-                    serverPanelButtonView: "您可以检查服务器的发布状态。 如果显示错误，则说明存在未配置的项目。 请检查服务器设置。"
+                    serverPanelButtonEditTour: "未设置初始服务器信息的服务器无法出现在 Discord 列表中。 请务必编辑服务器。",
+                    serverPanelButtonViewTour: "您可以检查服务器的发布状态。 如果显示错误，则说明存在未配置的项目。 请检查服务器设置。"
                 }
             },
             setting: {

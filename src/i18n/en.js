@@ -41,8 +41,8 @@ function ENi18n() {
                 dashboard: {
                     dashboardTitle: "Dashboard",
                     serverContainerTour: "Here you will see the servers that you own as an administrator.",
-                    serverPanelButtonEdit: "Servers that do not have the initial server information set will not be able to appear on the Discord List. Please be sure to edit the server.",
-                    serverPanelButtonView: "You can check the posting status of the server. If an error is displayed, there are items that have not been set. Please review the server settings."
+                    serverPanelButtonEditTour: "Servers that do not have the initial server information set will not be able to appear on the Discord List. Please be sure to edit the server.",
+                    serverPanelButtonViewTour: "You can check the posting status of the server. If an error is displayed, there are items that have not been set. Please review the server settings."
                 }
             },
             setting: {

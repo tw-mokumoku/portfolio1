@@ -109,9 +109,13 @@ export function ServerStepper() {
                                     return (
                                         <Step key={label}>
                                             <StepLabel>
-                                                <div style={{ color: '#e8ecef' }}>
-                                                    {label}
-                                                </div>
+                                                {index == activeStep ?
+                                                    <div style={{ color: '#e8ecef' }}>
+                                                        {label}
+                                                    </div>
+                                                    :
+                                                    <></>
+                                                }
                                             </StepLabel>
                                         </Step>
                                     );
@@ -137,34 +141,35 @@ export function ServerStepper() {
                             }
                         </div>
 
-                        {activeStep === steps.length ?
-                        <React.Fragment>
-                            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                                <Box sx={{ flex: '1 1 auto' }} />
-                                    <Button style={{ color: 'rgb(117, 176, 34)' }} href={`/server/${params['id']}`}>{t('serverStepper.serverStepper.checkServer')}</Button>
-                            </Box>
-                        </React.Fragment>
-                        :
-                        <React.Fragment>
-                            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                                <Button
-                                    color="inherit"
-                                    disabled={activeStep === 0}
-                                    onClick={handleBack}
-                                >
-                                    {t('serverStepper.serverStepper.back')}
-                                </Button>
-                                <Box sx={{ flex: '1 1 auto' }} />
-                                <Button
-                                    disabled={nextDisabled}
-                                    onClick={handleNext}
-                                >
-                                    {activeStep === steps.length - 1 ? t('serverStepper.serverStepper.end') : t('serverStepper.serverStepper.next')}
-                                </Button>
-                            </Box>
-                        </React.Fragment>
-                        }
-                        
+                        <div className="mb-5">
+                            {activeStep === steps.length ?
+                            <React.Fragment>
+                                <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                                    <Box sx={{ flex: '1 1 auto' }} />
+                                        <Button style={{ color: 'rgb(117, 176, 34)' }} href={`/server/${params['id']}`}>{t('serverStepper.serverStepper.checkServer')}</Button>
+                                </Box>
+                            </React.Fragment>
+                            :
+                            <React.Fragment>
+                                <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                                    <Button
+                                        color="inherit"
+                                        disabled={activeStep === 0}
+                                        onClick={handleBack}
+                                    >
+                                        {t('serverStepper.serverStepper.back')}
+                                    </Button>
+                                    <Box sx={{ flex: '1 1 auto' }} />
+                                    <Button
+                                        disabled={nextDisabled}
+                                        onClick={handleNext}
+                                    >
+                                        {activeStep === steps.length - 1 ? t('serverStepper.serverStepper.end') : t('serverStepper.serverStepper.next')}
+                                    </Button>
+                                </Box>
+                            </React.Fragment>
+                            }
+                        </div>
                     </Col>
                 </Row>
             </Container>

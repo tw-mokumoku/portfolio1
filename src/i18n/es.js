@@ -41,8 +41,8 @@ function ESi18n() {
                 dashboard: {
                     dashboardTitle: "panel",
                     serverContainerTour: "Aquí verá los servidores que posee como administrador.",
-                    serverPanelButtonEdit: "Los servidores sin información inicial no pueden aparecer en la lista de Discord. Por favor, asegúrese de editar el servidor.",
-                    serverPanelButtonView: "Puede comprobar el estado de contabilización del servidor. Si aparece un error, es que hay elementos no configurados. Por favor, revise la configuración del servidor."
+                    serverPanelButtonEditTour: "Los servidores sin información inicial no pueden aparecer en la lista de Discord. Por favor, asegúrese de editar el servidor.",
+                    serverPanelButtonViewTour: "Puede comprobar el estado de contabilización del servidor. Si aparece un error, es que hay elementos no configurados. Por favor, revise la configuración del servidor."
                 }
             },
             setting: {
