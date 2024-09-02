@@ -15,7 +15,7 @@ export function DiscordAuth() {
         getLogin(getRedirectURL(), code)
             .then((response) => {
                 if (response.data == null) navigate("/");
-                set_SessionManagerDiscordListUID(response.data._smdluid);
+                set_SessionManagerDiscordListUID(response.data._smdluid, response.data.updated_epoch);
                 getMemberData()
                     .then((response) => {
                         setMemberDataLocalStorgae(response.data);

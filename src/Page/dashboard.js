@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import './dashboard.css';
 import { Navigate } from "react-router-dom";
 import { ServerPanel } from '../Component/parts/Panel';
-import { hasDiscordOAuthTokenCookie, has_SessionManagerDiscordListUID } from '../Function/OAuthController';
+import { checkLoginExpiry, hasDiscordOAuthTokenCookie, has_SessionManagerDiscordListUID } from '../Function/OAuthController';
 import { DashboardUserPanel } from '../Component/union/SectionUnion';
 import { useEffect } from 'react';
 import { getCurrentUserGuilds, getMemberDataGuilds } from '../Function/APIController';
@@ -22,7 +22,6 @@ export function DashBoard() {
     const [serverPanels, setServerPanels] = useState(<></>);
     const [loading, setLoading] = useState(true);
     const [afterInviteRunning, setAfterInviteRunning] = useState(false);
-
 
     const afterInviteSteps = [
         {
@@ -71,8 +70,8 @@ export function DashBoard() {
 
     useEffect(() => {
         if (!has_SessionManagerDiscordListUID()) return;
-        getMemberDataGuilds()
-            .then((response) => {
+        checkLoginExpiry().then(() => {
+            getMemberDataGuilds().then((response) => {
                 setServerPanels(
                     response.data.filter(value => value.owner).map((value, key) => {
                         return <ServerPanel
@@ -82,21 +81,29 @@ export function DashBoard() {
                             icon={value.icon}
                             toastError={toastError}
                             toastSuccess={toastSuccess}
+                            toastLoading={toastLoading}
                         />
                     })
                 );
                 if (!hasDashboardAfterInviteTourLocalStorage()) setAfterInviteRunning(true);
                 setLoading(false);
-            })
+            });
+        });
     }, []);
     window.history.replaceState('', '', '/dashboard');
-    if (!has_SessionManagerDiscordListUID()) return <Navigate to="/" />
+    if (!has_SessionManagerDiscordListUID()) return <Navigate to="/" />;
 
-    const toastError = (value) => {
-        toast.error(value);
+    const toastError = (value, toastID = null) => {
+        if (toastID != null) toast.update(toastID, { render: value, type: "error", isLoading: false, autoClose: 5000 });
+        else toast.error(value);
     }
-    const toastSuccess = (value) => {
-        toast.success(value);
+    const toastSuccess = (value, toastID = null) => {
+        if (toastID != null) toast.update(toastID, { render: value, type: "success", isLoading: false, autoClose: 5000 });
+        else toast.success(value);
+    }
+    const toastLoading = (value) => {
+        const id = toast.loading(value);
+        return id;
     }
 
     return (

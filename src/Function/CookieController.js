@@ -1,6 +1,6 @@
 function getCookiesJSON() {
     let cookies = [];
-    document.cookie.split('; ').map((value) => value.split('=')).map(([key, value]) => cookies[key] = value);
+    document.cookie.split('; ').map((value) => value.split(/(?<=^[^=]+?)=/)).map(([key, value]) => cookies[key] = value);
     return cookies;
 }
 export function setCookie(key, value, max_age) {
