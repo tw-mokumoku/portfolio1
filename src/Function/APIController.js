@@ -9,8 +9,8 @@ import { checkLocalAndOAuth } from './LoginController';
 
 const DiscordBaseURL = "https://discord.com/api";
 const DiscordImageBaseURL = "https://cdn.discordapp.com/";
-//const DislitBaseURL = "https://nfvdoa532a.execute-api.ap-northeast-1.amazonaws.com/InitialStage";
-const DislitBaseURL = "https://xixj7gp1xl.execute-api.ap-northeast-1.amazonaws.com/InitialStage";
+const DislitBaseURL = "https://nfvdoa532a.execute-api.ap-northeast-1.amazonaws.com/InitialStage";
+//const DislitBaseURL = "https://xixj7gp1xl.execute-api.ap-northeast-1.amazonaws.com/InitialStage";
 
 /***************************************************************/
 /***************************************************************/

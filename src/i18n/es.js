@@ -34,7 +34,8 @@ function ESi18n() {
                 serverView: {
                     serverDataMissing: "Falta información del servidor. Ingrese la información del servidor editando el panel.",
                     failedToGetServerData: "No se pudo obtener la información del servidor. Por favor inténtalo de nuevo.",
-                    joinServer: "Unirse al servidor"
+                    joinServer: "Unirse al servidor",
+                    serverNotPublic: "privado",
                 }
             },
             dashboard: {

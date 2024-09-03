@@ -46,7 +46,8 @@ function CNi18n() {
                 serverView: {
                     serverDataMissing: "服务器信息丢失。请通过编辑仪表板输入服务器信息。",
                     failedToGetServerData: "获取服务器信息失败。请再试一次。",
-                    joinServer: "加入服务器"
+                    joinServer: "加入服务器",
+                    serverNotPublic: "私人",
                 }
             },
             dashboard: {

@@ -34,7 +34,8 @@ function ENi18n() {
                 serverView: {
                     serverDataMissing: "Server information is missing. Please enter the server information from the dashboard.",
                     failedToGetServerData: "Failed to obtain server information. Please try again.",
-                    joinServer: "Join Server"
+                    joinServer: "Join Server",
+                    serverNotPublic: "private",
                 }
             },
             dashboard: {
