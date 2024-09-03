@@ -195,7 +195,7 @@ export function Home(props) {
                     setHasResult(false);
                     return;
                 }
-                const tmpGuildCards = response.data.map((value, index) => {
+                const tmpGuildCards = response.data.filter((value)=> value.invite_url != null).map((value, index) => {
                     return <GuildCard
                     key={index}
                     cardTitleName={index == 0 ? "guild-card-title-tour" : ""}
