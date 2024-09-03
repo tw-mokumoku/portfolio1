@@ -32,7 +32,7 @@ export function SearchResult(props) {
                     return;
                 }
                 setGuildCards(
-                    response.data.map((value, index) => {
+                    response.data.filter((value) => value.invite_url != null).map((value, index) => {
                         return <GuildCard
                             key={index}
                             guildID={value['id']}
