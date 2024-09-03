@@ -34,7 +34,8 @@
                 serverView: {
                     serverDataMissing: "서버 정보가 부족합니다. 대시보드 편집에서 서버 정보를 입력합니다.",
                     failedToGetServerData: "서버 정보를 가져오지 못했습니다. 다시 시도해 주세요.",
-                    joinServer: "서버 가입"
+                    joinServer: "서버 가입",
+                    serverNotPublic: "비공개",
                 }
             },
             dashboard: {

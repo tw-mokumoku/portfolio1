@@ -18,9 +18,7 @@ export function NewServerView() {
     const navigate = useNavigate();
     const { t } = useTranslation();
     const params = useParams();
-    const [serverIcon, setServerIcon] = useState(<></>);
     const [currentServerName, setCurrentServerName] = useState();
-    const [serverID, setServerID] = useState("");
     const [currentServerDescription, setCurrentServerDescription] = useState();
     const [loading, setLoading] = useState(true);
     const [currentServer, setCurrentServer] = useState({});
@@ -28,9 +26,9 @@ export function NewServerView() {
     const [serverCurrentUpdatedLog, setServerCurrentUpdatedLog] = useState();
     const [serverInviteURL, setServerInviteURL] = useState();
     const [guildTags, setGuildTags] = useState();
+    const [isServerPublic, setIsServerPublic] = useState(false);
 
     useEffect(() => {
-        setServerID(params['id']);
         const getServerPromise = getServer(params['id'])
             .then((response) => {
                 if (response.data.id == null || response.data.country_id == null || response.data.invite_url == null) {
@@ -42,26 +40,7 @@ export function NewServerView() {
                 }
                 let currentServer = response.data;
                 setCurrentServer(response.data);
-                const avatarStyle = { borderRadius: "100px", border: "2px solid lightblue", width: 120, height: 120 };
-                // Sever Icon
-                if (!currentServer['icon']) {
-                    setServerIcon(
-                        <Avatar
-                            style={avatarStyle}
-                        >
-                            {currentServer['name'].slice(0, 2)}
-                        </Avatar>
-                    );
-                } else {
-                    setServerIcon(
-                        <Avatar
-                            src={
-                                getDiscordGuildIcon(params['id'], currentServer['icon'])
-                            }
-                            style={avatarStyle}
-                        />
-                    );
-                }
+                setIsServerPublic(currentServer['is_public'])
                 // Set Current Server Name
                 setCurrentServerName(currentServer['name']);
                 // Set Current Server Description
@@ -93,6 +72,7 @@ export function NewServerView() {
         <>
             <OverlayLoading active={loading} />
             <HeaderUnion />
+            <ToastContainer />
             <div className="new-server-view-bg-img">
                 <img src={currentServer ? getDiscordGuildIcon(params['id'], currentServer.icon) : ""} className="w-100" alt=""></img>
             </div>
@@ -105,11 +85,22 @@ export function NewServerView() {
                         <div className="new-server-view-main-info-container">
                             <div className="fs-3 fw-bold">{currentServerName}</div>
                             <div style={{ color: '#acb2b8' }}>@{params['id']}</div>
-                            <div className="d-flex">
-                                <div className="new-server-view-tags py-2 px-4 mt-2" style={{ background: 'linear-gradient( to right, #75b022 5%, #588a1b 95%)' }} onClick={() => window.open(serverInviteURL)}>
-                                    {t('serverview.serverView.joinServer')}
+                            {isServerPublic ?
+                                <div className="d-flex">
+                                    <div className="new-server-view-tags py-2 px-4 mt-2" style={{ background: 'linear-gradient( to right, #75b022 5%, #588a1b 95%)' }} onClick={() => window.open(serverInviteURL)}>
+                                        {t('serverview.serverView.joinServer')}
+                                    </div>
                                 </div>
-                            </div>
+                                :
+                                <div className="d-flex">
+                                    <div
+                                        className="new-server-view-tags py-2 px-4 mt-2"
+                                        style={{ background: 'linear-gradient( to right, #56606b 5%, #212529 95%)', cursor: 'default' }}
+                                    >
+                                        {t('serverview.serverView.serverNotPublic')}
+                                    </div>
+                                </div>
+                            }
                             <div className="d-flex mt-2" style={{ flexWrap: 'wrap' }}>
                                 {
                                     guildTags ?

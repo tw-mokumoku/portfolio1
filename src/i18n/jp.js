@@ -44,9 +44,11 @@ function JPi18n() {
             },
             serverview: {
                 serverView: {
-                    serverDataMissing: "サーバー情報が不足しています。ダッシュボードの編集からサーバー情報を入力してください。",
+                    serverDataMissing: "サーバー情報が不足しています。ダッシュボードの設定からサーバー情報を入力してください。",
                     failedToGetServerData: "サーバー情報の取得に失敗しました。再度お試しください。",
-                    joinServer: "サーバーに参加"
+                    joinServer: "サーバーに参加",
+                    serverNotPublic: "非公開",
+
                 }
             },
             dashboard: {

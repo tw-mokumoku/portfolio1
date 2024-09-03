@@ -34,7 +34,8 @@ function FRi18n() {
                 serverView: {
                     serverDataMissing: "Les informations sur le serveur sont manquantes. Veuillez saisir les informations du serveur en modifiant le tableau de bord.",
                     failedToGetServerData: "Échec de l'obtention des informations sur le serveur. Veuillez réessayer.",
-                    joinServer: "Rejoindre le serveur"
+                    joinServer: "Rejoindre le serveur",
+                    serverNotPublic: "privé",
                 }
             },
             dashboard: {
