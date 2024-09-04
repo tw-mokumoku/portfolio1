@@ -127,60 +127,58 @@ export function Home(props) {
         getRecommend(getLanguageLocalStorage())
             .then((response) => {
                 var tmpRecommendServers = [];
-                response.data.dayRanking
-                    .map((value, index) => {
+                response.data.dayRanking.map((value, index) => {
                     tmpRecommendServers = [
                         ...tmpRecommendServers,
                         {
                             type: 'dayRanking',
-                            icon: value['icon'] ? getDiscordGuildIcon(value['id'], value['icon']) : "",
-                            avarage_sec_per_log: value.avarage_sec_per_log,
-                            avarage_sec_per_member: value.avarage_sec_per_member,
-                            description: value.description,
                             id: value.id,
                             name: value.name,
+                            description: value.description,
+                            icon: value['icon'] ? getDiscordGuildIcon(value['id'], value['icon']) : "",
                             total_sec: value.total_sec,
+                            avarage_sec_per_log: value.avarage_sec_per_log,
+                            avarage_sec_per_member: value.avarage_sec_per_member,
+                            member_count: value.member_count,
                             rank: value.rank,
-                            member_count: value.member_count
                         }
                     ];
                 });
                 response.data.weekRanking.map((value, index) => {
-                    if (!value.is_bot_available || !value.is_public) return null;
                     tmpRecommendServers = [
                         ...tmpRecommendServers,
                         {
                             type: 'weekRanking',
-                            icon: value['icon'] ? getDiscordGuildIcon(value['id'], value['icon']) : "",
-                            avarage_sec_per_log: value.avarage_sec_per_log,
-                            avarage_sec_per_member: value.avarage_sec_per_member,
-                            description: value.description,
                             id: value.id,
                             name: value.name,
+                            description: value.description,
+                            icon: value['icon'] ? getDiscordGuildIcon(value['id'], value['icon']) : "",
                             total_sec: value.total_sec,
+                            avarage_sec_per_log: value.avarage_sec_per_log,
+                            avarage_sec_per_member: value.avarage_sec_per_member,
+                            member_count: value.member_count,
                             rank: value.rank,
-                            member_count: value.member_count
                         }
                     ];
                 });
                 response.data.monthRanking.map((value, index) => {
-                    if (!value.is_bot_available || !value.is_public) return null;
                     tmpRecommendServers = [
                         ...tmpRecommendServers,
                         {
                             type: 'monthRanking',
-                            icon: value['icon'] ? getDiscordGuildIcon(value['id'], value['icon']) : "",
-                            avarage_sec_per_log: value.avarage_sec_per_log,
-                            avarage_sec_per_member: value.avarage_sec_per_member,
-                            description: value.description,
                             id: value.id,
                             name: value.name,
+                            description: value.description,
+                            icon: value['icon'] ? getDiscordGuildIcon(value['id'], value['icon']) : "",
                             total_sec: value.total_sec,
+                            avarage_sec_per_log: value.avarage_sec_per_log,
+                            avarage_sec_per_member: value.avarage_sec_per_member,
+                            member_count: value.member_count,
                             rank: value.rank,
-                            member_count: value.member_count
                         }
                     ];
                 });
+                console.log(tmpRecommendServers)
                 setRecommendServers(tmpRecommendServers);
             });
     }
