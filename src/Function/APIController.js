@@ -5,6 +5,7 @@ import { getCurrentDiscordUserDataLocalStorage, getMemberDataLocalStorage } from
 import { Avatar } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { checkLocalAndOAuth } from './LoginController';
+import { dayEndEpoch, dayStartEpoch, monthEndEpoch, monthStartEpoch, weekEndEpoch, weekStartEpoch } from './DateCalc';
 
 
 const DiscordBaseURL = "https://discord.com/api";
@@ -70,7 +71,7 @@ export async function getSearch(query, country_id = "JP") {
 }
 export async function getRecommend(country_id = "JP") {
     return await axios.get(
-        `${DislitBaseURL}/server/recommend?country_id=${country_id}`
+        `${DislitBaseURL}/server/recommend?country_id=${country_id}&monthStartEpoch=${monthStartEpoch()}&weekStartEpoch=${weekStartEpoch()}&dayStartEpoch=${dayStartEpoch()}&monthEndEpoch=${monthEndEpoch()}&weekEndEpoch=${weekEndEpoch()}&dayEndEpoch=${dayEndEpoch()}`
     );
 }
 export async function getServer(server_id) {
