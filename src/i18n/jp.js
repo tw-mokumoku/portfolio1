@@ -13,6 +13,27 @@
 function JPi18n() {
     return {
         translation: {
+            helmet: {
+                home: {
+                    title: "Discord List｜サーバー掲示板",
+                    description: "サーバーに入る前に今通話中の人数を事前に確認できる掲示板サイト",
+                    keywords: "Discord List, discord, 掲示板, discord掲示板"
+                },
+                dashboard: {
+                    title: "ダッシュボード｜DList",
+                    description: "サーバーに入る前に今通話中の人数を事前に確認できる掲示板サイト"
+                },
+                newServerView: {
+                    // 不要
+                },
+                serverStepper: {
+                    title: "設定"
+                },
+                tagview: {
+                    description1: "",
+                    description2: "タグのdiscordサーバー一覧です。自分に合うサーバー・友達を見つけましょう！"
+                },
+            },
             headerUnion: {
                 myVerticallyCenteredModal: {
                     changeLanguage: "言語を変更"

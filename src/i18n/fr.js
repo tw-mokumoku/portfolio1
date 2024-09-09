@@ -1,6 +1,27 @@
 function FRi18n() {
     return {
         translation: {
+            helmet: {
+                home: {
+                    title: "Discord List｜Serveur BBS",
+                    description: "Site web du panneau d'affichage qui vous permet de voir à l'avance combien de personnes sont en train de téléphoner avant d'entrer dans le serveur.",
+                    keywords: "Discord List, discord, BBS, discordBBS"
+                },
+                dashboard: {
+                    title: "tableau de bord｜DList",
+                    description: "Site web du panneau d'affichage qui vous permet de voir à l'avance combien de personnes sont en train de téléphoner avant d'entrer dans le serveur."
+                },
+                newServerView: {
+                    // 不要
+                },
+                serverStepper: {
+                    title: "paramètre"
+                },
+                tagview: {
+                    description1: "Liste des serveurs discord étiquetés ",
+                    description2: ". Trouvez un serveur/ami qui vous convient !"
+                },
+            },
             headerUnion: {
                 myVerticallyCenteredModal: {
                     changeLanguage: "changer de langue"

@@ -1,6 +1,27 @@
 function ENi18n() {
     return {
         translation: {
+            helmet: {
+                home: {
+                    title: "Discord List｜Server Bulletin Board",
+                    description: "A bulletin board site where you can check the number of people currently on a call before entering the server.",
+                    keywords: "Discord List, discord, bulletin board, discord bulletin board"
+                },
+                dashboard: {
+                    title: "Dashboard｜DList",
+                    description: "A bulletin board site where you can check the number of people currently on a call before entering the server."
+                },
+                newServerView: {
+                    // 不要
+                },
+                serverStepper: {
+                    title: "Setting"
+                },
+                tagview: {
+                    description1: "List of discord servers for ",
+                    description2: "tag. Find the server and friends that suit you!"
+                },
+            },
             headerUnion: {
                 myVerticallyCenteredModal: {
                     changeLanguage: "Change Language"

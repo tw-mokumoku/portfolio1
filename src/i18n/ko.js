@@ -1,6 +1,27 @@
 ﻿function KOi18n() {
     return {
         translation: {
+            helmet: {
+                home: {
+                    title: "Discord List｜서버 게시판",
+                    description: "서버에 들어가기 전에 지금 통화 중인 인원을 미리 확인할 수 있는 게시판 사이트입니다.",
+                    keywords: "Discord List, discord, 게시판, discord게시판"
+                },
+                dashboard: {
+                    title: "대시보드｜DList",
+                    description: "서버에 들어가기 전에 지금 통화 중인 인원을 미리 확인할 수 있는 게시판 사이트입니다."
+                },
+                newServerView: {
+                    // 不要
+                },
+                serverStepper: {
+                    title: "설정"
+                },
+                tagview: {
+                    description1: "",
+                    description2: "태그의 discord 서버 목록입니다. 나에게 맞는 서버와 친구를 찾아보세요!"
+                },
+            },
             headerUnion: {
                 myVerticallyCenteredModal: {
                     changeLanguage: "언어 변경"
