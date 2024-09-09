@@ -22,6 +22,7 @@ import './serverstepper.css';
 import { getDiscordBotOAuthURL, getDiscordBotStepperOAuthURL } from "../Function/LocalRemoteSwitcher";
 import { getServer } from "../Function/APIController";
 import { ToastContainer, toast } from 'react-toastify';
+import { Helmet } from 'react-helmet';
 
 // 実験
 import { useCallback } from "react";
@@ -93,6 +94,9 @@ export function ServerStepper() {
     if (!has_SessionManagerDiscordListUID()) return <Navigate to="/" />;
     return (
         <>
+            <Helmet>
+                <title>{t('helmet.serverStepper.title')}｜Discord List</title>
+            </Helmet>
             <OverlayLoading active={loading} />
             <HeaderUnion />
             <ToastContainer />

@@ -13,6 +13,7 @@ import { FirstEditCategory, ViewServerBody } from "../Component/union/viewServer
 import nl2br from 'react-newline-to-break'; 
 import { ToButton } from "../Component/parts/conversion";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from 'react-helmet';
 
 export function NewServerView() {
     const navigate = useNavigate();
@@ -27,6 +28,7 @@ export function NewServerView() {
     const [serverInviteURL, setServerInviteURL] = useState();
     const [guildTags, setGuildTags] = useState();
     const [isServerPublic, setIsServerPublic] = useState(false);
+    const [helmetTitle, setHelmetTitle] = useState("");
 
     useEffect(() => {
         const getServerPromise = getServer(params['id'])
@@ -45,6 +47,7 @@ export function NewServerView() {
                 setCurrentServerName(currentServer['name']);
                 // Set Current Server Description
                 setCurrentServerDescription(currentServer['description']);
+                setHelmetTitle(`${currentServer['name']}｜Discord List`);
                 setServerInviteURL(currentServer['invite_url']);
                 const getServerUpdatedLogPromise = getServerUpdatedLog(params['id'])
                     .then((response) => {
@@ -70,6 +73,10 @@ export function NewServerView() {
     }, [params]);
     return (
         <>
+            <Helmet>
+                <title>{helmetTitle}</title>
+                <meta name="description" content={currentServerDescription} />
+            </Helmet>
             <OverlayLoading active={loading} />
             <HeaderUnion />
             <ToastContainer />

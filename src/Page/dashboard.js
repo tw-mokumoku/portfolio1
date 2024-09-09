@@ -16,6 +16,7 @@ import { useTranslation } from "react-i18next";
 import Joyride, { ACTIONS, EVENTS, ORIGIN, STATUS, CallBackProps } from 'react-joyride';
 import { hasDashboardAfterInviteTourLocalStorage, setDashboardAfterInviteTourLocalStorage, setHomeTourFlagLocalStorage } from '../Function/LocalStorageController';
 import { ToastContainer, toast } from 'react-toastify';
+import { Helmet } from 'react-helmet';
 
 export function DashBoard() {
     const { t } = useTranslation();
@@ -108,6 +109,10 @@ export function DashBoard() {
 
     return (
         <>
+            <Helmet>
+                <title>{t('helmet.dashboard.title')}</title>
+                <meta name="description" content={t('helmet.dashboard.description')} />
+            </Helmet>
             <OverlayLoading active={loading} />
             <ToastContainer />
             <Joyride

@@ -20,6 +20,7 @@ import { Avatar } from '@mui/material';
 import Placeholder from 'react-bootstrap/Placeholder';
 import { useParams } from "react-router-dom";
 import InfiniteScroll from 'react-infinite-scroller';
+import { Helmet } from 'react-helmet';
 
 export function Home(props) {
     const { t } = useTranslation();
@@ -305,6 +306,10 @@ export function Home(props) {
     }, [didSelectedRegionChange]);
     return (
         <>
+            <Helmet>
+                <title>{t('helmet.home.title')}</title>
+                <meta name="description" content={t('helmet.home.description')} />
+            </Helmet>
             <OverlayLoading active={loading} />
             <Joyride
                 continuous

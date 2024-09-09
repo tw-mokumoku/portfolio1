@@ -13,6 +13,27 @@
 function CNi18n() {
     return {
         translation: {
+            helmet: {
+                home: {
+                    title: "Discord List｜服务器 BBS",
+                    description: "公告板网站，让您在进入服务器之前就能预先看到目前有多少人在打电话。",
+                    keywords: "Discord List, discord, 论坛, discord论坛"
+                },
+                dashboard: {
+                    title: "仪表盘｜DList",
+                    description: "公告板网站，让您在进入服务器之前就能预先看到目前有多少人在打电话。"
+                },
+                newServerView: {
+                    // 不要
+                },
+                serverStepper: {
+                    title: "设置"
+                },
+                tagview: {
+                    description1: "带有",
+                    description2: "标记的 discord 服务器列表。 查找适合您的服务器/朋友！"
+                },
+            },
             headerUnion: {
                 myVerticallyCenteredModal: {
                     changeLanguage: "改变语言"

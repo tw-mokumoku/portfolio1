@@ -1,6 +1,27 @@
 function ESi18n() {
     return {
         translation: {
+            helmet: {
+                home: {
+                    title: "Discord List｜Servidor BBS",
+                    description: "Tablón de anuncios que permite ver de antemano cuántas personas están al teléfono antes de entrar en el servidor.",
+                    keywords: "Discord List, discord, BBS, discordBBS"
+                },
+                dashboard: {
+                    title: "salpicadero｜DList",
+                    description: "Tablón de anuncios que permite ver de antemano cuántas personas están al teléfono antes de entrar en el servidor."
+                },
+                newServerView: {
+                    // 不要
+                },
+                serverStepper: {
+                    title: "configuración"
+                },
+                tagview: {
+                    description1: "Lista de servidores de discord con la etiqueta ",
+                    description2: "¡Encuentra un servidor/amigo que se adapte a ti!"
+                },
+            },
             headerUnion: {
                 myVerticallyCenteredModal: {
                     changeLanguage: "cambiar idioma"

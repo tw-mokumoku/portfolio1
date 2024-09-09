@@ -15,6 +15,7 @@ import './tagview.css';
 import InfiniteScroll from 'react-infinite-scroller';
 import { Avatar } from '@mui/material';
 import Placeholder from 'react-bootstrap/Placeholder';
+import { Helmet } from 'react-helmet';
 
 export function TagView() {
     const { t } = useTranslation();
@@ -135,6 +136,10 @@ export function TagView() {
 
     return (
         <>
+            <Helmet>
+                <title>{params['name']}｜Discord List</title>
+                <meta name="description" content={`${t('helmet.tagview.description1')} ${params['name']} ${t('helmet.tagview.description1')}`} />
+            </Helmet>
             <OverlayLoading active={loading} />
             <HeaderUnion />
             <Container>
