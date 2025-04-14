@@ -70,8 +70,9 @@
 こちらは、AWS RDSで構築したデータベースの図です。成果物としてお目通しいただければ幸いです。詳細な説明は割愛させていただきます。
 
 全体像を把握いただくため、このサイズの画像で表示しておりますが、SVG形式で作成しておりますので、別のタブで画像を開いていただければ、拡大しても文字が潰れることなく詳細をご確認いただけます。
+[別タブで開く](https://raw.githubusercontent.com/tw-mokumoku/portfolio1/01f001f23a32aa6491e2fcc5b33b17dd199cb383/doc/rds構築.svg)
 
-![image](https://github.com/tw-mokumoku/portfolio1/blob/master/doc/rds構築.svg)
+![image](https://raw.githubusercontent.com/tw-mokumoku/portfolio1/01f001f23a32aa6491e2fcc5b33b17dd199cb383/doc/rds構築.svg)
 
 ## このプロジェクトの費用
 
