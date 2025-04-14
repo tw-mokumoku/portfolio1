@@ -69,8 +69,7 @@
 ## データベース
 こちらは、AWS RDSで構築したデータベースの図です。成果物としてお目通しいただければ幸いです。詳細な説明は割愛させていただきます。
 
-全体像を把握いただくため、このサイズの画像で表示しておりますが、SVG形式で作成しておりますので、別のタブで画像を開いていただければ、拡大しても文字が潰れることなく詳細をご確認いただけます。
-<a href="https://raw.githubusercontent.com/tw-mokumoku/portfolio1/01f001f23a32aa6491e2fcc5b33b17dd199cb383/doc/rds構築.svg" target="_blank" rel="noopener noreferrer">別タブで開く</a>
+全体像を把握いただくため、このサイズの画像で表示しておりますが、SVG形式で作成しておりますので、画像をクリックして別のタブで画像を開いていただければ、拡大しても文字が潰れることなく詳細をご確認いただけます。
 
 ![image](https://raw.githubusercontent.com/tw-mokumoku/portfolio1/01f001f23a32aa6491e2fcc5b33b17dd199cb383/doc/rds構築.svg){:target="_blank"}
 
